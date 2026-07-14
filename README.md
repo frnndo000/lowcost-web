@@ -1,3 +1,5 @@
+> 📘 Lee [PROYECTO.md](./PROYECTO.md) — todo el contexto en un solo lugar.
+
 # 🌐 Lowcost Web — Bitácora
 
 Proyecto de desarrollo de sitios web de bajo costo para PYMEs de la Región de Valparaíso.
@@ -27,16 +29,16 @@ reemplazarlas. Queremos darles la cara pública que hoy no tienen:
 
 ## 🧰 Stack
 
-| Capa | Herramienta |
-|---|---|
-| Framework | Astro |
-| Estilos | Tailwind CSS |
-| Lenguajes | HTML, CSS, JavaScript |
-| Hosting | Cloudflare Pages |
-| Formularios | Web3Forms |
-| Diseño | Figma |
-| Versionado | Git + GitHub |
-| Analítica | Google Analytics + Search Console |
+| Capa        | Herramienta                                    |
+| ----------- | ---------------------------------------------- |
+| Framework   | Astro                                          |
+| Estilos     | Tailwind CSS                                   |
+| Lenguajes   | HTML, CSS, JavaScript                          |
+| Hosting     | Cloudflare Pages                               |
+| Formularios | Web3Forms                                      |
+| Diseño      | Figma                                          |
+| Versionado  | Git + GitHub                                   |
+| Analítica   | Google Analytics + Search Console              |
 | Visibilidad | Google Business Profile, SEO local, Schema.org |
 
 **Costo fijo de operación: $0/mes.** El dominio (.cl, ~$10.000/año) lo paga el cliente.
@@ -46,6 +48,7 @@ reemplazarlas. Queremos darles la cara pública que hoy no tienen:
 ## 🗺️ Roadmap
 
 ### Fase 1 — Aprendizaje (días 1-8)
+
 - [ ] HTML semántico
 - [ ] CSS: box model, selectores
 - [ ] Flexbox y Grid
@@ -56,6 +59,7 @@ reemplazarlas. Queremos darles la cara pública que hoy no tienen:
 - [ ] JavaScript esencial (DOM, eventos, fetch)
 
 ### Fase 2 — Prototipos (días 9-14)
+
 - [ ] Astro: componentes, layouts, rutas
 - [ ] **Prototipo 1**: sitio para servicio con agendamiento externo
 - [ ] SEO local + Schema.org `LocalBusiness`
@@ -64,6 +68,7 @@ reemplazarlas. Queremos darles la cara pública que hoy no tienen:
 - [ ] **Prototipo 2**: catálogo digital + checkout por WhatsApp
 
 ### Fase 3 — Venta (día 15+)
+
 - [ ] Lista de 30 negocios objetivo en Valparaíso / Viña / Quilpué
 - [ ] Pitch y material de venta
 - [ ] Informe comparativo de PageSpeed como gancho
@@ -111,9 +116,9 @@ Registro diario en [`/bitacora`](./bitacora). Cada entrada responde tres pregunt
 
 ## 👥 Equipo
 
-| | Rol |
-|---|---|
-| *(nombre)* | Frontend / diseño |
-| *(nombre)* | SEO / despliegue / comercial |
+|            | Rol                          |
+| ---------- | ---------------------------- |
+| _(nombre)_ | Frontend / diseño            |
+| _(nombre)_ | SEO / despliegue / comercial |
 
-*Metodología: sprints semanales gestionados con GitHub Projects.*
+_Metodología: sprints semanales gestionados con GitHub Projects._
