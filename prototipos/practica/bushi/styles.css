@@ -1,0 +1,594 @@
+/* =============================================================
+   BARBERÍA EL CHUTE — styles.css
+
+   ORDEN DEL ARCHIVO (importa):
+     1. Reset        — apagar los defaults del navegador
+     2. Variables    — los valores que se repiten
+     3. Base         — estilos por etiqueta, sin clases
+     4. Layout       — el esqueleto de la página
+     5. Componentes  — las piezas reutilizables
+     6. Responsive   — los ajustes para pantalla grande
+
+   ¿Por qué ese orden? El CSS se lee de arriba a abajo. Cuando dos
+   reglas tienen la misma fuerza, gana la que está más abajo. Si
+   pones lo general primero y lo específico después, lo específico
+   gana sin que tengas que pelear. Al revés, terminas escribiendo
+   !important para arreglar tu propio desorden.
+   ============================================================= */
+
+/* =============================================================
+   1. RESET
+   El navegador trae estilos propios (márgenes, bullets, tamaños).
+   Los apagamos para partir de cero y decidir nosotros.
+   ============================================================= */
+
+/* La línea más importante de todo el archivo.
+   Por defecto: width 200px + padding 20px = caja de 240px.
+   Con border-box: la caja mide 200px y el padding va por dentro.
+   Es el box model comportándose como uno espera.
+   El * significa "todos los elementos". ::before y ::after son
+   pseudo-elementos que se crean desde CSS y no los hereda el *. */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* El navegador le pone margen a h1, h2, p, etc. Los matamos todos
+   y los devolvemos a mano donde los queramos. Es más fácil agregar
+   espacio que andar descubriendo de dónde salió uno que no pediste. */
+* {
+  margin: 0;
+}
+
+/* Las imágenes son inline por defecto, y eso les deja un espacio
+   fantasma abajo (el navegador reserva sitio para las "colas" de
+   letras como la p o la j). display: block lo elimina.
+   max-width evita que se desborden en pantallas chicas. */
+img {
+  display: block;
+  max-width: 100%;
+}
+
+/* line-height: 1.2 → los títulos grandes con interlineado normal
+   quedan demasiado separados. Mientras más grande el texto, más
+   apretado va.
+   text-wrap: balance → reparte las palabras entre líneas para que
+   no quede una sola palabra huérfana abajo. Solo para títulos. */
+h1,
+h2,
+h3,
+h4 {
+  line-height: 1.2;
+  text-wrap: balance;
+}
+
+/* Como text-wrap: balance, pero pensado para párrafos largos. */
+p {
+  text-wrap: pretty;
+}
+
+/* Apagamos el azul y el subrayado que trae el navegador.
+   inherit = "usa el color de tu papá". Después, en la sección Base,
+   les damos el color que queremos. */
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Una sola regla mata los bullets de las TRES listas del HTML:
+   el nav, los servicios y los barberos. Cero clases.
+   Esto es la cascada haciendo su trabajo — es la razón por la que
+   NO hay que ponerle clase a todo. */
+ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+/* La etiqueta <address> viene en cursiva por defecto. Nadie quiere eso. */
+address {
+  font-style: normal;
+}
+
+/* =============================================================
+   2. VARIABLES
+   Un valor que se repite, se declara una vez y se reusa.
+   Cambias --acento acá y muta toda la página.
+
+   :root es el <html>. Se usa este selector y no "html" por
+   costumbre: deja claro que ahí viven las variables globales.
+   ============================================================= */
+
+:root {
+  /* ---- COLOR ----
+     OJO: esta paleta es un punto de partida, no una decisión.
+     Es una barbería de barrio en San Martín, no una marca de lujo.
+     Anda a mirar el Instagram de barberías del sector y saca
+     los colores de ahí. */
+  --fondo: #14110f; /* negro cálido, no negro puro */
+  --fondo-alt: #1e1a17; /* para cajas que deben despegarse del fondo */
+  --texto: #e8e4e0; /* blanco roto — el blanco puro cansa la vista */
+  --texto-suave: #8f877f; /* texto secundario */
+  --acento: #c8a24a; /* dorado: links, precios, botones */
+  --acento-claro: #dfba62; /* el mismo dorado para el :hover */
+  --borde: #2e2823; /* líneas divisorias */
+
+  /* ---- ESPACIADO ----
+     Esto es lo que de verdad importa hoy.
+     Existe para que NUNCA escribas padding: 13px ni margin: 27px.
+     Solo usas los peldaños de esta escala. Consistencia forzada.
+     Esto — no las animaciones — es el 60% de por qué un sitio se
+     ve profesional o se ve de estudiante.
+
+     1rem = 16px. Usamos rem y no px porque respeta el tamaño de
+     letra que el usuario configuró en su navegador. */
+  --e1: 0.5rem; /*  8px */
+  --e2: 1rem; /* 16px */
+  --e3: 1.5rem; /* 24px */
+  --e4: 2rem; /* 32px */
+  --e6: 4rem; /* 64px */
+  --e8: 6rem; /* 96px */
+
+  /* ---- OTROS ---- */
+  --radio: 4px; /* redondeo de esquinas, igual en todas partes */
+  --ancho: 65ch; /* ancho de lectura cómodo.
+                     1ch = el ancho del carácter "0" de la fuente.
+                     ~65 caracteres por línea es lo que recomienda
+                     la tipografía clásica. Más largo cansa. */
+}
+
+/* =============================================================
+   3. BASE
+   Estilos por etiqueta. Sin una sola clase.
+   Todo esto se hereda o aplica a la página entera.
+   ============================================================= */
+
+body {
+  background-color: var(--fondo);
+  color: var(--texto);
+
+  /* system-ui = la fuente del sistema operativo del usuario.
+     No se descarga nada → 0ms de carga.
+     Google Fonts se ve mejor pero te cuesta PageSpeed, y PageSpeed
+     es tu argumento de venta. Cuando quieras una fuente propia,
+     que sea una decisión consciente, no un default. */
+  font-family:
+    system-ui,
+    -apple-system,
+    "Segoe UI",
+    sans-serif;
+
+  /* 1.6 = 160% del tamaño de letra. Para texto corrido, entre
+     1.5 y 1.7 es lo legible. Es un número sin unidad a propósito:
+     así cada elemento lo calcula sobre SU tamaño, no sobre el
+     del body. */
+  line-height: 1.6;
+
+  /* -webkit-font-smoothing: en pantallas normales, el texto claro
+     sobre fondo oscuro se ve más gordo de lo que debería. Esto lo
+     adelgaza. Solo aplica en navegadores WebKit (Safari, Chrome). */
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ---- Escala tipográfica ----
+   Los tamaños no son inventados: cada uno es ~1.25x el anterior.
+   Eso se llama escala modular. Si los eliges a ojo, la página se
+   ve desordenada aunque no sepas explicar por qué.
+     h4 = 1rem     (16px)
+     h3 = 1.125rem (18px)
+     h2 = 1.75rem  (28px)
+     h1 = grande, ver más abajo */
+h2 {
+  font-size: 1.75rem;
+}
+
+h3 {
+  font-size: 1.125rem;
+}
+
+h4 {
+  font-size: 1rem;
+}
+
+/* Los links van en dorado.
+   Fíjate: en el reset pusimos a { color: inherit } y acá lo
+   pisamos. Misma fuerza (0,0,1), pero esta regla está más abajo
+   → gana. Ese es el orden del archivo trabajando a tu favor. */
+a {
+  color: var(--acento);
+  transition: color 0.15s ease;
+}
+
+a:hover {
+  color: var(--acento-claro);
+}
+
+/* :focus-visible = cuando el usuario llega al link con el TECLADO
+   (tabulando), no con el mouse. Dibuja un recuadro para que sepa
+   dónde está parado.
+   NO se lo borres. Hay gente que navega solo con teclado, y esto
+   es lo que separa un sitio usable de uno que no lo es.
+   Diferencia con :focus a secas → :focus también se activa con
+   click, y ahí el recuadro molesta. */
+a:focus-visible {
+  outline: 2px solid var(--acento);
+  outline-offset: 3px;
+}
+
+/* =============================================================
+   4. LAYOUT
+   El esqueleto. Solo espacio y posición — cero tipografía, cero color.
+
+   REGLA DE ORO: los contenedores llevan layout, los componentes
+   llevan estilo. Si mezclas, terminas con reglas que se pisan
+   entre ellas.
+   ============================================================= */
+
+/* Sin esto, el texto va de borde a borde de la pantalla en un
+   monitor de 27" y es ilegible.
+     max-width      → nunca más ancho que ~65 caracteres
+     margin-inline  → auto a izquierda y derecha = centrado
+     padding-inline → aire a los lados en el celular */
+main {
+  max-width: var(--ancho);
+  margin-inline: auto;
+  padding-inline: var(--e3);
+}
+
+/* Una línea, cinco secciones. La cascada otra vez.
+   padding-block = padding arriba y abajo (atajo moderno de
+   padding-top + padding-bottom). */
+section {
+  padding-block: var(--e6);
+}
+
+/* ---- El truco del búho ----
+   Se lee: "todo elemento hijo directo de section que venga
+   DESPUÉS de otro hermano".
+     >  = hijo directo (no nietos)
+     +  = el hermano que viene inmediatamente después
+
+   Efecto: le pone espacio arriba a todo MENOS al primero.
+   Así no tienes que andar poniendo margin-bottom a cada h2, cada
+   p y cada ul por separado, ni corrigiendo el margen sobrante del
+   último elemento.
+
+   Su especificidad es (0,0,0) — la más baja posible. O sea:
+   cualquier regla que escribas después lo pisa sin problema.
+   Eso es a propósito. Es un default, no una imposición. */
+section > * + * {
+  margin-top: var(--e3);
+}
+
+/* =============================================================
+   5. COMPONENTES
+   Acá sí van las clases. Cada bloque = una pieza del HTML.
+   ============================================================= */
+
+/* ---------- HEADER ---------------------------------------- */
+/* Sin clase: hay un solo <header> en la página, la etiqueta ya
+   lo identifica. Ponerle class="header" no aporta nada. */
+
+header {
+  /* [DÍA 2 — flexbox]
+     display: flex convierte a los hijos en "flex items" y los
+     pone en fila. Con direction: column, en columna.
+
+     Mobile-first: en el celular el logo va arriba y el menú abajo.
+     Más abajo, en la sección Responsive, lo pasamos a fila. */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--e2); /* espacio ENTRE hijos. Reemplaza márgenes. */
+
+  padding: var(--e3);
+  border-bottom: 1px solid var(--borde);
+}
+
+/* Es el único <a> del header que no está dentro del <nav>.
+   Sin esta clase no lo puedes distinguir de los links del menú. */
+.logo {
+  flex-shrink: 0; /* [DÍA 2] que no se achique si falta espacio */
+}
+
+nav ul {
+  /* [DÍA 2] */
+  display: flex;
+  flex-wrap: wrap; /* si no caben, saltan de línea */
+  justify-content: center;
+  align-items: center;
+  gap: var(--e1) var(--e3); /* 8px vertical, 24px horizontal */
+}
+
+/* NOTA: en un sitio real acá va un menú hamburguesa en el celular.
+   Eso necesita JavaScript, así que queda para el día 8.
+   Con 5 items y flex-wrap se defiende bien mientras tanto. */
+
+/* ---------- BOTÓN ------------------------------------------ */
+/* El componente más reutilizado del archivo: aparece 3 veces —
+   en el nav, en la portada y en la sección agendar.
+   Un botón es un botón, esté donde esté. Por eso NO existe una
+   clase aparte para el botón del menú. */
+
+.boton {
+  /* CLAVE: un <a> es inline por naturaleza, y a los elementos
+     inline el padding vertical NO los empuja — se les sale por
+     encima y por debajo sin mover nada.
+     inline-block = acepta ancho/alto/padding como un bloque, pero
+     sigue fluyendo en la línea como texto. */
+  display: inline-block;
+
+  padding: var(--e2) var(--e4);
+  background-color: var(--acento);
+
+  /* Texto oscuro sobre fondo dorado. Con var(--texto) claro no se
+     leería. */
+  color: var(--fondo);
+
+  font-weight: 700;
+  border-radius: var(--radio);
+  transition: background-color 0.15s ease;
+
+  /* ¿Por qué esta regla le gana a "a { color: var(--acento) }"?
+     Especificidad. Una clase = (0,1,0). Una etiqueta = (0,0,1).
+     La clase gana SIEMPRE, esté donde esté en el archivo.
+     Por eso el botón del nav se ve como botón y no como link. */
+}
+
+/* Repetimos el color en el :hover porque a:hover (más arriba) le
+   cambia el color del texto al dorado — y dorado sobre dorado no
+   se lee. Especificidad de "a:hover" = (0,1,1). La de ".boton:hover"
+   = (0,2,0) → gana esta.
+   Este es EXACTAMENTE el tipo de choque que te va a pasar. Cuando
+   algo "no funciona", casi siempre es esto: sí funciona, pero otra
+   regla lo está pisando. */
+.boton:hover {
+  background-color: var(--acento-claro);
+  color: var(--fondo);
+}
+
+/* ---------- PORTADA ---------------------------------------- */
+
+.portada {
+  text-align: center;
+
+  /* Pisa el "section { padding-block: var(--e6) }" de arriba.
+     Especificidad: .portada = (0,1,0) vs section = (0,0,1).
+     Gana la clase. La portada respira más que el resto. */
+  padding-block: var(--e8);
+}
+
+/* ¿Por qué acá SÍ puedo escribir ".portada p" y en .nosotros no?
+   Porque .portada tiene un solo <p> y ningún componente anidado
+   adentro. En .nosotros hay un <p class="nota"> metido dentro de
+   un .barbero → ".nosotros p" (0,1,1) le ganaría a ".nota" (0,1,0)
+   y la nota dejaría de funcionar, sin ningún error ni aviso.
+
+   REGLA: no uses "contenedor p" si el contenedor tiene componentes
+   con <p> adentro. */
+.portada p {
+  color: var(--texto-suave);
+  font-size: 1.125rem;
+}
+
+/* clamp(mínimo, ideal, máximo) — resuelve el responsive de un tiro:
+     2rem  → nunca más chico que esto (celular)
+     6vw   → 6% del ancho de la ventana; crece con la pantalla
+     3.5rem→ nunca más grande que esto (monitor grande)
+   Sin clamp necesitarías 2 o 3 media queries solo para el título. */
+.portada h1 {
+  font-size: clamp(2rem, 6vw, 3.5rem);
+}
+
+/* ---------- SERVICIO --------------------------------------- */
+/* El componente que justifica todo el sistema de clases.
+   6 items en el HTML, una sola regla. Si Don Carlos agrega un
+   séptimo servicio, le pones class="servicio" y ya está listo. */
+
+.servicio {
+  /* [DÍA 2] Sin flexbox esto sería: nombre, abajo duración, abajo
+     precio. Tres líneas por servicio. Con flexbox: una sola. */
+  display: flex;
+  flex-wrap: wrap;
+
+  /* baseline = alinea por la línea sobre la que se apoyan las
+     letras, no por el borde de la caja. Con textos de distinto
+     tamaño (h3 de 18px vs precio de 18px vs duración de 14px) es
+     la única alineación que se ve bien. */
+  align-items: baseline;
+
+  gap: var(--e1) var(--e2);
+  padding-block: var(--e3);
+  border-bottom: 1px solid var(--borde);
+}
+
+/* Sin clase: es el único <h3> dentro de .servicio.
+   ¿Y si mañana lo cambio a <h4>? Se rompe. Ese es el precio de no
+   ponerle clase, y a esta escala (200 líneas, 2 personas) vale la
+   pena pagarlo. */
+.servicio h3 {
+  font-weight: 600;
+}
+
+/* Estos dos SÍ llevan clase: son dos <p> hermanos que deben verse
+   distinto. ".servicio p" agarraría a los dos por igual.
+   No hay salida — este es el caso canónico donde una clase se gana
+   el puesto. */
+.servicio__duracion {
+  color: var(--texto-suave);
+  font-size: 0.875rem;
+}
+
+.servicio__precio {
+  /* [DÍA 2] El truco más útil de flexbox:
+     margin-left: auto en un flex item se come TODO el espacio
+     sobrante y empuja el elemento al extremo derecho.
+     Es más limpio que justify-content: space-between cuando solo
+     quieres separar el último. */
+  margin-left: auto;
+
+  color: var(--acento);
+  font-weight: 700;
+  font-size: 1.125rem;
+
+  /* Números tabulares: todos los dígitos ocupan el mismo ancho,
+     así $9.000 y $14.000 quedan alineados en columna.
+     Detalle de dos palabras que se nota harto. */
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---------- HORARIO ---------------------------------------- */
+
+.horario dl {
+  border-top: 1px solid var(--borde);
+}
+
+/* El <div> que envuelve cada par <dt>+<dd>.
+   Es HTML5 válido dentro de un <dl> y es la ÚNICA forma de
+   aplicarle flexbox a la fila: sin él, dt y dd son hermanos
+   sueltos y no hay nada que agrupar. */
+.horario__fila {
+  /* [DÍA 2] space-between = el primero pegado a la izquierda, el
+     último a la derecha, todo el espacio sobrante al medio. */
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: var(--e2);
+
+  padding-block: var(--e2);
+  border-bottom: 1px solid var(--borde);
+}
+
+/* dt y dd ya son etiquetas distintas entre sí → no necesitan clase. */
+.horario__fila dt {
+  font-weight: 600;
+}
+
+.horario__fila dd {
+  color: var(--texto-suave);
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---------- BARBERO ---------------------------------------- */
+
+/* Acá "nosotros ul" es seguro: hay una sola <ul> en la sección.
+   El peligro era con <p>, no con listas. */
+.nosotros ul {
+  /* [DÍA 2] */
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--e2);
+}
+
+.barbero {
+  /* [DÍA 2] flex: grow shrink basis
+       1    → puede crecer si sobra espacio
+       1    → puede achicarse si falta
+       12rem→ tamaño de partida
+
+     Traducción: "mide 12rem, pero estírate para repartir el espacio
+     con tus hermanos, y si no caben 12rem, salta de línea".
+     Eso da 3 columnas en desktop y 1 en celular, sin una sola media
+     query. */
+  flex: 1 1 12rem;
+
+  padding: var(--e3);
+  background-color: var(--fondo-alt);
+  border-radius: var(--radio);
+}
+
+/* ---------- UBICACIÓN -------------------------------------- */
+
+.ubicacion address {
+  line-height: 1.8; /* la dirección usa <br>, necesita más aire */
+}
+
+/* ---------- FOOTER ----------------------------------------- */
+
+footer {
+  border-top: 1px solid var(--borde);
+  padding: var(--e4) var(--e3);
+  text-align: center;
+}
+
+/* ---------- NOTA ------------------------------------------- */
+/* La clase más rentable del archivo: se usa 5 veces.
+     - medios de pago
+     - el detalle de la Fran
+     - la alternativa de WhatsApp
+     - el estacionamiento
+     - el copyright
+
+   Antes eran 5 clases distintas (.servicios__pago, .barbero__detalle,
+   .ubicacion__estacionamiento...) con exactamente el mismo CSS.
+   Cuando notes que varias clases van a tener las mismas reglas,
+   es señal de que siempre fue una sola. */
+
+.nota {
+  color: var(--texto-suave);
+  font-size: 0.875rem;
+}
+
+/* =============================================================
+   6. RESPONSIVE
+
+   MOBILE-FIRST: todo lo de arriba está escrito pensando en el
+   celular. Acá abajo solo AGREGAMOS lo que cambia en pantalla
+   grande, con min-width.
+
+   ¿Por qué así y no al revés? Porque el layout del celular es más
+   simple (todo apilado en una columna). Partir de lo simple y
+   agregar complejidad es más fácil que partir de lo complejo y
+   andar deshaciendo.
+
+   Y porque a la barbería la van a buscar desde el celular en la
+   calle. El desktop es el caso secundario.
+
+   48em = 768px. Usamos em y no px para que el breakpoint respete
+   el zoom y el tamaño de letra del usuario.
+   El número no sale de ningún dispositivo real: sale de dónde SE
+   ROMPE TU DISEÑO. Achica la ventana hasta que se vea mal → ahí va
+   el breakpoint.
+   ============================================================= */
+
+@media (min-width: 48em) {
+  /* Logo a la izquierda, menú a la derecha.
+     Solo cambian dos propiedades; todo lo demás (el gap, el
+     padding, el borde) se hereda de la regla de arriba. */
+  header {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  nav ul {
+    justify-content: flex-end;
+  }
+
+  main {
+    padding-inline: var(--e2);
+  }
+}
+
+/* =============================================================
+   ACCESIBILIDAD
+
+   Hay gente que activa "reducir movimiento" en su sistema
+   operativo — por vértigo, migrañas o preferencia. El navegador
+   nos avisa con esta media query y nosotros apagamos todo.
+
+   Son 6 líneas. No hay excusa para no ponerlas.
+
+   (Es de los poquísimos lugares donde !important está bien: acá
+   la intención es justamente pisar TODO lo demás.)
+   ============================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

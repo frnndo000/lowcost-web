@@ -6,115 +6,199 @@
     <title>Barbería Rápida y Fade en Viña del Mar | El Chute</title>
     <meta
       name="description"
-      content="Barbería y fade en Viña del Mar. Agendas tu hora y te atendemos sin esperas. 8 años en Av. San Martín. Reserva online en menos de un minuto"
+      content="Barbería y fade en Viña del Mar. Agendas tu hora y te atendemos sin esperas. 8 años en Av. San Martín. Reserva online en menos de un minuto."
     />
+    <link rel="stylesheet" href="styles.css" />
   </head>
 
   <body>
     <header>
-      <a href="/">
+      <a class="logo" href="/">
         <img src="logo.png" alt="Barbería El Chute" width="150" height="50" />
       </a>
+
       <nav>
         <ul>
-          <li><a href="#nosotros">Nosotros</a></li>
-          <li><a href="#horario">Horario</a></li>
           <li><a href="#servicios">Servicios</a></li>
-          <li><a href="#agendar">Agendar hora</a></li>
+          <li><a href="#horario">Horario</a></li>
+          <li><a href="#nosotros">Nosotros</a></li>
           <li><a href="#ubicacion">Ubicación</a></li>
+          <li><a class="boton" href="#agendar">Agendar hora</a></li>
         </ul>
       </nav>
     </header>
 
     <main>
-      <h1>Barbería El Chute</h1>
+      <section class="portada">
+        <h1>Barbería en Viña del Mar: fade rápido y sin esperas</h1>
 
-      <section id="nosotros">
-        <h2>Quiénes somos</h2>
         <p>
-          Somos una barbería en Viña del Mar con 8 años de experiencia,
-          especializada en cortes rápidos y fades. Nuestro objetivo es ofrecer
-          un servicio de calidad sin largas esperas, asegurando que cada cliente
-          salga satisfecho y con un estilo impecable.
-        </p>
-
-        <h3>Nuestro Barberos</h3>
-
-        <ul>
-          <li>Nacho - Especialista en fades y cortes modernos</li>
-          <li>
-            Fran - Experta en corte degradado, los mejores fades de la región
-          </li>
-          <li>Carlos - Conocido por su rapidez y precisión en cortes</li>
-        </ul>
-      </section>
-
-      <section id="horario">
-        <h2>Horario de atención</h2>
-
-        <dl>
-          <dt>Martes a viernes</dt>
-          <dd>10:30 a 20:00</dd>
-
-          <dt>Sábado</dt>
-          <dd>10:00 a 18:00</dd>
-
-          <dt>Domingo y lunes</dt>
-          <dd>Cerrado</dd>
-        </dl>
-      </section>
-
-      <section id="servicios">
-        <h2>Servicios</h2>
-        <p>
-          Ofrecemos una amplia gama de servicios de barbería, incluyendo cortes
-          clásicos, fades, afeitado y barba.
-        </p>
-
-        <ul>
-          <li>Corte de cabello clasico $9.000 (30 min)</li>
-          <li>Corte degradado $11.000 (45 min)</li>
-          <li>Corte + Barba $14.000 (60 min)</li>
-          <li>Perfilado de Barba $6.000 (20 min)</li>
-          <li>Corte niño hasta 12 años $7.000 (30 min)</li>
-        </ul>
-      </section>
-
-      <section id="agendar">
-        <h2>Agendar hora</h2>
-        <p>
-          Reserva tu hora en línea en menos de un minuto. Solo necesitas
-          seleccionar el servicio y la fecha que prefieras.
+          Si agendas tu hora, te atendemos a la hora. 8 años cortando en Av. San
+          Martín.
         </p>
 
         <a
+          class="boton"
+          href="https://reservo.cl/barberiaelchute"
+          target="_blank"
+          rel="noopener"
+          >Agendar hora en Reservo</a
+        >
+      </section>
+
+      <section class="servicios" id="servicios">
+        <h2>Servicios</h2>
+
+        <ul>
+          <li class="servicio">
+            <h3>Corte de cabello clásico</h3>
+            <p class="servicio__duracion">30 min</p>
+            <p class="servicio__precio">$9.000</p>
+          </li>
+
+          <li class="servicio">
+            <h3>Corte degradado (fade)</h3>
+            <p class="servicio__duracion">45 min</p>
+            <p class="servicio__precio">$11.000</p>
+          </li>
+
+          <li class="servicio">
+            <h3>Corte + barba</h3>
+            <p class="servicio__duracion">60 min</p>
+            <p class="servicio__precio">$14.000</p>
+          </li>
+
+          <li class="servicio">
+            <h3>Diseño con máquina</h3>
+            <p class="servicio__duracion">45 min</p>
+            <p class="servicio__precio">$13.000</p>
+          </li>
+
+          <li class="servicio">
+            <h3>Perfilado de barba</h3>
+            <p class="servicio__duracion">20 min</p>
+            <p class="servicio__precio">$6.000</p>
+          </li>
+
+          <li class="servicio">
+            <h3>Corte niño (hasta 12 años)</h3>
+            <p class="servicio__duracion">30 min</p>
+            <p class="servicio__precio">$7.000</p>
+          </li>
+        </ul>
+
+        <p class="nota">
+          Aceptamos efectivo, débito y transferencia. No aceptamos tarjeta de
+          crédito.
+        </p>
+      </section>
+
+      <section class="horario" id="horario">
+        <h2>Horario de atención</h2>
+
+        <dl>
+          <div class="horario__fila">
+            <dt>Martes a viernes</dt>
+            <dd>10:30 a 20:00</dd>
+          </div>
+
+          <div class="horario__fila">
+            <dt>Sábado</dt>
+            <dd>10:00 a 18:00</dd>
+          </div>
+
+          <div class="horario__fila">
+            <dt>Domingo y lunes</dt>
+            <dd>Cerrado</dd>
+          </div>
+        </dl>
+      </section>
+
+      <section class="nosotros" id="nosotros">
+        <h2>Quiénes somos</h2>
+
+        <p>
+          Somos una barbería en Viña del Mar con 8 años de experiencia,
+          especializada en cortes rápidos y fades. Trabajamos con hora agendada
+          para que nadie tenga que esperar.
+        </p>
+
+        <h3>Nuestros barberos</h3>
+
+        <!-- TODO: preguntarle a Don Carlos la especialidad de Carlos y Nacho.
+             El brief solo confirma la de Fran. No inventar. -->
+        <ul>
+          <li class="barbero">
+            <h4>Carlos</h4>
+          </li>
+
+          <li class="barbero">
+            <h4>Nacho</h4>
+          </li>
+
+          <li class="barbero">
+            <h4>Fran</h4>
+            <p class="nota">Los mejores fades del sector.</p>
+          </li>
+        </ul>
+      </section>
+
+      <section class="agendar" id="agendar">
+        <h2>Agendar hora</h2>
+
+        <p>
+          Reserva en línea en menos de un minuto: eliges el servicio, eliges la
+          hora y te atendemos sin esperas.
+        </p>
+
+        <a
+          class="boton"
           href="https://reservo.cl/barberiaelchute"
           target="_blank"
           rel="noopener"
           >Agendar hora en Reservo</a
         >
 
-        <p>
-          También puedes escribirnos por
+        <p class="nota">
+          Reservo es la vía más rápida. Si prefieres, escríbenos por
           <a
             href="https://wa.me/56987654321?text=Hola%2C%20quiero%20agendar%20una%20hora"
+            target="_blank"
+            rel="noopener"
             >WhatsApp</a
           >
-          o llamar al <a href="tel:+56987654321">+56 9 8765 4321</a>.
+          o llama al <a href="tel:+56987654321">+56 9 8765 4321</a>.
         </p>
       </section>
 
-      <section id="ubicacion">
+      <section class="ubicacion" id="ubicacion">
         <h2>Dónde estamos</h2>
+
         <address>
           Av. San Martín 450, Viña del Mar<br />
+          Casi llegando a 8 Norte, al lado de la farmacia.<br />
           <a href="tel:+56987654321">+56 9 8765 4321</a>
         </address>
+
+        <p class="nota">
+          No tenemos estacionamiento propio, pero hay uno público a media
+          cuadra.
+        </p>
       </section>
     </main>
 
     <footer>
-      <p>&copy; 2026 Barbería El Chute. Todos los derechos reservados.</p>
+      <p>
+        Míranos en Instagram:
+        <a
+          href="https://instagram.com/barberiaelchute"
+          target="_blank"
+          rel="noopener"
+          >@barberiaelchute</a
+        >
+      </p>
+
+      <p class="nota">&copy; 2026 Barbería El Chute.</p>
     </footer>
   </body>
 </html>
