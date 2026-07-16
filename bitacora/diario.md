@@ -24,3 +24,23 @@
 - Verificación del Student Pack
 - Primer deploy en Cloudflare Pages
 - josear
+
+# Día 1 — 14 de julio de 2026
+
+## Qué hicimos
+
+- Estudiamos y practicamos html
+
+## Qué aprendimos
+
+- html basico lol
+
+# Día 2 — 15 de julio de 2026
+
+## Qué hicimos
+
+- Estudiamos y practicamos CSS
+
+## Qué aprendimos
+
+- CSS basico lol
