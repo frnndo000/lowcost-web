@@ -11,6 +11,3 @@ Thumbs.db
 # Build de Astro (para más adelante)
 dist/
 .astro/
-
-# Build de Tailwind
-prototipos/**/output.css
