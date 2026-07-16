@@ -1,12 +1,12 @@
 @theme {
   /* ---- COLOR ---- */
-  --color-fondo: #faf8f5;
-  --color-fondo-alt: #f1ece4;
-  --color-texto: #1c1917;
-  --color-texto-suave: #6b625b;
-  --color-acento: #a63a26;
-  --color-acento-hover: #7d2b1b;
-  --color-borde: #e2dbd0;
+  --color-fondo: #f6f7f8;
+  --color-fondo-alt: #e9edef;
+  --color-texto: #202f38;
+  --color-texto-suave: #55656f;
+  --color-acento: #154d8c;
+  --color-acento-hover: #071f69;
+  --color-borde: #071f69;
 
   /* ---- MEDIDAS ---- */
   --container-lectura: 65ch;
