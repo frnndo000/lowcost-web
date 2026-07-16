@@ -44,3 +44,13 @@
 ## Qué aprendimos
 
 - CSS basico lol
+
+# Día 3 — 16 de julio de 2026
+
+## Qué hicimos
+
+- Estudiamos y practicamos Tailwind CSS
+
+## Qué aprendimos
+
+- Tailwind CSS
