@@ -1,80 +1,90 @@
 <!doctype html>
-
-<html lang="en">
+<html lang="es">
   <head>
     <meta charset="UTF-8" />
-    <title>Pagina Principal</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Barbería clásica en Valparaíso desde 2017. Reserva tu hora."
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <title>
+      Mapu Barber Shop — Barbería Premium en Valparaíso y Viña del Mar
+    </title>
   </head>
-
   <body>
-    <h1>Encabezados</h1>
-    <h1>Este es una etiqueta de encabezado</h1>
-    <h2>Este es una etiqueta de encabezado secundaria</h2>
-    <h3>Estas etiquetas van desde la h1 hasta la h6</h3>
-    <hr />
-    <h1>Listas</h1>
-    <h3>Existen dos tipos de listas, las desordenadas y las ordenadas</h3>
+    <header>
+      <a href="index.html"><h2>Mapu Barber Shop</h2></a>
+      <nav>
+        <ul>
+          <li><a href="index.html">Inicio</a></li>
+          <li><a href="servicios.html">Servicios</a></li>
+          <li><a href="galeria.html">Galería</a></li>
+          <li><a href="contacto.html">Contacto</a></li>
+          <li><a href="reservar.html">Reservar</a></li>
+        </ul>
+      </nav>
+    </header>
 
-    <ol>
-      <h3>Lista ordenada</h3>
-      <li>Elemento 1 de la lista</li>
-      <li>Elemento 2 de la lista</li>
-      <li>Elemento 3 de la lista</li>
-      <li>La etiqueta < ol > se utiliza para crear listas numeradas</li>
-    </ol>
+    <main>
+      <section class="hero">
+        <h1>Mapu Barber Shop</h1>
+        <h2>Vive la experiencia</h2>
+        <a href="reservar.html" class="boton">Reserva tu hora</a>
+        <a href="galeria.html" class="boton-secundario">Ver galería</a>
+      </section>
 
-    <ul>
-      <h3>Lista desordenada</h3>
-      <li>Elemento 1 de la lista</li>
-      <li>Elemento 2 de la lista</li>
-      <li>Elemento 3 de la lista</li>
-      <li>La etiqueta < ul > se utiliza para crear listas desordenadas</li>
-    </ul>
-    <hr />
+      <section class="sobre-nosotros">
+        <p class="desde">Desde 2017 · Valparaíso, Chile</p>
+        <h2>Sobre Nosotros</h2>
+        <p>
+          Fundada en 2017 en Valparaíso, Mapu Barber nació de la pasión por el
+          oficio y la convicción de que una barbería puede ser mucho más que un
+          espacio de corte. Hoy, con dos sucursales en la región, somos un
+          referente de la barbería clásica en Chile.
+        </p>
+        <p>
+          Cada barbero que forma parte de nuestro equipo comparte los mismos
+          valores: precisión, respeto por el cliente y amor por el oficio. A
+          través de la Academia Mapu Barber, hemos egresado más de 24
+          generaciones de barberos que hoy ejercen su profesión con orgullo en
+          todo Chile.
+        </p>
+        <img
+          width="250"
+          src="img/mapu-barber.jpg"
+          alt="Interior de la barbería Mapu Barber Shop"
+        />
+      </section>
 
-    <h1>Tablas</h1>
-    <table>
-      <tr>
-        <th>Encabezado 1</th>
-        <th>Encabezado 2</th>
-        <th>Encabezado 3</th>
-        <th>Encabezado 4</th>
-      </tr>
-      <tr>
-        <td>Dato 1</td>
-        <td>Dato 2</td>
-        <td>Dato 3</td>
-        <td>Este es un dato</td>
-      </tr>
-    </table>
-    <hr />
+      <section class="servicios">
+        <h2>Nuestros Servicios</h2>
+        <p>Cada servicio incluye la experiencia completa Mapu Barber.</p>
 
-    <h1>Enlaces</h1>
-    <p>Crearemos otra pagina html llamada enlaces.html para esta seccion</p>
-    <ul>
-      <li><a href="enlaces.html">Enlaces</a></li>
-    </ul>
-    <hr />
+        <article class="servicio">
+          <h3>Corte de Cabello</h3>
+          <p>Corte clásico a tijera y máquina.</p>
+          <span class="precio">$12.000</span>
+        </article>
 
-    <h1>Imagenes</h1>
-    <h1>Presiona la imagen</h1>
-    <a
-      href="https://upload.wikimedia.org/wikipedia/en/7/73/Trollface.png"
-      target="_blank"
-    >
-      <img src="img/image.jpg" alt="Imagen de prueba" />
-    </a>
-    <hr />
+        <article class="servicio">
+          <h3>Afeitado Clásico</h3>
+          <p>Afeitado con navaja y toalla caliente.</p>
+          <span class="precio">$10.000</span>
+        </article>
 
-    <h1>Formularios</h1>
-    <form>
-      <label for="nombre">Nombre:</label>
-      <input type="text" id="nombre" name="nombre" />
-      <br />
-      <label for="numero">Numero:</label>
-      <input type="number" id="numero" name="numero" />
-    </form>
+        <article class="servicio">
+          <h3>Corte + Barba</h3>
+          <p>El combo completo.</p>
+          <span class="precio">$18.000</span>
+        </article>
+      </section>
+    </main>
 
-    <hr />
+    <footer>
+      <p>Mapu Barber Shop · Valparaíso, Chile</p>
+      <a href="https://wa.me/56900000000">WhatsApp</a>
+      <a href="https://instagram.com/mapubarber">Instagram</a>
+    </footer>
   </body>
 </html>
