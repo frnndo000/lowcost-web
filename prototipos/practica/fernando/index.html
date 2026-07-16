@@ -7,84 +7,204 @@
       name="description"
       content="Barbería clásica en Valparaíso desde 2017. Reserva tu hora."
     />
-    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="output.css" />
     <title>
       Mapu Barber Shop — Barbería Premium en Valparaíso y Viña del Mar
     </title>
   </head>
   <body>
-    <header>
-      <a href="index.html"><h2>Mapu Barber Shop</h2></a>
+    <header
+      class="flex flex-col md:flex-row justify-between items-center px-8 py-4 bg-slate-900 text-white"
+    >
+      <a href="index.html" class="no-underline text-white mb-4 md:mb-0">
+        <h2 class="text-2xl font-bold tracking-wide">Mapu Barber Shop</h2>
+      </a>
       <nav>
-        <ul>
-          <li><a href="index.html">Inicio</a></li>
-          <li><a href="servicios.html">Servicios</a></li>
-          <li><a href="galeria.html">Galería</a></li>
-          <li><a href="contacto.html">Contacto</a></li>
-          <li><a href="reservar.html">Reservar</a></li>
+        <ul class="flex flex-wrap justify-center gap-6 list-none">
+          <li>
+            <a
+              href="index.html"
+              class="text-white no-underline hover:text-amber-500 transition-colors"
+              >Inicio</a
+            >
+          </li>
+          <li>
+            <a
+              href="servicios.html"
+              class="text-white no-underline hover:text-amber-500 transition-colors"
+              >Servicios</a
+            >
+          </li>
+          <li>
+            <a
+              href="galeria.html"
+              class="text-white no-underline hover:text-amber-500 transition-colors"
+              >Galería</a
+            >
+          </li>
+          <li>
+            <a
+              href="contacto.html"
+              class="text-white no-underline hover:text-amber-500 transition-colors"
+              >Contacto</a
+            >
+          </li>
+          <li>
+            <a
+              href="reservar.html"
+              class="text-white no-underline hover:text-amber-500 transition-colors"
+              >Reservar</a
+            >
+          </li>
         </ul>
       </nav>
     </header>
 
     <main>
-      <section class="hero">
-        <h1>Mapu Barber Shop</h1>
-        <h2>Vive la experiencia</h2>
-        <a href="reservar.html" class="boton">Reserva tu hora</a>
-        <a href="galeria.html" class="boton-secundario">Ver galería</a>
+      <<!-- HERO: el bloque grande de bienvenida, lo primero que ve el visitante -->
+      <!-- min-h-[70vh] = ocupa el 70% del alto de la pantalla -->
+      <!-- flex flex-col items-center justify-center = centra todo, vertical y horizontal -->
+      <!-- text-center = texto centrado | px-4 = aire a los lados en celular -->
+      <section
+        class="min-h-[70vh] flex flex-col items-center justify-center text-center px-4 bg-slate-800 text-white"
+      >
+        <!-- El título principal. text-5xl en celular, text-7xl desde 768px (md:) -->
+        <h1 class="text-5xl md:text-7xl font-bold mb-4">Mapu Barber Shop</h1>
+
+        <!-- Subtítulo. text-slate-300 = gris claro, para contraste suave -->
+        <p class="text-xl md:text-2xl text-slate-300 mb-2">
+          Vive la experiencia
+        </p>
+
+        <!-- Línea pequeña de credibilidad -->
+        <p class="text-sm text-slate-400 mb-8">
+          Desde 2017 · Valparaíso, Chile
+        </p>
+
+        <!-- Contenedor de los dos botones -->
+        <!-- flex-col sm:flex-row = botones apilados en celular, lado a lado en pantalla más grande -->
+        <div class="flex flex-col sm:flex-row gap-4">
+          <!-- Botón principal (relleno ámbar) -->
+          <!-- inline-block = se comporta como botón | px-8 py-3 = tamaño cómodo para el dedo -->
+          <!-- rounded-lg = esquinas redondeadas | font-semibold = seminegrita -->
+          <!-- hover:bg-amber-400 = se aclara al pasar el mouse -->
+          <a
+            href="reservar.html"
+            class="inline-block bg-amber-500 text-slate-900 px-8 py-3 rounded-lg font-semibold no-underline hover:bg-amber-400 transition-colors"
+          >
+            Reserva tu hora
+          </a>
+
+          <!-- Botón secundario (solo borde, sin relleno) -->
+          <!-- border border-white = borde blanco | hover se rellena al pasar el mouse -->
+          <a
+            href="galeria.html"
+            class="inline-block border border-white text-white px-8 py-3 rounded-lg font-semibold no-underline hover:bg-white hover:text-slate-900 transition-colors"
+          >
+            Ver galería
+          </a>
+        </div>
       </section>
 
-      <section class="sobre-nosotros">
-        <p class="desde">Desde 2017 · Valparaíso, Chile</p>
-        <h2>Sobre Nosotros</h2>
-        <p>
+      <!-- SECCIÓN sobre nosotros -->
+      <!-- max-w-4xl mx-auto = ancho máximo y centrado (que el texto no se estire infinito en pantallas grandes) -->
+      <!-- py-16 px-4 = espacio arriba/abajo generoso, aire a los lados -->
+      <section class="max-w-4xl mx-auto py-16 px-4">
+        <!-- Título de sección. text-3xl, negrita, con margen abajo -->
+        <h2 class="text-3xl font-bold mb-6 text-center">Sobre Nosotros</h2>
+
+        <!-- Párrafos. text-slate-600 = gris para lectura cómoda -->
+        <!-- leading-relaxed = interlineado más aireado | mb-4 = separación entre párrafos -->
+        <p class="text-slate-600 leading-relaxed mb-4">
           Fundada en 2017 en Valparaíso, Mapu Barber nació de la pasión por el
           oficio y la convicción de que una barbería puede ser mucho más que un
           espacio de corte. Hoy, con dos sucursales en la región, somos un
           referente de la barbería clásica en Chile.
         </p>
-        <p>
+        <p class="text-slate-600 leading-relaxed mb-8">
           Cada barbero que forma parte de nuestro equipo comparte los mismos
           valores: precisión, respeto por el cliente y amor por el oficio. A
           través de la Academia Mapu Barber, hemos egresado más de 24
-          generaciones de barberos que hoy ejercen su profesión con orgullo en
-          todo Chile.
+          generaciones de barberos.
         </p>
+
+        <!-- Imagen. rounded-lg = bordes redondeados | mx-auto = centrada -->
+        <!-- w-full max-w-md = ocupa el ancho disponible pero sin pasar de cierto tamaño -->
         <img
-          width="250"
           src="img/mapu-barber.jpg"
           alt="Interior de la barbería Mapu Barber Shop"
+          class="rounded-lg mx-auto w-full max-w-md"
         />
       </section>
 
-      <section class="servicios">
-        <h2>Nuestros Servicios</h2>
-        <p>Cada servicio incluye la experiencia completa Mapu Barber.</p>
+      <!-- SECCIÓN servicios -->
+      <section class="max-w-5xl mx-auto py-16 px-4">
+        <h2 class="text-3xl font-bold mb-2 text-center">Nuestros Servicios</h2>
+        <p class="text-slate-500 text-center mb-10">
+          Cada servicio incluye la experiencia completa Mapu Barber.
+        </p>
 
-        <article class="servicio">
-          <h3>Corte de Cabello</h3>
-          <p>Corte clásico a tijera y máquina.</p>
-          <span class="precio">$12.000</span>
-        </article>
+        <!-- LA GRILLA: 1 columna en celular, 3 desde 768px (md:grid-cols-3) -->
+        <!-- gap-6 = espacio entre tarjetas -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <!-- Tarjeta de servicio -->
+          <!-- border = borde sutil | rounded-xl = bien redondeado -->
+          <!-- p-6 = padding interno | text-center = todo centrado -->
+          <!-- hover:shadow-lg = sombra al pasar el mouse, da sensación de "elevarse" -->
+          <article
+            class="border border-slate-200 rounded-xl p-6 text-center hover:shadow-lg transition-shadow"
+          >
+            <h3 class="text-xl font-semibold mb-2">Corte de Cabello</h3>
+            <p class="text-slate-500 mb-4">Corte clásico a tijera y máquina.</p>
+            <!-- Precio destacado en ámbar -->
+            <span class="text-2xl font-bold text-amber-500">$12.000</span>
+          </article>
 
-        <article class="servicio">
-          <h3>Afeitado Clásico</h3>
-          <p>Afeitado con navaja y toalla caliente.</p>
-          <span class="precio">$10.000</span>
-        </article>
+          <article
+            class="border border-slate-200 rounded-xl p-6 text-center hover:shadow-lg transition-shadow"
+          >
+            <h3 class="text-xl font-semibold mb-2">Afeitado Clásico</h3>
+            <p class="text-slate-500 mb-4">
+              Afeitado con navaja y toalla caliente.
+            </p>
+            <span class="text-2xl font-bold text-amber-500">$10.000</span>
+          </article>
 
-        <article class="servicio">
-          <h3>Corte + Barba</h3>
-          <p>El combo completo.</p>
-          <span class="precio">$18.000</span>
-        </article>
+          <article
+            class="border border-slate-200 rounded-xl p-6 text-center hover:shadow-lg transition-shadow"
+          >
+            <h3 class="text-xl font-semibold mb-2">Corte + Barba</h3>
+            <p class="text-slate-500 mb-4">El combo completo.</p>
+            <span class="text-2xl font-bold text-amber-500">$18.000</span>
+          </article>
+        </div>
       </section>
     </main>
 
-    <footer>
-      <p>Mapu Barber Shop · Valparaíso, Chile</p>
-      <a href="https://wa.me/56900000000">WhatsApp</a>
-      <a href="https://instagram.com/mapubarber">Instagram</a>
+    <!-- FOOTER -->
+    <!-- bg-slate-900 = mismo oscuro que el header, para cerrar el diseño de forma coherente -->
+    <footer class="bg-slate-900 text-white py-10 px-4">
+      <!-- Contenedor centrado con los enlaces en fila -->
+      <div class="max-w-4xl mx-auto flex flex-col items-center gap-4">
+        <p class="font-semibold">Mapu Barber Shop · Valparaíso, Chile</p>
+
+        <!-- Enlaces de contacto -->
+        <div class="flex gap-6">
+          <!-- Enlace de WhatsApp. El número va con formato internacional: 56 + número sin el 0 -->
+          <a
+            href="https://wa.me/56912345678"
+            class="text-white no-underline hover:text-amber-500 transition-colors"
+          >
+            WhatsApp
+          </a>
+          <a
+            href="https://instagram.com/mapubarber"
+            class="text-white no-underline hover:text-amber-500 transition-colors"
+          >
+            Instagram
+          </a>
+        </div>
+      </div>
     </footer>
   </body>
 </html>
