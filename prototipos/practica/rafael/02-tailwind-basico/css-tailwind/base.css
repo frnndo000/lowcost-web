@@ -1,0 +1,57 @@
+/* =========================================================
+   BASE — solo lo que Preflight NO cubre.
+   El resto de tu reset ya lo hace Tailwind.
+   ========================================================= */
+
+@layer base {
+  body {
+    background-color: var(--color-fondo);
+    color: var(--color-texto);
+    line-height: 1.6; /* Preflight pone 1.5 en <html> */
+    -webkit-font-smoothing: antialiased;
+  }
+
+  a {
+    color: var(--color-acento);
+    transition: color 0.15s ease;
+  }
+
+  a:hover {
+    color: var(--color-acento-hover);
+  }
+
+  a:focus-visible {
+    outline: 2px solid var(--color-acento);
+    outline-offset: 3px;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    line-height: 1.2;
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  address {
+    font-style: normal;
+  }
+}
+
+/* Fuera de @layer A PROPÓSITO: el CSS sin capa le gana a TODAS las
+   capas, incluida utilities. Sumado al !important, esto no lo pisa
+   nadie. Que es exactamente la intención. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

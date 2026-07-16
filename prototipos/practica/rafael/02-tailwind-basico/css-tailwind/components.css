@@ -1,0 +1,20 @@
+/* =========================================================
+   COMPONENTES — piezas que se repiten en el HTML.
+   Existen porque no tenemos componentes de verdad todavía.
+   Cuando llegue Astro, esto se muere.
+   ========================================================= */
+
+@utility boton {
+  display: inline-block;
+  padding: --spacing(4) --spacing(8);
+  background-color: var(--color-acento);
+  color: var(--color-fondo);
+  font-weight: 700;
+  border-radius: var(--radius-sm);
+  transition: background-color 150ms ease;
+
+  &:hover {
+    background-color: var(--color-acento-hover);
+    color: var(--color-fondo);
+  }
+}

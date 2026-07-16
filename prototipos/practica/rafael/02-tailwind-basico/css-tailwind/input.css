@@ -1,0 +1,6 @@
+/* Punto de entrada. Solo imports, en orden. No escribas CSS acá. */
+
+@import "tailwindcss";
+@import "./theme.css";
+@import "./base.css";
+@import "./components.css";

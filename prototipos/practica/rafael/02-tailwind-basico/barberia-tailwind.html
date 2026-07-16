@@ -1,0 +1,250 @@
+<!doctype html>
+<html lang="es-CL">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Barbería Rápida y Fade en Viña del Mar | El Chute</title>
+    <meta
+      name="description"
+      content="Barbería y fade en Viña del Mar. Agendas tu hora y te atendemos sin esperas. 8 años en Av. San Martín. Reserva online en menos de un minuto."
+    />
+    <link rel="stylesheet" href="css-tailwind/output.css" />
+  </head>
+
+  <body>
+    <!-- header: flex-col en celular, flex-row en desktop (md:) -->
+    <header
+      class="flex flex-col items-center gap-4 border-b border-borde p-6 md:flex-row md:justify-between"
+    >
+      <a class="shrink-0" href="/">
+        <img
+          src="../imagenes/logo.png"
+          alt="Barbería El Chute"
+          width="150"
+          height="50"
+        />
+      </a>
+
+      <nav>
+        <ul
+          class="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 md:justify-end"
+        >
+          <li><a href="#servicios">Servicios</a></li>
+          <li><a href="#horario">Horario</a></li>
+          <li><a href="#nosotros">Nosotros</a></li>
+          <li><a href="#ubicacion">Ubicación</a></li>
+          <li><a class="boton" href="#agendar">Agendar hora</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <!-- main: ancho de lectura, centrado, con aire a los lados -->
+    <main class="mx-auto max-w-lectura px-6 md:px-4">
+      <!-- portada: respira más que el resto (py-24 vs py-16) -->
+      <section class="space-y-6 py-24 text-center">
+        <h1 class="text-[clamp(2rem,6vw,3.5rem)] font-bold">
+          Barbería en Viña del Mar: fade rápido y sin esperas
+        </h1>
+
+        <p class="text-lg text-texto-suave">
+          Si agendas tu hora, te atendemos a la hora. 8 años cortando en Av. San
+          Martín.
+        </p>
+
+        <a
+          class="boton"
+          href="https://reservo.cl/barberiaelchute"
+          target="_blank"
+          rel="noopener"
+          >Agendar hora en Reservo</a
+        >
+      </section>
+
+      <section id="servicios" class="space-y-6 py-16">
+        <h2 class="text-3xl font-bold">Servicios</h2>
+
+        <ul>
+          <li
+            class="flex flex-wrap items-baseline gap-x-4 gap-y-2 border-b border-borde py-6"
+          >
+            <h3 class="text-lg font-semibold">Corte de cabello clásico</h3>
+            <p class="text-sm text-texto-suave">30 min</p>
+            <p class="ml-auto text-lg font-bold tabular-nums text-acento">
+              $9.000
+            </p>
+          </li>
+
+          <li
+            class="flex flex-wrap items-baseline gap-x-4 gap-y-2 border-b border-borde py-6"
+          >
+            <h3 class="text-lg font-semibold">Corte degradado (fade)</h3>
+            <p class="text-sm text-texto-suave">45 min</p>
+            <p class="ml-auto text-lg font-bold tabular-nums text-acento">
+              $11.000
+            </p>
+          </li>
+
+          <li
+            class="flex flex-wrap items-baseline gap-x-4 gap-y-2 border-b border-borde py-6"
+          >
+            <h3 class="text-lg font-semibold">Corte + barba</h3>
+            <p class="text-sm text-texto-suave">60 min</p>
+            <p class="ml-auto text-lg font-bold tabular-nums text-acento">
+              $14.000
+            </p>
+          </li>
+
+          <li
+            class="flex flex-wrap items-baseline gap-x-4 gap-y-2 border-b border-borde py-6"
+          >
+            <h3 class="text-lg font-semibold">Diseño con máquina</h3>
+            <p class="text-sm text-texto-suave">45 min</p>
+            <p class="ml-auto text-lg font-bold tabular-nums text-acento">
+              $13.000
+            </p>
+          </li>
+
+          <li
+            class="flex flex-wrap items-baseline gap-x-4 gap-y-2 border-b border-borde py-6"
+          >
+            <h3 class="text-lg font-semibold">Perfilado de barba</h3>
+            <p class="text-sm text-texto-suave">20 min</p>
+            <p class="ml-auto text-lg font-bold tabular-nums text-acento">
+              $6.000
+            </p>
+          </li>
+
+          <li
+            class="flex flex-wrap items-baseline gap-x-4 gap-y-2 border-b border-borde py-6"
+          >
+            <h3 class="text-lg font-semibold">Corte niño (hasta 12 años)</h3>
+            <p class="text-sm text-texto-suave">30 min</p>
+            <p class="ml-auto text-lg font-bold tabular-nums text-acento">
+              $7.000
+            </p>
+          </li>
+        </ul>
+
+        <p class="text-sm text-texto-suave">
+          Aceptamos efectivo, débito y transferencia. No aceptamos tarjeta de
+          crédito.
+        </p>
+      </section>
+
+      <section id="horario" class="space-y-6 py-16">
+        <h2 class="text-3xl font-bold">Horario de atención</h2>
+
+        <dl class="border-t border-borde">
+          <div
+            class="flex flex-wrap justify-between gap-4 border-b border-borde py-4"
+          >
+            <dt class="font-semibold">Martes a viernes</dt>
+            <dd class="tabular-nums text-texto-suave">10:30 a 20:00</dd>
+          </div>
+
+          <div
+            class="flex flex-wrap justify-between gap-4 border-b border-borde py-4"
+          >
+            <dt class="font-semibold">Sábado</dt>
+            <dd class="tabular-nums text-texto-suave">10:00 a 18:00</dd>
+          </div>
+
+          <div
+            class="flex flex-wrap justify-between gap-4 border-b border-borde py-4"
+          >
+            <dt class="font-semibold">Domingo y lunes</dt>
+            <dd class="tabular-nums text-texto-suave">Cerrado</dd>
+          </div>
+        </dl>
+      </section>
+
+      <section id="nosotros" class="space-y-6 py-16">
+        <h2 class="text-3xl font-bold">Quiénes somos</h2>
+
+        <p>
+          Somos una barbería en Viña del Mar con 8 años de experiencia,
+          especializada en cortes rápidos y fades. Trabajamos con hora agendada
+          para que nadie tenga que esperar.
+        </p>
+
+        <h3 class="text-lg font-bold">Nuestros barberos</h3>
+
+        <!-- TODO: preguntarle a Don Carlos la especialidad de Carlos y Nacho.
+             El brief solo confirma la de Fran. No inventar. -->
+        <ul class="flex flex-wrap gap-4">
+          <li class="grow basis-48 rounded-sm bg-fondo-alt p-6">
+            <h4 class="text-base font-bold">Carlos</h4>
+          </li>
+
+          <li class="grow basis-48 rounded-sm bg-fondo-alt p-6">
+            <h4 class="text-base font-bold">Nacho</h4>
+          </li>
+
+          <li class="grow basis-48 rounded-sm bg-fondo-alt p-6">
+            <h4 class="text-base font-bold">Fran</h4>
+            <p class="text-sm text-texto-suave">
+              Los mejores fades del sector.
+            </p>
+          </li>
+        </ul>
+      </section>
+
+      <section id="agendar" class="space-y-6 py-16">
+        <h2 class="text-3xl font-bold">Agendar hora</h2>
+
+        <p>
+          Reserva en línea en menos de un minuto: eliges el servicio, eliges la
+          hora y te atendemos sin esperas.
+        </p>
+
+        <a
+          class="boton"
+          href="https://reservo.cl/barberiaelchute"
+          target="_blank"
+          rel="noopener"
+          >Agendar hora en Reservo</a
+        >
+
+        <p class="text-sm text-texto-suave">
+          Reservo es la vía más rápida. Si prefieres, escríbenos por
+          <a
+            href="https://wa.me/56987654321?text=Hola%2C%20quiero%20agendar%20una%20hora"
+            target="_blank"
+            rel="noopener"
+            >WhatsApp</a
+          >
+          o llama al <a href="tel:+56987654321">+56 9 8765 4321</a>.
+        </p>
+      </section>
+
+      <section id="ubicacion" class="space-y-6 py-16">
+        <h2 class="text-3xl font-bold">Dónde estamos</h2>
+
+        <address class="leading-[1.8]">
+          Av. San Martín 450, Viña del Mar<br />
+          Casi llegando a 8 Norte, al lado de la farmacia.<br />
+          <a href="tel:+56987654321">+56 9 8765 4321</a>
+        </address>
+
+        <p class="text-sm text-texto-suave">
+          No tenemos estacionamiento propio, pero hay uno público a media
+          cuadra.
+        </p>
+      </section>
+    </main>
+
+    <footer class="border-t border-borde px-6 py-8 text-center">
+      <p>
+        Míranos en Instagram:
+        <a
+          href="https://instagram.com/barberiaelchute"
+          target="_blank"
+          rel="noopener"
+          >@barberiaelchute</a
+        >
+      </p>
+
+      <p class="text-sm text-texto-suave">&copy; 2026 Barbería El Chute.</p>
+    </footer>
+  </body>
+</html>
