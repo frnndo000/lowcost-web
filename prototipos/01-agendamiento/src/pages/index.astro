@@ -1,0 +1,27 @@
+---
+import Layout from '../layouts/Layout.astro';
+import TarjetaServicio from '../components/TarjetaServicio.astro';
+---
+<Layout titulo="Mapu Barber Shop — Barbería en Valparaíso">
+
+  <!-- HERO -->
+  <section class="min-h-[70vh] flex flex-col items-center justify-center text-center px-4 bg-slate-800 text-white">
+    <h1 class="text-5xl md:text-7xl font-bold mb-4">Mapu Barber Shop</h1>
+    <p class="text-xl text-slate-300 mb-8">Vive la experiencia</p>
+    <div class="flex flex-col sm:flex-row gap-4">
+      <a href="/reservar" class="bg-amber-500 text-slate-900 px-8 py-3 rounded-lg font-semibold no-underline hover:bg-amber-400 transition-colors">Reserva tu hora</a>
+      <a href="/servicios" class="border border-white text-white px-8 py-3 rounded-lg font-semibold no-underline hover:bg-white hover:text-slate-900 transition-colors">Ver servicios</a>
+    </div>
+  </section>
+
+  <!-- SERVICIOS: fíjate cómo se reutiliza el componente 3 veces -->
+  <section class="max-w-5xl mx-auto py-16 px-4">
+    <h2 class="text-3xl font-bold mb-10 text-center">Nuestros Servicios</h2>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <TarjetaServicio nombre="Corte de Cabello" descripcion="Corte clásico a tijera y máquina." precio="$12.000" />
+      <TarjetaServicio nombre="Afeitado Clásico" descripcion="Afeitado con navaja y toalla caliente." precio="$10.000" />
+      <TarjetaServicio nombre="Corte + Barba" descripcion="El combo completo." precio="$18.000" />
+    </div>
+  </section>
+
+</Layout>

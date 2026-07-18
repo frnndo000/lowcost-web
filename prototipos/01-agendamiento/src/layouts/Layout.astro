@@ -1,0 +1,45 @@
+---
+// Recibe el título de cada página como prop
+import '../styles/global.css';
+const { titulo } = Astro.props;
+---
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Barbería clásica en Valparaíso desde 2017." />
+    <title>{titulo}</title>
+  </head>
+  <body>
+    <!-- HEADER: pega aquí tu header de Tailwind de la barbería -->
+    <header class="flex flex-col md:flex-row justify-between items-center px-8 py-4 bg-slate-900 text-white">
+      <a href="/" class="no-underline text-white mb-4 md:mb-0">
+        <h2 class="text-2xl font-bold">Mapu Barber Shop</h2>
+      </a>
+      <nav>
+        <ul class="flex flex-wrap justify-center gap-6 list-none">
+          <li><a href="/" class="text-white no-underline hover:text-amber-500 transition-colors">Inicio</a></li>
+          <li><a href="/servicios" class="text-white no-underline hover:text-amber-500 transition-colors">Servicios</a></li>
+          <li><a href="/contacto" class="text-white no-underline hover:text-amber-500 transition-colors">Contacto</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <!-- Aquí se inserta el contenido único de cada página -->
+    <main>
+      <slot />
+    </main>
+
+    <!-- FOOTER: pega aquí tu footer de Tailwind -->
+    <footer class="bg-slate-900 text-white py-10 px-4">
+      <div class="max-w-4xl mx-auto flex flex-col items-center gap-4">
+        <p class="font-semibold">Mapu Barber Shop · Valparaíso, Chile</p>
+        <div class="flex gap-6">
+          <a href="https://wa.me/56912345678" class="text-white no-underline hover:text-amber-500">WhatsApp</a>
+          <a href="https://instagram.com/mapubarber" class="text-white no-underline hover:text-amber-500">Instagram</a>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
