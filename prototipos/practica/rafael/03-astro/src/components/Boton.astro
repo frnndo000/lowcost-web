@@ -1,0 +1,17 @@
+---
+// Tu .boton dejó de ser CSS y ahora es un componente.
+// - href, target, rel  → PROPS (datos que le pasas)
+// - el texto del botón  → SLOT (contenido entre <Boton>...</Boton>)
+//
+// Regla mental: dato simple = prop. Contenido/HTML de adentro = slot.
+const { href, target, rel } = Astro.props;
+---
+
+<a
+  href={href}
+  target={target}
+  rel={rel}
+  class="inline-block rounded-sm bg-acento px-8 py-4 font-bold text-fondo transition-colors hover:bg-acento-hover hover:text-fondo"
+>
+  <slot />
+</a>

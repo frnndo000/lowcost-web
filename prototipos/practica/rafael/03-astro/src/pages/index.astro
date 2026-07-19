@@ -1,0 +1,129 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Boton from "../components/Boton.astro";
+import ServicioItem from "../components/ServicioItem.astro";
+import BarberoCard from "../components/BarberoCard.astro";
+
+// Los DATOS viven arriba, separados del HTML. Editar un precio =
+// tocar este array, no cazar el número entre etiquetas.
+const servicios = [
+  { nombre: "Corte de cabello clásico", duracion: "30 min", precio: "$9.000" },
+  { nombre: "Corte degradado (fade)", duracion: "45 min", precio: "$11.000" },
+  { nombre: "Corte + barba", duracion: "60 min", precio: "$14.000" },
+  { nombre: "Diseño con máquina", duracion: "45 min", precio: "$13.000" },
+  { nombre: "Perfilado de barba", duracion: "20 min", precio: "$6.000" },
+  { nombre: "Corte niño (hasta 12 años)", duracion: "30 min", precio: "$7.000" },
+];
+
+const barberos = [
+  { nombre: "Carlos", especialidad: null },
+  { nombre: "Nacho", especialidad: null },
+  { nombre: "Fran", especialidad: "Los mejores fades del sector." },
+];
+---
+
+<Layout
+  titulo="Barbería Rápida y Fade en Viña del Mar | El Chute"
+    descripcion="Barbería y fade en Viña del Mar. Agendas tu hora y te atendemos sin esperas. 8 años en Av. San Martín. Reserva online en menos de un minuto."
+    >>
+  <!-- PORTADA -->
+  <section class="space-y-6 py-24 text-center">
+    <h1 class="text-[clamp(2rem,6vw,3.5rem)] font-bold">
+      Barbería en Viña del Mar: fade rápido y sin esperas
+    </h1>
+    <p class="text-lg text-texto-suave">
+      Si agendas tu hora, te atendemos a la hora. 8 años cortando en Av. San
+      Martín.
+    </p>
+    <Boton href="https://reservo.cl/barberiaelchute" target="_blank" rel="noopener">
+      Agendar hora en Reservo
+    </Boton>
+  </section>
+
+  <!-- SERVICIOS: .map() recorre el array y dibuja un ServicioItem por cada uno -->
+  <section id="servicios" class="space-y-6 py-16 text-center">
+    <h2 class="text-3xl font-bold">Servicios</h2>
+    <ul>
+      {
+        servicios.map((s) => (
+          <ServicioItem nombre={s.nombre} duracion={s.duracion} precio={s.precio} />
+        ))
+      }
+    </ul>
+    <p class="text-sm text-texto-suave">
+      Aceptamos efectivo, débito y transferencia. No aceptamos tarjeta de
+      crédito.
+    </p>
+  </section>
+
+  <!-- HORARIO -->
+  <section id="horario" class="space-y-6 py-16 text-center">
+    <h2 class="text-3xl font-bold">Horario de atención</h2>
+    <dl class="border-t border-borde">
+      <div class="flex flex-wrap justify-between gap-4 border-b border-borde py-4">
+        <dt class="font-semibold">Martes a viernes</dt>
+        <dd class="tabular-nums text-texto-suave">10:30 a 20:00</dd>
+      </div>
+      <div class="flex flex-wrap justify-between gap-4 border-b border-borde py-4">
+        <dt class="font-semibold">Sábado</dt>
+        <dd class="tabular-nums text-texto-suave">10:00 a 18:00</dd>
+      </div>
+      <div class="flex flex-wrap justify-between gap-4 border-b border-borde py-4">
+        <dt class="font-semibold">Domingo y lunes</dt>
+        <dd class="tabular-nums text-texto-suave">Cerrado</dd>
+      </div>
+    </dl>
+  </section>
+
+  <!-- NOSOTROS -->
+  <section id="nosotros" class="space-y-6 py-16 text-center">
+    <h2 class="text-3xl font-bold">Quiénes somos</h2>
+    <p>
+      Somos una barbería en Viña del Mar con 8 años de experiencia,
+      especializada en cortes rápidos y fades. Trabajamos con hora agendada para
+      que nadie tenga que esperar.
+    </p>
+    <h3 class="text-lg font-bold">Nuestros barberos</h3>
+    <ul class="flex flex-wrap gap-4">
+      {
+        barberos.map((b) => (
+          <BarberoCard nombre={b.nombre} especialidad={b.especialidad} />
+        ))
+      }
+    </ul>
+  </section>
+
+  <!-- AGENDAR -->
+  <section id="agendar" class="space-y-6 py-16 text-center">
+    <h2 class="text-3xl font-bold">Agendar hora</h2>
+    <p>
+      Reserva en línea en menos de un minuto: eliges el servicio, eliges la hora
+      y te atendemos sin esperas.
+    </p>
+    <Boton href="https://reservo.cl/barberiaelchute" target="_blank" rel="noopener">
+      Agendar hora en Reservo
+    </Boton>
+    <p class="text-sm text-texto-suave">
+      Reservo es la vía más rápida. Si prefieres, escríbenos por
+      <a
+        href="https://wa.me/56987654321?text=Hola%2C%20quiero%20agendar%20una%20hora"
+        target="_blank"
+        rel="noopener">WhatsApp</a
+      >
+      o llama al <a href="tel:+56987654321">+56 9 8765 4321</a>.
+    </p>
+  </section>
+
+  <!-- UBICACIÓN -->
+  <section id="ubicacion" class="space-y-6 py-16">
+    <h2 class="text-3xl font-bold">Dónde estamos</h2>
+    <address class="leading-[1.8]">
+      Av. San Martín 450, Viña del Mar<br />
+      Casi llegando a 8 Norte, al lado de la farmacia.<br />
+      <a href="tel:+56987654321">+56 9 8765 4321</a>
+    </address>
+    <p class="text-sm text-texto-suave">
+      No tenemos estacionamiento propio, pero hay uno público a media cuadra.
+    </p>
+  </section>
+</Layout>

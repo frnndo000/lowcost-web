@@ -1,0 +1,33 @@
+---
+// import de layout
+import Layout from "../layouts/Layout.astro";
+import ServicioItem from "../components/ServicioItem.astro";
+
+// array de servicios 
+const servicios = [
+  { nombre: "Corte de cabello clásico", duracion: "30 min", precio: "$9.000" },
+  { nombre: "Corte degradado (fade)", duracion: "45 min", precio: "$11.000" },
+  { nombre: "Corte + barba", duracion: "60 min", precio: "$14.000" },
+  { nombre: "Diseño con máquina", duracion: "45 min", precio: "$13.000" },
+  { nombre: "Perfilado de barba", duracion: "20 min", precio: "$6.000" },
+  { nombre: "Corte niño (hasta 12 años)", duracion: "30 min", precio: "$7.000" },
+];
+
+---
+
+<Layout
+  titulo="Barbería Rápida y Fade en Viña del Mar | El Chute"
+  descripcion="Barbería y fade en Viña del Mar. Agendas tu hora y te atendemos sin esperas. 8 años en Av. San Martín. Reserva online en menos de un minuto."
+>
+
+<section class ="space-y-6 py-20 text-center">
+  <h2 class="text-3xl font-extrabold text-acento-hover">Nuestro Servicios</h2> 
+  <ul>
+    {servicios.map((s) => (
+      <ServicioItem nombre={s.nombre} duracion={s.duracion} precio={s.precio} />
+    ))}
+    
+  </ul>
+
+</section>
+</Layout>

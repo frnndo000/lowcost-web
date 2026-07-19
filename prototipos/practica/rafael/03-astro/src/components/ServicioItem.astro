@@ -1,0 +1,13 @@
+---
+// Cada <li> de la lista de servicios era el MISMO HTML repetido 6 veces.
+// Ahora es UN componente que recibe 3 props y se dibuja las veces que haga falta.
+const { nombre, duracion, precio } = Astro.props;
+---
+
+<li
+  class="flex flex-wrap items-baseline gap-x-4 gap-y-2 border-b border-borde py-6"
+>
+  <h3 class="text-lg font-semibold">{nombre}</h3>
+  <p class="text-sm text-texto-suave">{duracion}</p>
+  <p class="ml-auto text-lg font-bold tabular-nums text-acento">{precio}</p>
+</li>

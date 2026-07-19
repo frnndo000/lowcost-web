@@ -1,0 +1,78 @@
+/* =========================================================
+   GLOBAL — punto de entrada único de estilos en Astro.
+   Antes esto estaba partido en input/theme/base/components.
+   Ahora: Tailwind + tu @theme + tu base. Los "componentes"
+   CSS (.boton) ya NO viven aquí: son componentes .astro.
+   ========================================================= */
+
+@import "tailwindcss";
+
+/* ---------- TU TEMA (idéntico a theme.css) ---------- */
+@theme {
+  /* ---- COLOR ---- */
+  --color-fondo: #f6f7f8;
+  --color-fondo-alt: #e9edef;
+  --color-texto: #202f38;
+  --color-texto-suave: #55656f;
+  --color-acento: #154d8c;
+  --color-acento-hover: #071f69;
+  --color-borde: #071f69;
+
+  /* ---- MEDIDAS ---- */
+  --container-lectura: 65ch;
+
+  /* ---- TIPOGRAFÍA ---- */
+  --font-sans: system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+
+/* ---------- BASE (idéntico a base.css) ---------- */
+@layer base {
+  body {
+    background-color: var(--color-fondo);
+    color: var(--color-texto);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  a {
+    color: var(--color-acento);
+    transition: color 0.15s ease;
+  }
+
+  a:hover {
+    color: var(--color-acento-hover);
+  }
+
+  a:focus-visible {
+    outline: 2px solid var(--color-acento);
+    outline-offset: 3px;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    line-height: 1.2;
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  address {
+    font-style: normal;
+  }
+}
+
+/* Fuera de @layer a propósito: le gana a todas las capas. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

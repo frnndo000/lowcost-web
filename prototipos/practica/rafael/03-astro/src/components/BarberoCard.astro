@@ -1,0 +1,11 @@
+---
+const { nombre, especialidad } = Astro.props;
+---
+
+<li class="grow basis-48 rounded-sm bg-fondo-alt p-6">
+
+  <h4 class="text-base font-bold">{nombre}</h4>
+  
+  {especialidad && <p class="text-sm text-texto-suave">{especialidad}</p>}
+
+</li>
