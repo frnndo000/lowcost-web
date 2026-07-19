@@ -1,0 +1,67 @@
+---
+import { local } from "../data/local.js";
+---
+
+<footer class="border-t border-borde bg-superficie">
+  <div class="mx-auto grid max-w-5xl gap-8 px-5 py-12 sm:grid-cols-3">
+    <!-- Contacto -->
+    <div class="space-y-1">
+      <p class="font-display text-lg font-bold">
+        <span class="text-texto">SUSHI</span><span class="text-rojo">ITTO</span>
+      </p>
+      <p class="text-sm text-texto-suave">{local.direccion}</p>
+      <p class="text-sm text-texto-suave">{local.comuna}, {local.region}</p>
+      <p class="text-sm text-texto-suave">{local.telefono}</p>
+      <p>
+        
+          <a href={`https://instagram.com/${local.instagram}`}
+          target="_blank"
+          rel="noopener"
+          class="text-sm text-dorado transition-colors hover:text-texto"
+        >
+          @{local.instagram}
+        </a>
+      </p>
+    </div>
+
+    <!-- Horario -->
+    <div>
+      <h3 class="mb-2 text-sm font-semibold uppercase tracking-wider text-texto-suave">Horario</h3>
+      <ul class="space-y-1">
+        {
+          local.horario.map((bloque) => (
+            <li class="flex justify-between gap-4 text-sm">
+              <span class="text-texto">{bloque.dias}</span>
+              <span class="text-texto-suave tabular-nums">{bloque.horas}</span>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+
+    <!-- Canales de delivery (respaldo) -->
+    <div>
+      <h3 class="mb-2 text-sm font-semibold uppercase tracking-wider text-texto-suave">También en delivery</h3>
+      <ul class="space-y-1 text-sm">
+        {local.canales.ubereats && (
+          <li>
+            <a href={local.canales.ubereats} target="_blank" rel="noopener" class="text-texto-suave transition-colors hover:text-texto">
+              Uber Eats
+            </a>
+          </li>
+        )}
+        {local.canales.pedidosya && (
+          <li>
+            <a href={local.canales.pedidosya} target="_blank" rel="noopener" class="text-texto-suave transition-colors hover:text-texto">
+              PedidosYa
+            </a>
+          </li>
+        )}
+      </ul>
+    </div>
+  </div>
+
+  <p class="border-t border-borde py-6 text-center text-xs text-texto-suave">
+    &copy; {new Date().getFullYear()} {local.nombre} · Viña del Mar
+  </p>
+</footer>

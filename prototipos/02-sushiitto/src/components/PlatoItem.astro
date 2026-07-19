@@ -1,0 +1,18 @@
+---
+const { nombre, precio, descripcion } = Astro.props;
+
+const precioFormateado = new Intl.NumberFormat("es-CL", {
+  style: "currency",
+  currency: "CLP",
+}).format(precio);
+---
+
+<li class="flex items-baseline gap-3 border-b border-borde/60 py-3">
+  <div class="min-w-0">
+    <span class="text-texto">{nombre}</span>
+    {descripcion && <p class="text-sm text-texto-suave">{descripcion}</p>}
+  </div>
+  <span class="ml-auto shrink-0 font-semibold text-dorado tabular-nums">
+    {precioFormateado}
+  </span>
+</li>

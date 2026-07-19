@@ -1,0 +1,139 @@
+---
+// @ts-nocheck
+import Layout from "../layouts/Layout.astro";
+import { categorias } from "../data/menu.js";
+import PlatoItem from "../components/PlatoItem.astro";
+import { local } from "../data/local.js";
+---
+
+<Layout>
+  <!-- HERO -->
+  <section class="relative overflow-hidden border-b border-borde">
+    <div class="mx-auto flex max-w-5xl flex-col items-center gap-6 px-5 py-24 text-center sm:py-32">
+      <img
+        src="/imagenes/logo.jpg"
+        alt="SUSHIITTO"
+        width="120"
+        height="120"
+        class="h-28 w-28 rounded-full ring-2 ring-rojo/40"
+      />
+
+      <h1 class="font-display text-5xl font-bold tracking-wide sm:text-7xl">
+        <span class="text-texto">SUSHI</span><span class="text-rojo">ITTO</span>
+      </h1>
+
+      <p class="max-w-md text-lg text-texto-suave">
+        Sushi en Viña del Mar. Retiro y delivery.
+      </p>
+
+      <p class="text-sm text-texto-suave">
+        <span class="text-dorado">●</span> Abierto hasta las 23:30
+      </p>
+
+      
+        <a href="#menu"
+          class="rounded-suave bg-rojo px-8 py-4 text-lg font-semibold text-texto transition-colors hover:bg-rojo-hover"
+        >
+          Ver la carta
+        </a>
+      </div>
+  </section>
+
+  <!-- MENÚ -->
+  <section id="menu" class="mx-auto max-w-3xl px-5 py-16">
+    <h2 class="mb-10 text-center font-display text-4xl font-bold">
+      <span class="text-texto">Nuestra </span><span class="text-rojo">carta</span>
+    </h2>
+
+    <div class="space-y-14">
+      {
+        categorias.map((categoria) => (
+          <section>
+            <h3 class="mb-4 font-display text-2xl font-bold text-dorado">
+              {categoria.nombre}
+            </h3>
+
+            {categoria.tipo === "subgrupos" &&
+              categoria.subgrupos.map((sub) => (
+                <div class="mb-6">
+                  <h4 class="mb-2 text-sm font-semibold uppercase tracking-wider text-texto-suave">
+                    {sub.nombre}
+                  </h4>
+                  <ul>
+                    {sub.platos.map((plato) => (
+                      <PlatoItem nombre={plato.nombre} precio={plato.precio} />
+                    ))}
+                  </ul>
+                </div>
+              ))}
+
+            {categoria.tipo === "simple" && (
+              <ul>
+                {categoria.platos.map((plato) => (
+                  <PlatoItem nombre={plato.nombre} precio={plato.precio} descripcion={plato.descripcion} />
+                ))}
+              </ul>
+            )}
+
+            {categoria.tipo === "configurable" && (
+              <div class="rounded-suave border border-borde bg-superficie p-5">
+                <div class="mb-4 flex items-baseline justify-between gap-3">
+                  <p class="text-texto-suave">{categoria.descripcion}</p>
+                  <span class="shrink-0 font-semibold text-dorado tabular-nums">
+                    {new Intl.NumberFormat("es-CL", { style: "currency", currency: "CLP" }).format(categoria.precio)}
+                  </span>
+                </div>
+                {categoria.opciones.map((grupo) => (
+                  <div class="mb-3">
+                    <h4 class="mb-1 text-sm font-semibold uppercase tracking-wider text-texto-suave">
+                      {grupo.titulo}
+                    </h4>
+                    <p class="text-sm text-texto">{grupo.items.join(" · ")}</p>
+                    {grupo.nota && <p class="mt-1 text-xs text-rojo">{grupo.nota}</p>}
+                  </div>
+                ))}
+              </div>
+            )}
+          </section>
+        ))
+      }
+    </div>
+  </section>
+  
+  <!-- CONTACTO: WhatsApp como acción principal -->
+  <section id="contacto" class="border-t border-borde bg-superficie">
+    <div class="mx-auto max-w-3xl px-5 py-16 text-center">
+      <h2 class="mb-3 font-display text-4xl font-bold">
+        <span class="text-texto">Haz tu </span><span class="text-rojo">pedido</span>
+      </h2>
+      <p class="mx-auto mb-8 max-w-md text-texto-suave">
+        Escríbenos directo por WhatsApp y te tomamos el pedido al tiro. Sin apps, sin comisiones.
+      </p>
+      
+        <a href={`https://wa.me/${local.whatsapp}?text=${encodeURIComponent(local.mensajeWhatsapp)}`}
+        target="_blank"
+        rel="noopener"
+        class="inline-flex items-center gap-2 rounded-suave bg-rojo px-8 py-4 text-lg font-semibold text-texto transition-colors hover:bg-rojo-hover"
+      >
+        Pedir por WhatsApp
+      </a>
+      <p class="mt-4 text-sm text-texto-suave">O llámanos al {local.telefono}</p>
+    </div>
+  </section>
+
+  <!-- UBICACIÓN -->
+  <section id="ubicacion" class="mx-auto max-w-3xl px-5 py-16 text-center">
+    <h2 class="mb-6 font-display text-4xl font-bold">
+      <span class="text-texto">Dónde </span><span class="text-rojo">estamos</span>
+    </h2>
+    <address class="text-lg not-italic text-texto">
+      {local.direccion}<br />
+      {local.comuna}, {local.region}
+    </address>
+    <p class="mt-3 text-texto-suave">{local.horario[0].dias}: {local.horario[0].horas}</p>
+  </section>
+
+ 
+
+
+</Layout>

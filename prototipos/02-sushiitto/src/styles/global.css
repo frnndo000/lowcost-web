@@ -1,0 +1,55 @@
+@import "tailwindcss";
+
+/* =========================================================
+   TEMA SUSHIITTO — oscuro, rojo sangre, dorado. Onda samurái.
+   Tomado de la estética real de su carta de WhatsApp.
+   ========================================================= */
+@theme {
+  --color-fondo: #0f0f0f; /* negro casi puro (fondo) */
+  --color-superficie: #1a1a1a; /* tarjetas, un pelo más claro */
+  --color-borde: #2e2e2e; /* líneas sutiles */
+  --color-texto: #f2ebe3; /* crema cálido (no blanco puro) */
+  --color-texto-suave: #a89f96; /* gris cálido, para descripciones */
+  --color-rojo: #c1121f; /* rojo sangre (marca, acentos) */
+  --color-rojo-hover: #9a0e18;
+  --color-dorado: #d4a24e; /* dorado (títulos de categoría) */
+
+  --font-sans: "Poppins", system-ui, sans-serif;
+  --font-display: "Zen Kaku Gothic New", var(--font-sans); /* aire japonés */
+
+  --radius-suave: 0.75rem;
+}
+
+@layer base {
+  body {
+    background-color: var(--color-fondo);
+    color: var(--color-texto);
+    font-family: var(--font-sans);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display);
+    line-height: 1.2;
+    text-wrap: balance;
+    font-weight: 600;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
