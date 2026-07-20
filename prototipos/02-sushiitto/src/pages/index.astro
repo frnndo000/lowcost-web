@@ -18,7 +18,7 @@ import heroImg from "../assets/platos/handroll.jpeg";
       class="absolute inset-0 h-full w-full object-cover"
     />
     <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_0%,var(--color-fondo)_75%)]"></div>
-    <div class="absolute inset-0 bg-gradient-to-t from-fondo via-fondo/60 to-transparent"></div>
+    <div class="absolute inset-0 bg-linear-to-t from-fondo via-fondo/60 to-transparent"></div>
 
     <div class="relative mx-auto flex max-w-5xl flex-col items-center gap-6 px-5 py-28 text-center sm:py-40">
       <img
@@ -132,5 +132,21 @@ import heroImg from "../assets/platos/handroll.jpeg";
       {local.comuna}, {local.region}
     </address>
     <p class="mt-3 text-texto-suave">{local.horario[0].dias}: {local.horario[0].horas}</p>
+
+    <!-- Mapa de Google -->
+    <div class="mt-8 overflow-hidden rounded-suave border border-borde">
+      <iframe
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d209.12530125102717!2d-71.50561036479056!3d-33.00364839994829!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9689dd002e90cb39%3A0xfc8756f52e64e457!2sSUSHIITTO!5e0!3m2!1sen!2scl!4v1784516632657!5m2!1sen!2scl"
+        width="100%"
+        height="320"
+        style="border:0;"
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"
+        title="Ubicación de SUSHIITTO en Viña del Mar"
+        class="block w-full filter-[invert(0.89)_hue-rotate(180deg)_brightness(0.95)_contrast(0.9)]"
+      ></iframe>
+    </div>
   </section>
+
+  
 </Layout>
