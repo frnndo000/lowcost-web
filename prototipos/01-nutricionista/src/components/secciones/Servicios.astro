@@ -5,22 +5,17 @@ const pilares = [
   {
     numero: "01",
     titulo: "Evaluación completa",
-    texto: "Analizo tus hábitos, tu composición corporal y tus metas para entender qué necesitas realmente."
+    texto: "Analizo tus hábitos, tu composición corporal y tus metas para entender tu punto de partida."
   },
   {
     numero: "02",
-    titulo: "Plan único para ti",
-    texto: "Adaptado a tus necesidades y estilo de vida, para que puedas ver resultados reales."
+    titulo: "Un plan a tu medida",
+    texto: "Adaptado a tu rutina, tus horarios y lo que realmente te gusta comer."
   },
   {
     numero: "03",
-    titulo: "Nada genérico",
-    texto: "No se trata de algo que le sirva a todos. Es un plan hecho a tu medida."
-  },
-  {
-    numero: "04",
     titulo: "Enfoque sostenible",
-    texto: "Una estrategia efectiva para tu salud, rendimiento y composición corporal, sin soluciones temporales."
+    texto: "Resultados que puedas mantener en el tiempo, no una dieta que abandonas en tres semanas."
   }
 ];
 ---
@@ -33,11 +28,11 @@ const pilares = [
         Atención personalizada
       </h2>
       <p class="text-neutral-600 text-lg leading-relaxed">
-        Una hora contigo, enfocada completamente en tu caso, necesidades y requerimientos.
+        Una hora contigo, enfocada completamente en tu caso según tus necesidades y requerimientos.
       </p>
     </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
       {pilares.map(p => (
         <article class="group relative bg-white border border-neutral-200 rounded-3xl p-8
                         transition-all duration-500 hover:border-emerald-700/30 hover:shadow-lg hover:-translate-y-1">
@@ -62,19 +57,55 @@ const pilares = [
       ))}
     </div>
 
-    <!-- Cierre con CTA -->
-    <div class="mt-16 bg-neutral-900 rounded-3xl p-10 md:p-14 text-center">
-      <p class="text-white text-2xl md:text-3xl font-bold mb-4 max-w-2xl mx-auto leading-snug">
-        Es momento de invertir en ti.
-      </p>
-      <p class="text-neutral-400 mb-8 max-w-xl mx-auto">
-        Estás a un paso de lograr lo que te propones y ver cambios tangibles.
-      </p>
-      <a href={AGENDA} target="_blank" rel="noopener"
-         class="inline-flex items-center gap-2 bg-white text-neutral-900 px-8 py-4 rounded-full font-semibold hover:bg-neutral-200 transition-colors">
-        Agendar mi hora →
-      </a>
+    <!-- Precio + CTA -->
+<div class="mt-16 grid md:grid-cols-5 gap-6 items-stretch">
+
+  <!-- Tarjeta de precio -->
+  <div class="md:col-span-2 bg-white border-2 border-neutral-900 rounded-3xl p-8 flex flex-col">
+    <p class="text-[11px] uppercase tracking-widest text-neutral-400 mb-3">Valor de la sesión</p>
+
+    <div class="flex items-baseline gap-2 mb-1">
+      <span class="font-[Anton] text-5xl text-neutral-900">$33.990</span>
+      <span class="text-neutral-500 text-sm">CLP</span>
     </div>
+    <p class="text-neutral-500 text-sm mb-6">Sesión de 1 hora</p>
+
+    <ul class="space-y-3 text-sm text-neutral-700 mb-8">
+      <li class="flex gap-3">
+        <span class="text-emerald-700 shrink-0">✓</span>
+        Evaluación de composición corporal
+      </li>
+      <li class="flex gap-3">
+        <span class="text-emerald-700 shrink-0">✓</span>
+        Análisis de hábitos y objetivos
+      </li>
+      <li class="flex gap-3">
+        <span class="text-emerald-700 shrink-0">✓</span>
+        Plan alimentario personalizado
+      </li>
+    </ul>
+
+    <p class="text-neutral-400 text-xs mt-auto">
+      El pago se realiza al agendar en el calendario de Gimnasio Seven.
+    </p>
+  </div>
+
+  <!-- CTA -->
+  <div class="md:col-span-3 bg-neutral-900 rounded-3xl p-10 md:p-14 flex flex-col justify-center text-center">
+    <p class="text-white text-2xl md:text-3xl font-bold mb-4 leading-snug">
+      Es momento de invertir en ti.
+    </p>
+    <p class="text-neutral-400 mb-8 max-w-md mx-auto">
+      Estás a un paso de lograr lo que te propones y ver cambios tangibles.
+    </p>
+    <a href={AGENDA} target="_blank" rel="noopener"
+       class="group inline-flex items-center justify-center gap-2 bg-white text-neutral-900 px-8 py-4 rounded-full font-semibold hover:bg-neutral-200 transition-colors mx-auto">
+      Ver disponibilidad y agendar
+      <span class="transition-transform group-hover:translate-x-1">→</span>
+    </a>
+  </div>
+
+</div>
 
   </div>
 </section>

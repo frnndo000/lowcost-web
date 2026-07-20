@@ -1,92 +1,98 @@
----
-const hitos = [
-  {
-    etiqueta: "Formación",
-    titulo: "Nutricionista titulado",
-    detalle: "Universidad [PLACEHOLDER] · Registro profesional [PLACEHOLDER]"
-  },
-  {
-    etiqueta: "Especialidad",
-    titulo: "Rendimiento y composición corporal",
-    detalle: "Enfoque en personas activas: entrenamiento de fuerza, deporte y cambios de composición sostenibles."
-  },
-  {
-    etiqueta: "Dónde atiendo",
-    titulo: "Gimnasio Seven · Viña del Mar",
-    detalle: "Atención presencial en box privado, con acceso a equipamiento de evaluación."
-  },
-  {
-    etiqueta: "Mi enfoque",
-    titulo: "Sostenible antes que rápido",
-    detalle: "Prefiero que mantengas los resultados un año, no que los pierdas en un mes."
-  }
-];
----
-<section id="sobre-mi" class="bg-white py-28 px-6">
-  <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-16">
+  ---
+  const hitos = [
+    {
+      etiqueta: "Formación",
+      titulo: "Nutricionista titulado",
+      detalle: "universidad y titulo"
+    },
+    {
+      etiqueta: "Especialidad",
+      titulo: "Rendimiento y composición corporal",
+      detalle: "Enfoque en personas activas: entrenamiento de fuerza, deporte y cambios de composición sostenibles."
+    },
+    {
+      etiqueta: "Dónde atiendo",
+      titulo: "Gimnasio Seven · Viña del Mar",
+      detalle: "Atención presencial en box privado, con acceso a equipamiento de evaluación."
+    },
+    {
+      etiqueta: "Mi enfoque",
+      titulo: "Sostenible antes que rápido",
+      detalle: "Prefiero que mantengas los resultados un año, no que los pierdas en un mes."
+    }
+  ];
+  ---
+  <section id="sobre-mi" class="bg-white py-28 px-6">
+    <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-10 md:gap-16">
 
-    <!-- COLUMNA IZQUIERDA: foto sticky -->
-    <div class="md:sticky md:top-28 md:self-start">
-      <div class="relative">
-        <div class="absolute -inset-5 bg-emerald-50 rounded-[3rem] rotate-3"></div>
-        <img src="/img/isaac-2.jpg"
-             alt="aqui va una foto del nutri pero no encontre ninguna xd"
-             class="relative w-full aspect-4/5 object-cover rounded-4xl shadow-xl" />
-      </div>
+<!-- COLUMNA IZQUIERDA: foto sticky -->
+<div class="md:sticky md:top-28 md:self-start">
 
-      <!-- Números -->
-      <div class="grid grid-cols-3 gap-4 mt-10">
-        <div class="group cursor-default">
-          <p class="font-[Anton] text-4xl text-neutral-900 transition-transform duration-300 group-hover:scale-110 origin-left">+X</p>
-          <p class="text-[11px] uppercase tracking-widest text-neutral-400 mt-1 leading-tight">Años de<br/>experiencia</p>
-        </div>
-        <div class="group cursor-default">
-          <p class="font-[Anton] text-4xl text-neutral-900 transition-transform duration-300 group-hover:scale-110 origin-left">+X</p>
-          <p class="text-[11px] uppercase tracking-widest text-neutral-400 mt-1 leading-tight">Pacientes<br/>atendidos</p>
-        </div>
-        <div class="group cursor-default">
-          <p class="font-[Anton] text-4xl text-emerald-700 transition-transform duration-300 group-hover:scale-110 origin-left">1h</p>
-          <p class="text-[11px] uppercase tracking-widest text-neutral-400 mt-1 leading-tight">Por cada<br/>consulta</p>
-        </div>
-      </div>
+  <!-- MÓVIL: foto + stats al costado / ESCRITORIO: apilados -->
+  <div class="flex md:block gap-5 items-center">
+
+    <!-- Foto -->
+    <div class="relative w-[55%] shrink-0 md:w-full">
+      <div class="absolute -inset-2.5 md:-inset-5 bg-emerald-50 rounded-3xl md:rounded-[3rem] rotate-3"></div>
+      <img src="/img/paciente.jpg"
+           alt="Isaac atendiendo en consulta"
+           class="relative w-full aspect-3/4 md:aspect-4/5 object-cover rounded-[1.25rem] md:rounded-4xl shadow-xl" />
     </div>
 
-    <!-- COLUMNA DERECHA: timeline -->
-    <div>
-      <p class="text-emerald-700 text-xs font-semibold uppercase tracking-widest mb-4">Sobre mí</p>
-      <h2 class="text-neutral-900 font-extrabold text-4xl md:text-5xl leading-tight mb-6">
-        Detrás del plan<br/>hay una persona
-      </h2>
-      <p class="text-neutral-600 text-lg leading-relaxed mb-12">
-        [PLACEHOLDER: 2–3 líneas en primera persona con  palabras del nutri.]
-      </p>
-
-      <div class="space-y-0">
-        {hitos.map(h => (
-          <div class="group border-l-2 border-neutral-200 hover:border-emerald-700 pl-8 py-7 transition-colors duration-300 relative">
-
-            <!-- Punto en la línea -->
-            <span class="absolute -left-1.75 top-9 w-3 h-3 rounded-full bg-neutral-200
-                         group-hover:bg-emerald-700 group-hover:scale-125 transition-all duration-300"></span>
-
-            <p class="text-[11px] uppercase tracking-widest text-neutral-400 mb-1">{h.etiqueta}</p>
-            <h3 class="text-lg font-bold text-neutral-900">{h.titulo}</h3>
-
-            <!-- Detalle que se despliega -->
-            <p class="text-neutral-600 text-sm leading-relaxed
-                      max-h-0 opacity-0 overflow-hidden
-                      group-hover:max-h-40 group-hover:opacity-100 group-hover:mt-3
-                      transition-all duration-500">
-              {h.detalle}
-            </p>
-          </div>
-        ))}
+    <!-- Stats -->
+    <div class="flex-1 flex flex-col gap-5 md:grid md:grid-cols-3 md:gap-4 md:mt-10">
+      <div class="group cursor-default">
+        <p class="font-[Anton] text-4xl text-neutral-900 transition-transform duration-300 group-hover:scale-110 origin-left">+X</p>
+        <p class="text-[11px] uppercase tracking-widest text-neutral-400 mt-1 leading-tight">Años de experiencia</p>
       </div>
-
-      <p class="text-neutral-400 text-xs mt-8 md:block hidden">
-        ↑ Pasa el cursor sobre cada punto para ver más
-      </p>
+      <div class="group cursor-default">
+        <p class="font-[Anton] text-4xl text-neutral-900 transition-transform duration-300 group-hover:scale-110 origin-left">+X</p>
+        <p class="text-[11px] uppercase tracking-widest text-neutral-400 mt-1 leading-tight">Pacientes atendidos</p>
+      </div>
+      <div class="group cursor-default">
+        <p class="font-[Anton] text-4xl text-emerald-700 transition-transform duration-300 group-hover:scale-110 origin-left">1h</p>
+        <p class="text-[11px] uppercase tracking-widest text-neutral-400 mt-1 leading-tight">Por consulta</p>
+      </div>
     </div>
 
   </div>
-</section>
+</div>
+      <!-- COLUMNA DERECHA: timeline -->
+      <div>
+        <p class="text-emerald-700 text-xs font-semibold uppercase tracking-widest mb-4">Sobre mí</p>
+        <h2 class="text-neutral-900 font-extrabold text-4xl md:text-5xl leading-tight mb-6">
+          Detrás del plan<br/>hay una persona
+        </h2>
+        <p class="text-neutral-600 text-lg leading-relaxed mb-12">
+          [2–3 líneas en primera persona con  palabras del nutri.]
+        </p>
+
+        <div class="space-y-0">
+          {hitos.map(h => (
+            <div class="group border-l-2 border-neutral-200 hover:border-emerald-700 pl-8 py-7 transition-colors duration-300 relative">
+
+              <!-- Punto en la línea -->
+              <span class="absolute -left-1.75 top-9 w-3 h-3 rounded-full bg-neutral-200
+                          group-hover:bg-emerald-700 group-hover:scale-125 transition-all duration-300"></span>
+
+              <p class="text-[11px] uppercase tracking-widest text-neutral-400 mb-1">{h.etiqueta}</p>
+              <h3 class="text-lg font-bold text-neutral-900">{h.titulo}</h3>
+
+              <!-- Detalle que se despliega -->
+              <p class="text-neutral-600 text-sm leading-relaxed
+                        max-h-0 opacity-0 overflow-hidden
+                        group-hover:max-h-40 group-hover:opacity-100 group-hover:mt-3
+                        transition-all duration-500">
+                {h.detalle}
+              </p>
+            </div>
+          ))}
+        </div>
+
+        <p class="text-neutral-400 text-xs mt-8 md:block hidden">
+          ↑ Pasa el cursor sobre cada punto para ver más
+        </p>
+      </div>
+
+    </div>
+  </section>

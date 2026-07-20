@@ -1,9 +1,21 @@
 ---
 const AGENDA = "https://www.gimnasioseven.com/booking-calendar/nutricionista-isaac-vi%C3%B1a-del-mar?referral=service_list_widget";
 ---
-<section id="inicio" class="relative min-h-screen flex items-center bg-white pt-24 pb-16">
-  <div class="max-w-6xl mx-auto px-6 grid md:grid-cols-2 gap-16 items-center">
+<section id="inicio" class="relative min-h-screen flex items-center bg-white pt-24 pb-16 overflow-hidden">
 
+  <!-- FOTO DE FONDO (solo móvil) -->
+  <div id="hero-foto" class="absolute inset-0 md:hidden will-change-transform">
+  <img src="/img/isaac.jpg"
+       alt=""
+       aria-hidden="true"
+       class="w-full h-full object-cover object-[center_15%]" />
+  <!-- Velo: sólido abajo, transparente arriba para que el rostro se vea -->
+  <div class="absolute inset-0 bg-linear-to-t from-white from-45% via-white/85 via-60% to-transparent"></div>
+</div>
+
+  <div class="relative z-10 max-w-6xl mx-auto px-6 grid md:grid-cols-2 gap-8 md:gap-16 items-center w-full pt-[45vh] md:pt-0">
+
+    <!-- TEXTO -->
     <div>
       <p class="inline-flex items-center gap-2 text-emerald-700 text-xs font-semibold uppercase tracking-widest mb-6">
         <span class="w-8 h-px bg-emerald-700"></span>
@@ -16,27 +28,28 @@ const AGENDA = "https://www.gimnasioseven.com/booking-calendar/nutricionista-isa
         a tu medida
       </h1>
 
-      <p class="text-neutral-600 text-lg leading-relaxed max-w-md mb-10">
-        Un enfoque personalizado que se adapta a tu cuerpo, rutina y objetivos.
+      <p class="text-neutral-700 text-lg leading-relaxed max-w-md mb-10">
+        Olvídate de las dietas genéricas. Un plan diseñado para tu cuerpo,
+        tu rutina y tus objetivos reales.
       </p>
 
       <div class="flex flex-col sm:flex-row gap-4">
         <a href={AGENDA} target="_blank" rel="noopener"
            class="group bg-neutral-900 text-white px-8 py-4 rounded-full font-semibold
-                  hover:bg-neutral-700 transition-all inline-flex items-center justify-center gap-2">
+                  hover:bg-neutral-700 transition-all inline-flex items-center justify-center gap-2 shadow-lg">
           Agendar mi evaluación
           <span class="transition-transform group-hover:translate-x-1">→</span>
         </a>
         <a href="#servicio"
-           class="border border-neutral-300 text-neutral-900 px-8 py-4 rounded-full font-semibold
+           class="border border-neutral-300 bg-white/70 backdrop-blur-sm text-neutral-900 px-8 py-4 rounded-full font-semibold
                   hover:border-neutral-900 transition-all text-center">
           Cómo funciona
         </a>
       </div>
     </div>
 
-    <div class="relative">
-      <!-- Forma orgánica de fondo -->
+    <!-- FOTO CON MARCO (solo escritorio) -->
+    <div class="relative hidden md:block">
       <div class="absolute -inset-6 bg-emerald-50 rounded-[3rem] -rotate-3"></div>
       <img src="/img/isaac.jpg"
            alt="Isaac, nutricionista en Viña del Mar"
@@ -45,3 +58,19 @@ const AGENDA = "https://www.gimnasioseven.com/booking-calendar/nutricionista-isa
 
   </div>
 </section>
+
+<script>
+  const foto = document.getElementById('hero-foto');
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  if (foto && !reduceMotion) {
+    const onScroll = () => {
+      const y = window.scrollY;
+      const avance = Math.min(y / window.innerHeight, 1); // 0 arriba → 1 al pasar el hero
+      foto.style.opacity = `${1 - avance}`;
+      foto.style.transform = `translateY(${y * 0.35}px) scale(${1 - avance * 0.08})`;
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+  }
+</script>

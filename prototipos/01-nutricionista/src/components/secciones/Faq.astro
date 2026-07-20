@@ -1,0 +1,63 @@
+---
+const preguntas = [
+  {
+    p: "¿Necesito ser socio del Gimnasio Seven para atenderme?",
+    r: "respuesta de prueba"
+  },
+  {
+    p: "¿Qué días atiendes?",
+    r: "Lunes y jueves de 16:00 a 19:00, en tres bloques de una hora. Los cupos son limitados, así que conviene reservar con anticipación."
+  },
+  {
+    p: "pregunta de prueba",
+    r: "respuesta de prueba"
+  },
+  {
+    p: "pregunta de prueba",
+    r: "respuesta de prueba"
+  },
+  {
+    p: "pregunta de prueba",
+    r: "respuesta de prueba"
+  },
+  {
+    p: "¿Cómo pago?",
+    r: "El pago se realiza al momento de agendar, directamente en el calendario del Gimnasio Seven."
+  }
+];
+---
+<section id="faq" class="bg-white py-28 px-6">
+  <div class="max-w-3xl mx-auto">
+
+    <p class="text-emerald-700 text-xs font-semibold uppercase tracking-widest mb-4">Preguntas frecuentes</p>
+    <h2 class="text-neutral-900 font-extrabold text-4xl md:text-5xl leading-tight mb-12">
+      Antes de agendar
+    </h2>
+
+    <div class="divide-y divide-neutral-200 border-y border-neutral-200">
+      {preguntas.map(item => (
+        <details class="group py-5">
+          <summary class="flex items-center justify-between gap-4 cursor-pointer list-none
+                          text-neutral-900 font-semibold text-lg
+                          hover:text-emerald-700 transition-colors">
+            {item.p}
+            <span class="shrink-0 w-8 h-8 rounded-full border border-neutral-300 flex items-center justify-center
+                         text-neutral-500 transition-all duration-300
+                         group-open:rotate-45 group-open:border-emerald-700 group-open:text-emerald-700">
+              +
+            </span>
+          </summary>
+          <p class="text-neutral-600 leading-relaxed mt-4 pr-12">
+            {item.r}
+          </p>
+        </details>
+      ))}
+    </div>
+
+  </div>
+</section>
+
+<style>
+  /* Oculta la flechita por defecto del navegador */
+  summary::-webkit-details-marker { display: none; }
+</style>

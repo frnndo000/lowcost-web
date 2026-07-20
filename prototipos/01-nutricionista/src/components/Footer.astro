@@ -1,17 +1,70 @@
 ---
 const anio = new Date().getFullYear();
+const AGENDA = "https://www.gimnasioseven.com/booking-calendar/nutricionista-isaac-vi%C3%B1a-del-mar?referral=service_list_widget";
+const TELEFONO = "nro";
+const INSTAGRAM = "https://www.instagram.com/nutri_isaac/";
 ---
-<footer class="bg-white border-t border-neutral-200 py-12 px-6">
-  <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
-    <div class="text-center md:text-left">
-      <p class="font-extrabold text-neutral-900">Isaac · Nutricionista</p>
-      <p class="text-neutral-500 text-sm mt-1">Viña del Mar, Chile</p>
+<footer class="bg-neutral-900 text-white pt-20 pb-10 px-6">
+  <div class="max-w-6xl mx-auto">
+
+    <!-- CTA final -->
+    <div class="border-b border-neutral-800 pb-14 mb-14 flex flex-col md:flex-row md:items-end justify-between gap-8">
+      <div>
+        <h2 class="font-[Anton] uppercase text-4xl md:text-5xl leading-none mb-3">
+          ¿Empezamos?
+        </h2>
+        <p class="text-neutral-400 max-w-md">
+          Agenda tu evaluación y demos el primer paso hacia un plan que sí puedas mantener.
+        </p>
+      </div>
+      <a href={AGENDA} target="_blank" rel="noopener"
+         class="group shrink-0 inline-flex items-center gap-2 bg-white text-neutral-900 px-8 py-4 rounded-full font-semibold hover:bg-neutral-200 transition-colors">
+        Agendar hora
+        <span class="transition-transform group-hover:translate-x-1">→</span>
+      </a>
     </div>
-    <nav class="flex gap-6 text-sm text-neutral-500">
-      <a href="#servicio" class="hover:text-neutral-900 transition-colors">Servicio</a>
-      <a href="#sobre-mi" class="hover:text-neutral-900 transition-colors">Sobre mí</a>
-      <a href="#contacto" class="hover:text-neutral-900 transition-colors">Contacto</a>
-    </nav>
-    <p class="text-neutral-400 text-xs">© {anio}</p>
+
+    <!-- Columnas -->
+    <div class="grid md:grid-cols-4 gap-10 mb-14">
+
+      <div class="md:col-span-2">
+        <p class="font-extrabold text-xl mb-2">Isaac <span class="text-neutral-500 font-normal">· Nutricionista</span></p>
+        <p class="text-neutral-400 text-sm leading-relaxed max-w-xs">
+          Nutrición enfocada en rendimiento y composición corporal.
+          Atención presencial en Viña del Mar.
+        </p>
+      </div>
+
+      <div>
+        <p class="text-[11px] uppercase tracking-widest text-neutral-500 mb-4">Navegación</p>
+        <nav class="flex flex-col gap-2.5 text-sm">
+          <a href="#servicio" class="text-neutral-300 hover:text-white transition-colors">Servicio</a>
+          <a href="#sobre-mi" class="text-neutral-300 hover:text-white transition-colors">Sobre mí</a>
+          <a href="#faq" class="text-neutral-300 hover:text-white transition-colors">Preguntas frecuentes</a>
+          <a href="#contacto" class="text-neutral-300 hover:text-white transition-colors">Contacto</a>
+        </nav>
+      </div>
+
+      <div>
+        <p class="text-[11px] uppercase tracking-widest text-neutral-500 mb-4">Contacto</p>
+        <nav class="flex flex-col gap-2.5 text-sm">
+          <a href={`https://wa.me/${TELEFONO}`} target="_blank" rel="noopener"
+             class="text-neutral-300 hover:text-white transition-colors">WhatsApp</a>
+          <a href={INSTAGRAM} target="_blank" rel="noopener"
+             class="text-neutral-300 hover:text-white transition-colors">@nutri_isaac</a>
+          <span class="text-neutral-500">Gimnasio Seven</span>
+          <span class="text-neutral-500">Viña del Mar, Chile</span>
+        </nav>
+      </div>
+    </div>
+
+    <!-- Línea final -->
+    <div class="border-t border-neutral-800 pt-8 flex flex-col md:flex-row justify-between gap-4 text-xs text-neutral-500">
+      <p>© {anio} · Isaac Caballero. Todos los derechos reservados.</p>
+      <p>
+        Sitio por <a href="#" class="text-neutral-400 hover:text-white transition-colors underline underline-offset-4">Hustlewebs</a>
+      </p>
+    </div>
+
   </div>
 </footer>

@@ -14,7 +14,7 @@ const INSTAGRAM = "https://www.instagram.com/nutri_isaac/";
       </h2>
       <p class="text-neutral-600 text-lg">
         Atiendo en Gimnasio Seven, Viña del Mar. Agenda directamente en el calendario
-        o escríbeme si tienes dudas antes.
+        o escríbeme al <a href={`https://wa.me/${TELEFONO}?text=${MENSAJE}`} target="_blank" rel="noopener" class="text-emerald-700 hover:underline">WhatsApp</a> si tienes dudas antes de agendar.
       </p>
     </div>
 
@@ -26,14 +26,26 @@ const INSTAGRAM = "https://www.instagram.com/nutri_isaac/";
         <div class="group bg-white border border-neutral-200 rounded-3xl p-7 hover:border-emerald-700/30 hover:shadow-lg transition-all duration-300">
           <p class="text-[11px] uppercase tracking-widest text-neutral-400 mb-2">Ubicación</p>
           <p class="text-neutral-900 font-bold text-lg mb-1">Gimnasio Seven</p>
-          <p class="text-neutral-600 text-sm">[PLACEHOLDER: dirección exacta], Viña del Mar</p>
+          <p class="text-neutral-600 text-sm">Bellavista 237, Viña del Mar, Valparaíso</p>
         </div>
 
         <div class="group bg-white border border-neutral-200 rounded-3xl p-7 hover:border-emerald-700/30 hover:shadow-lg transition-all duration-300">
-          <p class="text-[11px] uppercase tracking-widest text-neutral-400 mb-2">Horario de atención</p>
-          <p class="text-neutral-900 font-bold text-lg mb-1">[PLACEHOLDER]</p>
-          <p class="text-neutral-600 text-sm">Consulta la disponibilidad real en el calendario</p>
-        </div>
+        <p class="text-[11px] uppercase tracking-widest text-neutral-400 mb-4">Horario de atención</p>
+
+      <div class="flex items-baseline gap-3 mb-4">
+        <p class="text-neutral-900 font-bold text-lg">Lunes y jueves</p>
+      </div>
+
+      <div class="flex flex-wrap gap-2 mb-5">
+        <span class="text-xs font-semibold text-neutral-700 bg-neutral-100 px-3 py-1.5 rounded-full">16:00 – 17:00</span>
+        <span class="text-xs font-semibold text-neutral-700 bg-neutral-100 px-3 py-1.5 rounded-full">17:00 – 18:00</span>
+        <span class="text-xs font-semibold text-neutral-700 bg-neutral-100 px-3 py-1.5 rounded-full">18:00 – 19:00</span>
+      </div>
+
+      <p class="text-neutral-500 text-xs leading-relaxed border-t border-neutral-100 pt-4">
+        Tres cupos por jornada. Revisa la disponibilidad y reserva en el calendario del Gimnasio Seven.
+      </p>
+    </div>
 
         <div class="grid grid-cols-2 gap-4">
           <a href={`https://wa.me/${TELEFONO}?text=${MENSAJE}`} target="_blank" rel="noopener"
