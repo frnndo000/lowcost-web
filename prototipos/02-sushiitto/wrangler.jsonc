@@ -1,0 +1,9 @@
+{
+  // Sirve el sitio como archivos estáticos (sin SSR).
+  // El build de Astro (npm run build) genera ./dist con las imágenes ya optimizadas.
+  "name": "sushiitto",
+  "compatibility_date": "2026-07-20",
+  "assets": {
+    "directory": "./dist"
+  }
+}
