@@ -1,0 +1,23 @@
+---
+const AGENDA = "https://www.gimnasioseven.com/booking-calendar/nutricionista-isaac-vi%C3%B1a-del-mar?referral=service_list_widget";
+---
+<header class="fixed top-0 inset-x-0 z-50 bg-white/80 backdrop-blur-md border-b border-neutral-200">
+  <div class="max-w-6xl mx-auto flex items-center justify-between px-6 py-4">
+    <a href="#inicio" class="text-neutral-900 font-extrabold text-lg tracking-tight">
+      Isaac <span class="text-neutral-400 font-normal">· Nutricionista</span>
+    </a>
+    <nav class="hidden md:flex items-center gap-8">
+      <a href="#servicio" class="text-sm text-neutral-600 hover:text-neutral-900 transition-colors">Servicio</a>
+      <a href="#sobre-mi" class="text-sm text-neutral-600 hover:text-neutral-900 transition-colors">Sobre mí</a>
+      <a href="#contacto" class="text-sm text-neutral-600 hover:text-neutral-900 transition-colors">Contacto</a>
+      <a href={AGENDA} target="_blank" rel="noopener"
+         class="bg-neutral-900 text-white px-6 py-2.5 rounded-full text-sm font-semibold hover:bg-neutral-700 transition-colors">
+        Agendar hora
+      </a>
+    </nav>
+    <a href={AGENDA} target="_blank" rel="noopener"
+       class="md:hidden bg-neutral-900 text-white px-5 py-2 rounded-full text-xs font-semibold">
+      Agendar
+    </a>
+  </div>
+</header>

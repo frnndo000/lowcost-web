@@ -1,8 +1,11 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import Hero from '../components/secciones/Hero.astro';
+import Servicios from '../components/secciones/Servicios.astro';
+import SobreMi from '../components/secciones/SobreMi.astro';
 ---
 <Layout titulo="Isaac · Nutricionista en Viña del Mar">
-  <section class="min-h-screen bg-neutral-950 text-white flex items-center justify-center">
-    <h1 class="text-6xl font-black">Punto de partida</h1>
-  </section>
+  <Hero />
+  <Servicios />
+  <SobreMi />
 </Layout>

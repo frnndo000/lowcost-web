@@ -1,0 +1,47 @@
+---
+const AGENDA = "https://www.gimnasioseven.com/booking-calendar/nutricionista-isaac-vi%C3%B1a-del-mar?referral=service_list_widget";
+---
+<section id="inicio" class="relative min-h-screen flex items-center bg-white pt-24 pb-16">
+  <div class="max-w-6xl mx-auto px-6 grid md:grid-cols-2 gap-16 items-center">
+
+    <div>
+      <p class="inline-flex items-center gap-2 text-emerald-700 text-xs font-semibold uppercase tracking-widest mb-6">
+        <span class="w-8 h-px bg-emerald-700"></span>
+        Viña del Mar · Gimnasio Seven
+      </p>
+
+      <h1 class="font-[Anton] text-neutral-900 uppercase leading-[0.95] text-5xl md:text-7xl mb-6">
+        Nutrición<br />
+        <span class="text-emerald-700">hecha</span><br />
+        a tu medida
+      </h1>
+
+      <p class="text-neutral-600 text-lg leading-relaxed max-w-md mb-10">
+        Un enfoque personalizado que se adapta a tu cuerpo, rutina y objetivos.
+      </p>
+
+      <div class="flex flex-col sm:flex-row gap-4">
+        <a href={AGENDA} target="_blank" rel="noopener"
+           class="group bg-neutral-900 text-white px-8 py-4 rounded-full font-semibold
+                  hover:bg-neutral-700 transition-all inline-flex items-center justify-center gap-2">
+          Agendar mi evaluación
+          <span class="transition-transform group-hover:translate-x-1">→</span>
+        </a>
+        <a href="#servicio"
+           class="border border-neutral-300 text-neutral-900 px-8 py-4 rounded-full font-semibold
+                  hover:border-neutral-900 transition-all text-center">
+          Cómo funciona
+        </a>
+      </div>
+    </div>
+
+    <div class="relative">
+      <!-- Forma orgánica de fondo -->
+      <div class="absolute -inset-6 bg-emerald-50 rounded-[3rem] -rotate-3"></div>
+      <img src="/img/isaac.jpg"
+           alt="Isaac, nutricionista en Viña del Mar"
+           class="relative w-full aspect-4/5 object-cover rounded-4xl shadow-xl" />
+    </div>
+
+  </div>
+</section>

@@ -1,0 +1,81 @@
+---
+const AGENDA = "https://www.gimnasioseven.com/booking-calendar/nutricionista-isaac-vi%C3%B1a-del-mar?referral=service_list_widget";
+
+const pilares = [
+  {
+    numero: "01",
+    titulo: "Evaluación completa",
+    texto: "Analizo tus hábitos, tu composición corporal y tus metas para entender qué necesitas realmente."
+  },
+  {
+    numero: "02",
+    titulo: "Plan único para ti",
+    texto: "Adaptado a tus necesidades y estilo de vida, para que puedas ver resultados reales."
+  },
+  {
+    numero: "03",
+    titulo: "Nada genérico",
+    texto: "No se trata de algo que le sirva a todos. Es un plan hecho a tu medida."
+  },
+  {
+    numero: "04",
+    titulo: "Enfoque sostenible",
+    texto: "Una estrategia efectiva para tu salud, rendimiento y composición corporal, sin soluciones temporales."
+  }
+];
+---
+<section id="servicio" class="bg-neutral-50 py-28 px-6">
+  <div class="max-w-6xl mx-auto">
+
+    <div class="max-w-2xl mb-16">
+      <p class="text-emerald-700 text-xs font-semibold uppercase tracking-widest mb-4">El servicio</p>
+      <h2 class="text-neutral-900 font-extrabold text-4xl md:text-5xl leading-tight mb-6">
+        Atención personalizada
+      </h2>
+      <p class="text-neutral-600 text-lg leading-relaxed">
+        Una hora contigo, enfocada completamente en tu caso. Sin plantillas,
+        sin dietas de internet.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+      {pilares.map(p => (
+        <article class="group relative bg-white border border-neutral-200 rounded-3xl p-8
+                        transition-all duration-500 hover:border-emerald-700/30 hover:shadow-lg hover:-translate-y-1">
+
+          <span class="absolute top-8 right-8 text-6xl font-[Anton] text-neutral-100
+                       transition-colors duration-500 group-hover:text-emerald-50">
+            {p.numero}
+          </span>
+
+          <div class="relative">
+            <div class="w-10 h-10 rounded-full bg-emerald-700/10 flex items-center justify-center mb-5
+                        transition-all duration-500 group-hover:bg-emerald-700 group-hover:scale-110">
+              <span class="text-emerald-700 group-hover:text-white transition-colors duration-500">✓</span>
+            </div>
+            <h3 class="text-xl font-bold text-neutral-900 mb-3">{p.titulo}</h3>
+            <p class="text-neutral-600 leading-relaxed text-sm max-w-sm">{p.texto}</p>
+          </div>
+
+          <div class="absolute bottom-0 left-8 right-8 h-px bg-emerald-700 scale-x-0 origin-left
+                      group-hover:scale-x-100 transition-transform duration-700"></div>
+        </article>
+      ))}
+    </div>
+
+    <!-- Cierre con CTA -->
+    <div class="mt-16 bg-neutral-900 rounded-3xl p-10 md:p-14 text-center">
+      <p class="text-white text-2xl md:text-3xl font-bold mb-4 max-w-2xl mx-auto leading-snug">
+        Es momento de invertir en ti.
+      </p>
+      <p class="text-neutral-400 mb-8 max-w-xl mx-auto">
+        Estás a un paso de lograr lo que te propones y ver cambios tangibles.
+      </p>
+      <a href={AGENDA} target="_blank" rel="noopener"
+         class="inline-flex items-center gap-2 bg-white text-neutral-900 px-8 py-4 rounded-full font-semibold hover:bg-neutral-200 transition-colors">
+        Agendar mi hora →
+      </a>
+    </div>
+
+  </div>
+</section>

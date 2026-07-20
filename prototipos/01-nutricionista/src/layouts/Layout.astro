@@ -1,6 +1,7 @@
 ---
-import '../styles/global.css';
-const { titulo, descripcion = "Nutricionista en Viña del Mar. Agenda tu evaluación." } = Astro.props;
+import '../styles/global.css'
+import Header from '../components/Header.astro';
+const { titulo, descripcion = "Nutricionista en Viña del Mar. Evaluación nutricional y planes personalizados. Agenda tu hora." } = Astro.props;
 ---
 <!doctype html>
 <html lang="es">
@@ -9,8 +10,14 @@ const { titulo, descripcion = "Nutricionista en Viña del Mar. Agenda tu evaluac
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={descripcion} />
     <title>{titulo}</title>
+
+    <!-- Tipografías: Anton para títulos, Inter para cuerpo -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;600;800&display=swap" rel="stylesheet" />
   </head>
-  <body class="bg-neutral-950 antialiased">
+  <body class="bg-neutral-950 antialiased font-[Inter]">
+    <Header />
     <slot />
   </body>
 </html>
