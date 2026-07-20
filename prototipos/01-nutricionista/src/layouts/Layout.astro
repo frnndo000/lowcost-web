@@ -1,0 +1,16 @@
+---
+import '../styles/global.css';
+const { titulo, descripcion = "Nutricionista en Viña del Mar. Agenda tu evaluación." } = Astro.props;
+---
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={descripcion} />
+    <title>{titulo}</title>
+  </head>
+  <body class="bg-neutral-950 antialiased">
+    <slot />
+  </body>
+</html>
