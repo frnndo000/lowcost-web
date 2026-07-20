@@ -31,3 +31,11 @@
 - Deploy real en Cloudflare Pages (link permanente, sin PC prendida)
 - Self-hostear las tipografías (para exprimir PageSpeed 95+)
 - (Opcional) Tipar el menú con TypeScript — merece su propia sesión, no es urgente
+
+## Upgrades vendibles (el pitch: "esto es la base, esto viene si trabajamos juntos")
+
+- Galería interactiva de platos en el hero (carrusel)
+- Menú interactivo: tocar un plato abre su foto + descripción (modal)
+- Carrito: arma pedido con total y lo manda por WhatsApp
+- Toggle Apanado / En Nori en Hand Rolls
+- Animaciones y transiciones al scrollear

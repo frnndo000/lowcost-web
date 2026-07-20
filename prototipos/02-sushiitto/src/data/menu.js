@@ -1,16 +1,17 @@
 // =========================================================
 // SUSHIITTO — fuente única de verdad del menú.
 // Precios de la carta directa (WhatsApp). Números crudos, sin "$".
-// Cada categoría lleva un `tipo` que define cómo se dibuja:
-//   "simple"       → lista de platos con precio
-//   "subgrupos"    → platos agrupados (ej: Apanados / Nori)
-//   "configurable" → precio base + opciones para elegir
 // =========================================================
+
+import handrollImg from "../assets/platos/handroll.jpeg";
+import sushiburgerImg from "../assets/platos/sushiburger-pollo.jpg";
+import gohanImg from "../assets/platos/gohan.jpeg";
 
 export const categorias = [
   {
     nombre: "Hand Rolls",
     tipo: "subgrupos",
+    imagen: handrollImg,
     subgrupos: [
       {
         nombre: "Apanados",
@@ -36,6 +37,7 @@ export const categorias = [
   {
     nombre: "Sushi Burgers",
     tipo: "simple",
+    imagen: sushiburgerImg,
     platos: [
       { nombre: "Pollo, queso, cebollín, palta", precio: 5990 },
       { nombre: "Camarón, queso, cebollín, palta", precio: 6990 },
@@ -46,6 +48,7 @@ export const categorias = [
   {
     nombre: "Gohan",
     tipo: "configurable",
+    imagen: gohanImg,
     precio: 6500,
     descripcion: "Base de arroz y queso. Elige 1 proteína y 2 vegetales.",
     opciones: [

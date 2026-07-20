@@ -3,13 +3,24 @@
 import Layout from "../layouts/Layout.astro";
 import { categorias } from "../data/menu.js";
 import PlatoItem from "../components/PlatoItem.astro";
+import FotoCategoria from "../components/FotoCategoria.astro";
 import { local } from "../data/local.js";
+import { Image } from "astro:assets";
+import heroImg from "../assets/platos/handroll.jpeg";
 ---
 
 <Layout>
   <!-- HERO -->
   <section class="relative overflow-hidden border-b border-borde">
-    <div class="mx-auto flex max-w-5xl flex-col items-center gap-6 px-5 py-24 text-center sm:py-32">
+    <Image
+      src={heroImg}
+      alt="Hand roll de SUSHIITTO"
+      class="absolute inset-0 h-full w-full object-cover"
+    />
+    <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_0%,var(--color-fondo)_75%)]"></div>
+    <div class="absolute inset-0 bg-gradient-to-t from-fondo via-fondo/60 to-transparent"></div>
+
+    <div class="relative mx-auto flex max-w-5xl flex-col items-center gap-6 px-5 py-28 text-center sm:py-40">
       <img
         src="/imagenes/logo.jpg"
         alt="SUSHIITTO"
@@ -17,26 +28,19 @@ import { local } from "../data/local.js";
         height="120"
         class="h-28 w-28 rounded-full ring-2 ring-rojo/40"
       />
-
-      <h1 class="font-display text-5xl font-bold tracking-wide sm:text-7xl">
+      <h1 class="font-display text-5xl font-bold tracking-wide drop-shadow-lg sm:text-7xl">
         <span class="text-texto">SUSHI</span><span class="text-rojo">ITTO</span>
       </h1>
-
-      <p class="max-w-md text-lg text-texto-suave">
+      <p class="max-w-md text-lg text-texto-suave drop-shadow-lg">
         Sushi en Viña del Mar. Retiro y delivery.
       </p>
-
-      <p class="text-sm text-texto-suave">
+      <p class="text-sm text-texto-suave drop-shadow-lg">
         <span class="text-dorado">●</span> Abierto hasta las 23:30
       </p>
-
-      
-        <a href="#menu"
-          class="rounded-suave bg-rojo px-8 py-4 text-lg font-semibold text-texto transition-colors hover:bg-rojo-hover"
-        >
-          Ver la carta
-        </a>
-      </div>
+      <a href="#menu" class="rounded-suave bg-rojo px-8 py-4 text-lg font-semibold text-texto shadow-lg shadow-rojo/30 transition-colors hover:bg-rojo-hover">
+        Ver la carta
+      </a>
+    </div>
   </section>
 
   <!-- MENÚ -->
@@ -52,6 +56,8 @@ import { local } from "../data/local.js";
             <h3 class="mb-4 font-display text-2xl font-bold text-dorado">
               {categoria.nombre}
             </h3>
+
+            {categoria.imagen && <FotoCategoria imagen={categoria.imagen} nombre={categoria.nombre} />}
 
             {categoria.tipo === "subgrupos" &&
               categoria.subgrupos.map((sub) => (
@@ -99,8 +105,8 @@ import { local } from "../data/local.js";
       }
     </div>
   </section>
-  
-  <!-- CONTACTO: WhatsApp como acción principal -->
+
+  <!-- CONTACTO -->
   <section id="contacto" class="border-t border-borde bg-superficie">
     <div class="mx-auto max-w-3xl px-5 py-16 text-center">
       <h2 class="mb-3 font-display text-4xl font-bold">
@@ -109,12 +115,7 @@ import { local } from "../data/local.js";
       <p class="mx-auto mb-8 max-w-md text-texto-suave">
         Escríbenos directo por WhatsApp y te tomamos el pedido al tiro. Sin apps, sin comisiones.
       </p>
-      
-        <a href={`https://wa.me/${local.whatsapp}?text=${encodeURIComponent(local.mensajeWhatsapp)}`}
-        target="_blank"
-        rel="noopener"
-        class="inline-flex items-center gap-2 rounded-suave bg-rojo px-8 py-4 text-lg font-semibold text-texto transition-colors hover:bg-rojo-hover"
-      >
+      <a href={`https://wa.me/${local.whatsapp}?text=${encodeURIComponent(local.mensajeWhatsapp)}`} target="_blank" rel="noopener" class="inline-flex items-center gap-2 rounded-suave bg-rojo px-8 py-4 text-lg font-semibold text-texto shadow-lg shadow-rojo/30 transition-colors hover:bg-rojo-hover">
         Pedir por WhatsApp
       </a>
       <p class="mt-4 text-sm text-texto-suave">O llámanos al {local.telefono}</p>
@@ -132,8 +133,4 @@ import { local } from "../data/local.js";
     </address>
     <p class="mt-3 text-texto-suave">{local.horario[0].dias}: {local.horario[0].horas}</p>
   </section>
-
- 
-
-
 </Layout>

@@ -1,0 +1,30 @@
+---
+import { Image } from "astro:assets";
+const { imagen, nombre } = Astro.props;
+---
+
+<div class="relative mx-auto mb-6 mt-2 flex max-w-3xl items-center justify-center">
+  <!-- Kanji 寿司: grande, arriba-izquierda, muy inclinado -->
+  <span
+    class="pointer-events-none absolute -left-6 top-0 hidden -rotate-[18deg] select-none text-[13rem] leading-none text-rojo/30 [font-family:'Yuji_Syuku',serif] [writing-mode:vertical-rl] sm:block"
+    aria-hidden="true"
+  >寿司</span>
+
+  <!-- Kanji 巻き: grande e inclinado como el izquierdo, saliéndose por el borde -->
+  <span
+    class="pointer-events-none absolute -right-6 top-4 hidden rotate-[16deg] select-none text-[13rem] leading-none text-rojo/30 [font-family:'Yuji_Syuku',serif] [writing-mode:vertical-rl] sm:block"
+    aria-hidden="true"
+  >巻き</span>
+
+  <!-- Foto -->
+  <div class="group relative z-10 w-full max-w-md overflow-hidden rounded-suave border border-borde">
+    <Image
+      src={imagen}
+      alt={`${nombre} de SUSHIITTO`}
+      class="h-72 w-full object-cover transition-transform duration-500 group-hover:scale-105"
+    />
+    <div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-fondo to-transparent p-4">
+      <span class="font-display text-lg font-bold text-texto drop-shadow-lg">{nombre}</span>
+    </div>
+  </div>
+</div>
