@@ -1,4 +1,7 @@
   ---
+  import { Image } from "astro:assets";
+  import paciente from "../../assets/paciente.jpg";
+
   const hitos = [
     {
       etiqueta: "Formación",
@@ -34,9 +37,9 @@
     <!-- Foto -->
     <div class="relative w-[55%] shrink-0 md:w-full">
       <div class="absolute -inset-2.5 md:-inset-5 bg-emerald-50 rounded-3xl md:rounded-[3rem] rotate-3"></div>
-      <img src="/img/paciente.jpg"
-           alt="Isaac atendiendo en consulta"
-           class="relative w-full aspect-3/4 md:aspect-4/5 object-cover rounded-[1.25rem] md:rounded-4xl shadow-xl" />
+      <Image src={paciente}
+       alt="Isaac atendiendo en consulta"
+       class="relative w-full aspect-3/4 md:aspect-4/5 object-cover rounded-[1.25rem] md:rounded-4xl shadow-xl" />
     </div>
 
     <!-- Stats -->

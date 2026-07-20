@@ -1,0 +1,7 @@
+{
+  // Sirve el sitio como archivos estáticos (sin SSR).
+  // Necesario para que <Image> funcione en Cloudflare (evita el endpoint /_image que da 404).
+  "name": "nutriisaac",
+  "compatibility_date": "2026-07-20",
+  "assets": { "directory": "./dist" },
+}

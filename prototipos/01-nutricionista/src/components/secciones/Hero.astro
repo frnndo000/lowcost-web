@@ -1,13 +1,16 @@
 ---
+import { Image } from "astro:assets";
+import isaac from "../../assets/isaac.jpg";
 const AGENDA = "https://www.gimnasioseven.com/booking-calendar/nutricionista-isaac-vi%C3%B1a-del-mar?referral=service_list_widget";
 ---
 <section id="inicio" class="relative min-h-screen flex items-center bg-white pt-24 pb-16 overflow-hidden">
 
   <!-- FOTO DE FONDO (solo móvil) -->
   <div id="hero-foto" class="absolute inset-0 md:hidden will-change-transform">
-  <img src="/img/isaac.jpg"
+  <Image src={isaac}
        alt=""
        aria-hidden="true"
+       loading="eager"
        class="w-full h-full object-cover object-[center_15%]" />
   <!-- Velo: sólido abajo, transparente arriba para que el rostro se vea -->
   <div class="absolute inset-0 bg-linear-to-t from-white from-45% via-white/85 via-60% to-transparent"></div>
@@ -51,9 +54,10 @@ const AGENDA = "https://www.gimnasioseven.com/booking-calendar/nutricionista-isa
     <!-- FOTO CON MARCO (solo escritorio) -->
     <div class="relative hidden md:block">
       <div class="absolute -inset-6 bg-emerald-50 rounded-[3rem] -rotate-3"></div>
-      <img src="/img/isaac.jpg"
-           alt="Isaac, nutricionista en Viña del Mar"
-           class="relative w-full aspect-4/5 object-cover rounded-4xl shadow-xl" />
+      <Image src={isaac}
+       alt="Isaac, nutricionista en Viña del Mar"
+       loading="eager"
+       class="relative w-full aspect-4/5 object-cover rounded-4xl shadow-xl" />
     </div>
 
   </div>
