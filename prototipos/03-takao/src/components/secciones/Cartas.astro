@@ -1,0 +1,120 @@
+---
+// Puente de la portada a las dos cartas. Existe porque al separar carta y
+// barra en páginas propias, la home necesita mandarte a alguna de las dos
+// de forma evidente.
+//
+// La foto va en un panel que ocupa el alto completo de la tarjeta, no como
+// miniatura flotante: los recortes son de ~320 px, así que se muestran a
+// tamaño real o menos. Ampliarlos se nota.
+import { Image } from "astro:assets";
+import { categorias } from "../../data/carta.js";
+import { fotoCategoria } from "../../data/imagenes.js";
+
+const cuenta = (grupo) =>
+  categorias
+    .filter((c) => c.grupo === grupo)
+    .reduce(
+      (n, c) =>
+        n +
+        (c.tipo === "subgrupos"
+          ? c.subgrupos.reduce((m, s) => m + s.platos.length, 0)
+          : (c.platos?.length ?? 1)),
+      0,
+    );
+
+const tarjetas = [
+  {
+    href: "/carta",
+    // 鮨 es el kanji único de sushi. Se usa acá en vez de 寿司 (dos glifos)
+    // para que las dos tarjetas queden simétricas: en una tarjeta de 182 px
+    // dos glifos apilados quedan apretados.
+    kanji: "鮨",
+    titulo: "Carta",
+    texto: "Rolls, gohan, ceviches, sushi burgers y platos para compartir.",
+    total: cuenta("cocina"),
+    foto: fotoCategoria["takao-rolls"],
+    alt: "Roll Salmón Nikkey",
+    borde: "hover:border-marca",
+    acento: "text-marca",
+    linea: "bg-marca",
+  },
+  {
+    href: "/bar",
+    kanji: "酒",
+    titulo: "Barra",
+    texto: "Coctelería de autor, sour, mojitos, destilados y botellas.",
+    total: cuenta("bar"),
+    foto: fotoCategoria["cocktails-autor"],
+    alt: "Cóctel Takao Blue",
+    borde: "hover:border-acento",
+    acento: "text-acento",
+    linea: "bg-acento",
+  },
+];
+---
+
+<section class="border-y border-borde bg-superficie">
+  <div class="mx-auto max-w-5xl px-5 py-16">
+    <p class="mb-8 text-center text-xs uppercase tracking-[0.3em] text-texto-suave">
+      Dos cartas, una casa
+    </p>
+
+    <ul class="grid gap-5 sm:grid-cols-2">
+      {
+        tarjetas.map((t) => (
+          <li>
+            <a
+              href={t.href}
+              class:list={[
+                "group grid h-full grid-cols-[38%_1fr] overflow-hidden rounded-suave border border-borde bg-fondo transition-colors",
+                t.borde,
+              ]}
+            >
+              <div class="relative min-h-44 overflow-hidden">
+                <Image
+                  src={t.foto}
+                  alt={t.alt}
+                  widths={[320, 640]}
+                  sizes="(min-width: 640px) 200px, 40vw"
+                  class="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                />
+                {/* Funde la foto con la tarjeta en vez de dejar un borde duro */}
+                <div class="absolute inset-0 bg-linear-to-r from-transparent to-fondo/90" />
+              </div>
+
+              <div class="relative flex flex-col justify-center overflow-hidden p-6">
+                {/* Kanji vertical, entero y detrás del texto. En horizontal
+                    lo cortaba el borde de la tarjeta y parecía un error. */}
+                <span
+                  aria-hidden="true"
+                  class:list={[
+                    "kanji absolute right-3 top-1/2 -translate-y-1/2 text-[7rem] opacity-15",
+                    t.acento,
+                  ]}
+                >
+                  {t.kanji}
+                </span>
+
+                <div class="relative">
+                  <h2 class="titulo-carta text-2xl font-semibold sm:text-3xl">
+                    {t.titulo}
+                  </h2>
+                  <div class:list={["mt-2 h-px w-10", t.linea]} />
+                  <p class="mt-3 text-sm leading-snug text-texto-suave">
+                    {t.texto}
+                  </p>
+                  <p class:list={["mt-4 text-sm font-semibold", t.acento]}>
+                    Ver {t.total} productos{" "}
+                    <span class="ml-0.5 inline-block transition-transform group-hover:translate-x-1">
+                      →
+                    </span>
+                  </p>
+                </div>
+              </div>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>

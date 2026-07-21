@@ -1,0 +1,163 @@
+---
+// Una sola sección de carta, usada en dos páginas: /carta (cocina, rojo)
+// y /bar (barra, azul). La identidad de color sale de la carta oficial.
+//
+// Los tres tipos de categoría (simple / configurable / subgrupos) se
+// resuelven acá con guards, sin @ts-nocheck tapando warnings.
+import { Image } from "astro:assets";
+import PlatoItem from "../PlatoItem.astro";
+import { categorias, toppings, clp } from "../../data/carta.js";
+import { fotoCategoria } from "../../data/imagenes.js";
+
+interface Props {
+  grupo: "cocina" | "bar";
+  kanji: string;
+}
+
+const { grupo, kanji } = Astro.props;
+
+const delGrupo = categorias.filter((c) => c.grupo === grupo);
+
+// Clases literales para que Tailwind las vea en el código fuente.
+const esCocina = grupo === "cocina";
+const colorTexto = esCocina ? "text-marca" : "text-acento";
+const colorFondo = esCocina ? "bg-marca" : "bg-acento";
+const colorBorde = esCocina ? "hover:border-marca" : "hover:border-acento";
+const colorKanji = esCocina ? "text-marca/6" : "text-acento/6";
+---
+
+<!-- Índice pegajoso: con 180 platos, poder saltar a una categoría importa
+     más que cualquier foto. Es <nav> con anclas, cero JavaScript. -->
+<nav
+  aria-label="Categorías"
+  class="sticky top-[3.9rem] z-10 border-b border-borde bg-fondo/95 backdrop-blur"
+>
+  <ul class="mx-auto flex max-w-5xl gap-2 overflow-x-auto px-5 py-3 text-sm">
+    {
+      delGrupo.map((categoria) => (
+        <li>
+          <a
+            href={`#cat-${categoria.id}`}
+            class:list={[
+              "block whitespace-nowrap rounded-full border border-borde px-3 py-1.5 text-texto-suave transition-colors hover:text-texto",
+              colorBorde,
+            ]}
+          >
+            {categoria.nombre}
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</nav>
+
+<div class="relative overflow-hidden">
+  <span
+    aria-hidden="true"
+    class:list={[
+      "kanji absolute -left-4 top-20 hidden text-[18rem] sm:block lg:text-[24rem]",
+      colorKanji,
+    ]}>{kanji}</span
+  >
+
+  <div class="relative mx-auto max-w-3xl space-y-14 px-5 py-14">
+    {
+      delGrupo.map((categoria) => {
+        const foto = fotoCategoria[categoria.id];
+        return (
+          <section aria-labelledby={`cat-${categoria.id}`} class="scroll-ancla">
+            <header class="mb-4 flex items-center gap-4">
+              {foto && (
+                <div class="hidden h-20 w-20 shrink-0 overflow-hidden rounded-suave border border-borde sm:block">
+                  <Image
+                    src={foto}
+                    alt={`${categoria.nombre} de Takao Sushi Bar`}
+                    widths={[160, 320]}
+                    sizes="80px"
+                    class="h-full w-full object-cover"
+                  />
+                </div>
+              )}
+              <div class="min-w-0">
+                <h2
+                  id={`cat-${categoria.id}`}
+                  class="titulo-carta text-2xl font-semibold sm:text-3xl"
+                >
+                  {categoria.nombre}
+                </h2>
+                <div class:list={["mt-2 h-px w-14", colorFondo]} />
+                {categoria.nota && (
+                  <p class="mt-2 text-sm text-texto-suave">{categoria.nota}</p>
+                )}
+              </div>
+            </header>
+
+            {categoria.tipo === "simple" && categoria.platos && (
+              <ul>
+                {categoria.platos.map((plato) => (
+                  <PlatoItem {...plato} />
+                ))}
+              </ul>
+            )}
+
+            {categoria.tipo === "subgrupos" && categoria.subgrupos && (
+              <div class="space-y-6">
+                {categoria.subgrupos.map((sub) => (
+                  <div>
+                    <h3 class="mb-1 text-sm font-semibold uppercase tracking-wider text-texto-suave">
+                      {sub.nombre}
+                    </h3>
+                    <ul>
+                      {sub.platos.map((plato) => (
+                        <PlatoItem {...plato} />
+                      ))}
+                    </ul>
+                  </div>
+                ))}
+              </div>
+            )}
+
+            {categoria.tipo === "configurable" && categoria.opciones && (
+              <div class="rounded-suave border border-borde bg-superficie p-5">
+                <div class="mb-4 flex items-baseline justify-between gap-3">
+                  <p class="text-texto-suave">{categoria.descripcion}</p>
+                  <span class="shrink-0 text-xl font-semibold tabular-nums text-precio">
+                    {clp(categoria.precio)}
+                  </span>
+                </div>
+                <div class="space-y-3">
+                  {categoria.opciones.map((opcion) => (
+                    <div>
+                      <h3 class="mb-1 text-sm font-semibold uppercase tracking-wider text-texto-suave">
+                        {opcion.titulo}
+                      </h3>
+                      <p class="text-sm leading-relaxed">
+                        {opcion.items.join(" · ")}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {categoria.conToppings && (
+              <div class="mt-4 rounded-suave border border-borde/60 p-4">
+                <h3 class="mb-2 text-sm font-semibold uppercase tracking-wider text-texto-suave">
+                  + Topping
+                </h3>
+                <ul class="grid gap-x-6 sm:grid-cols-2">
+                  {toppings.map((t) => (
+                    <li class="flex justify-between gap-3 py-1 text-sm">
+                      <span>{t.nombre}</span>
+                      <span class="tabular-nums text-precio">{clp(t.precio)}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+          </section>
+        );
+      })
+    }
+  </div>
+</div>

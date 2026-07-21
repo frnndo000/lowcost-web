@@ -1,0 +1,86 @@
+---
+// Marco de todas las páginas: el <head> completo, el header y el footer.
+// El contenido único de cada página entra por el <slot />.
+//
+// Header Y Footer viven acá. En 01-nutricionista el Footer quedó dentro
+// de index.astro, así que la segunda página habría nacido sin footer.
+import "@fontsource-variable/jost";
+import "../styles/global.css";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import BotonWhatsapp from "../components/BotonWhatsapp.astro";
+import { negocio } from "../data/negocio.js";
+import { schemaRestaurant, schemaFaq } from "../data/schema.js";
+
+interface Props {
+  titulo?: string;
+  descripcion?: string;
+  /** El FAQPage va SOLO donde está el acordeón: repetirlo en cada página
+   *  es contenido duplicado y Google lo penaliza. */
+  conFaq?: boolean;
+}
+
+const {
+  titulo = `${negocio.nombre} — ${negocio.bajada}`,
+  descripcion = negocio.seo.descripcion,
+  conFaq = false,
+} = Astro.props;
+
+const canonical = new URL(Astro.url.pathname, Astro.site);
+const ogImagen = new URL(negocio.seo.ogImagen, Astro.site);
+---
+
+<!doctype html>
+<html lang="es-CL">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{titulo}</title>
+    <meta name="description" content={descripcion} />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <meta name="theme-color" content="#0b0b0b" />
+    <meta name="generator" content={Astro.generator} />
+
+    <!-- Open Graph: esto es lo que se ve al mandar el link por WhatsApp.
+         Sin esto el link llega gris y sin foto, y nadie lo abre. -->
+    <meta property="og:type" content="restaurant" />
+    <meta property="og:site_name" content={negocio.nombre} />
+    <meta property="og:title" content={titulo} />
+    <meta property="og:description" content={descripcion} />
+    <meta property="og:image" content={ogImagen} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:locale" content="es_CL" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <!-- Datos estructurados: horario, dirección y precios directo en Google -->
+    <script
+      type="application/ld+json"
+      set:html={JSON.stringify(schemaRestaurant())}
+    />
+    {
+      conFaq && (
+        <script
+          type="application/ld+json"
+          set:html={JSON.stringify(schemaFaq())}
+        />
+      )
+    }
+  </head>
+
+  <body>
+    <a
+      href="#contenido"
+      class="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded-suave focus:bg-marca focus:px-4 focus:py-2 focus:font-semibold"
+    >
+      Saltar al contenido
+    </a>
+
+    <Header />
+    <main id="contenido">
+      <slot />
+    </main>
+    <Footer />
+    <BotonWhatsapp />
+  </body>
+</html>

@@ -1,0 +1,22 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Carta from "../components/secciones/Carta.astro";
+import { negocio } from "../data/negocio.js";
+---
+
+<Layout
+  titulo={`Barra y coctelería — ${negocio.nombre}, ${negocio.comuna}`}
+  descripcion="Barra de Takao Sushi Bar: coctelería de autor, pisco sour, mojitos, spritz, destilados, cervezas y botellas. Promociones 2×1 de lunes a viernes."
+>
+  <header class="border-b border-borde px-5 py-12 text-center">
+    <p class="text-xs uppercase tracking-[0.3em] text-acento">Barra</p>
+    <h1 class="titulo-carta mt-2 text-4xl font-semibold sm:text-5xl">
+      Coctelería
+    </h1>
+    <p class="mx-auto mt-4 max-w-lg text-texto-suave">
+      2×1 de lunes a viernes. Venta de alcohol solo a mayores de 18 años.
+    </p>
+  </header>
+
+  <Carta grupo="bar" kanji="酒" />
+</Layout>

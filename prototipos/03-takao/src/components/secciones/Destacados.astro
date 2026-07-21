@@ -1,0 +1,53 @@
+---
+// Los destacados son el gancho de la portada: cuatro platos con foto que
+// mandan a la carta completa. Sin esto la home queda sin comida a la vista.
+//
+// Nada escondido tras hover: el texto se lee siempre, también en móvil.
+// (En 01-nutricionista el detalle de cada tarjeta solo aparece con el
+// cursor encima, así que en el teléfono es inalcanzable.)
+import { Image } from "astro:assets";
+import { destacados } from "../../data/imagenes.js";
+import { clp } from "../../data/carta.js";
+---
+
+<section id="destacados" class="mx-auto max-w-5xl px-5 py-16">
+  <header class="mb-10">
+    <p class="text-xs uppercase tracking-[0.3em] text-marca">Recomendados</p>
+    <h2 class="titulo-carta mt-2 text-4xl font-semibold sm:text-5xl">
+      Lo que más piden
+    </h2>
+  </header>
+
+  <ul class="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+    {
+      destacados.map((item) => (
+        <li>
+          <a
+            href={item.donde}
+            class="group flex h-full flex-col overflow-hidden rounded-suave border border-borde bg-superficie transition-colors hover:border-marca"
+          >
+            <div class="aspect-4/3 overflow-hidden">
+              <Image
+                src={item.foto}
+                alt={item.alt}
+                widths={[300, 600]}
+                sizes="(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw"
+                class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+              />
+            </div>
+            <div class="flex flex-1 flex-col gap-1 p-5">
+              <div class="flex items-baseline justify-between gap-3">
+                <h3 class="titulo-carta text-lg font-semibold">{item.titulo}</h3>
+                <span class="shrink-0 font-semibold tabular-nums text-precio">
+                  {clp(item.precio)}
+                </span>
+              </div>
+              <p class="text-sm leading-snug text-texto-suave">{item.texto}</p>
+              <span class="mt-auto pt-3 text-sm text-marca">Ver en la carta →</span>
+            </div>
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</section>

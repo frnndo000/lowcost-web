@@ -1,0 +1,34 @@
+---
+// Una línea de la carta. El precio se formatea con clp(), el único
+// formateador del proyecto: no se repite un Intl.NumberFormat suelto
+// en las páginas como pasó en 02-sushiitto.
+import { clp } from "../data/carta.js";
+
+interface Props {
+  nombre: string;
+  precio: number;
+  descripcion?: string;
+  picante?: boolean;
+  veggie?: boolean;
+}
+
+const { nombre, precio, descripcion, picante, veggie } = Astro.props;
+---
+
+<li class="flex items-baseline gap-4 border-b border-borde/60 py-3">
+  <div class="min-w-0">
+    <span class="text-texto">
+      {nombre}
+      {picante && <span class="ml-1 text-marca" title="Picante">🌶</span>}
+      {veggie && <span class="ml-1" title="Vegetariano">🌱</span>}
+    </span>
+    {
+      descripcion && (
+        <p class="mt-0.5 text-sm leading-snug text-texto-suave">{descripcion}</p>
+      )
+    }
+  </div>
+  <span class="ml-auto shrink-0 font-semibold tabular-nums text-precio">
+    {clp(precio)}
+  </span>
+</li>
