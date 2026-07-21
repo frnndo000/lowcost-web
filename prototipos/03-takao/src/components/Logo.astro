@@ -1,0 +1,32 @@
+---
+// PENDIENTE: este logo es un recorte de la carta en PDF, así que trae
+// pegada la textura del fondo y no tiene transparencia. Pedirle al dueño
+// el original en SVG o PNG con fondo transparente y reemplazar el archivo:
+// no hay que tocar código, solo public/imagenes/logo.png.
+interface Props {
+  tamano?: number;
+  conTexto?: boolean;
+  class?: string;
+}
+
+const { tamano = 44, conTexto = true, class: clase = "" } = Astro.props;
+---
+
+<span class={`flex items-center gap-3 ${clase}`}>
+  <img
+    src="/imagenes/logo.png"
+    alt="Takao Sushi Bar"
+    width={tamano}
+    height={tamano}
+    style={`width:${tamano}px;height:${tamano}px`}
+    class="shrink-0 object-contain"
+    loading="eager"
+  />
+  {
+    conTexto && (
+      <span class="titulo-carta text-xl font-semibold tracking-[0.2em] leading-none">
+        TAKAO
+      </span>
+    )
+  }
+</span>

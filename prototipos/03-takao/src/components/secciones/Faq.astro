@@ -1,0 +1,33 @@
+---
+// Acordeón con <details>/<summary> nativo: cero JavaScript.
+// El mismo arreglo `preguntas` genera el JSON-LD FAQPage en el Layout,
+// así que lo que se ve acá es exactamente lo que indexa Google.
+import { preguntas } from "../../data/faq.js";
+---
+
+<section id="preguntas" class="mx-auto max-w-3xl px-5 py-16">
+  <header class="mb-10 text-center">
+    <h2 class="titulo-carta text-4xl font-semibold sm:text-5xl">
+      Preguntas frecuentes
+    </h2>
+  </header>
+
+  <div class="divide-y divide-borde border-y border-borde">
+    {
+      preguntas.map((item) => (
+        <details class="group py-4">
+          <summary class="flex cursor-pointer items-center justify-between gap-4 font-semibold text-texto transition-colors hover:text-precio">
+            {item.p}
+            <span
+              class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-borde text-texto-suave transition-transform duration-300 group-open:rotate-45"
+              aria-hidden="true"
+            >
+              +
+            </span>
+          </summary>
+          <p class="mt-3 pr-12 leading-relaxed text-texto-suave">{item.r}</p>
+        </details>
+      ))
+    }
+  </div>
+</section>

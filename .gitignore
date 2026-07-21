@@ -11,3 +11,5 @@ Thumbs.db
 # Build de Astro (para más adelante)
 dist/
 .astro/
+
+.claude 
