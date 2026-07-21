@@ -13,23 +13,25 @@ const AGENDA = "https://www.gimnasioseven.com/booking-calendar/nutricionista-isa
        loading="eager"
        class="w-full h-full object-cover object-[center_15%]" />
   <!-- Velo: sólido abajo, transparente arriba para que el rostro se vea -->
-  <div class="absolute inset-0 bg-linear-to-t from-white from-45% via-white/85 via-60% to-transparent"></div>
+  <div class="absolute inset-0"
+     style="background: linear-gradient(to top, #fff 0%, #fff 34%, rgba(255,255,255,0.55) 45%, rgba(255,255,255,0) 58%);">
+</div>
 </div>
 
   <div class="relative z-10 max-w-6xl mx-auto px-6 grid md:grid-cols-2 gap-8 md:gap-16 items-center w-full pt-[45vh] md:pt-0">
 
     <!-- TEXTO -->
     <div>
-      <p class="inline-flex items-center gap-2 text-emerald-700 text-xs font-semibold uppercase tracking-widest mb-6">
-        <span class="w-8 h-px bg-emerald-700"></span>
-        Viña del Mar · Gimnasio Seven
-      </p>
-
       <h1 class="font-[Anton] text-neutral-900 uppercase leading-[0.95] text-5xl md:text-7xl mb-6">
         Nutrición<br />
         <span class="text-emerald-700">hecha</span><br />
         a tu medida
       </h1>
+
+      <p class="inline-flex items-center gap-2 text-emerald-700 text-xs font-semibold uppercase tracking-widest mb-6">
+        <span class="w-8 h-px bg-emerald-700"></span>
+        Viña del Mar · Gimnasio Seven
+      </p>
 
       <p class="text-neutral-700 text-lg leading-relaxed max-w-md mb-10">
         Olvídate de las dietas genéricas. Un plan diseñado para tu cuerpo,
@@ -68,13 +70,23 @@ const AGENDA = "https://www.gimnasioseven.com/booking-calendar/nutricionista-isa
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   if (foto && !reduceMotion) {
-    const onScroll = () => {
+    let ticking = false;
+
+    const actualizar = () => {
       const y = window.scrollY;
-      const avance = Math.min(y / window.innerHeight, 1); // 0 arriba → 1 al pasar el hero
+      const avance = Math.min(y / window.innerHeight, 1);
       foto.style.opacity = `${1 - avance}`;
-      foto.style.transform = `translateY(${y * 0.35}px) scale(${1 - avance * 0.08})`;
+      foto.style.transform = `translate3d(0, ${y * 0.3}px, 0)`;
+      ticking = false;
     };
-    window.addEventListener('scroll', onScroll, { passive: true });
-    onScroll();
+
+    window.addEventListener('scroll', () => {
+      if (!ticking) {
+        requestAnimationFrame(actualizar);
+        ticking = true;
+      }
+    }, { passive: true });
+
+    actualizar();
   }
 </script>
