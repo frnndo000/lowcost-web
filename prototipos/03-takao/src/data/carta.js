@@ -862,3 +862,38 @@ export const promos = {
     { dia: "Viernes", titulo: "Mojito", oferta: "2 × 1" },
   ],
 };
+
+// Lo que se muestra en la portada para dar ganas de entrar. Cuatro platos
+// reales de la carta; los precios tienen que calzar con los de arriba y
+// `npm run check` lo verifica.
+export const destacados = [
+  {
+    id: "okinawa-atun",
+    titulo: "Okinawa de atún",
+    texto: "Envuelto en atún, con lluvia tempura y topping de pollo furay.",
+    precio: 9990,
+    donde: "/carta#cat-entradas",
+  },
+  {
+    id: "sushi-burger",
+    titulo: "Sushi burger de salmón",
+    texto: "El pan es arroz. Salmón, queso crema, cebollín y palta.",
+    precio: 9990,
+    donde: "/carta#cat-sushi-burger",
+  },
+  {
+    id: "dragon-especial",
+    titulo: "Dragon Especial",
+    texto:
+      "Envuelto en palta. Camarón furay, queso crema, cebollín y masago con salsa spicy.",
+    precio: 9990,
+    donde: "/carta#cat-takao-rolls",
+  },
+  {
+    id: "la-bichota",
+    titulo: "La Bichota",
+    texto: "Vodka berries, frutilla, leche condensada y granadina.",
+    precio: 7990,
+    donde: "/bar#cat-cocktails-autor",
+  },
+];

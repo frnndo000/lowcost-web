@@ -1,73 +1,49 @@
 // =========================================================
-// Fotos por categoría.
+// Fotos de la portada.
 //
-// ¿Por qué vive aparte de carta.js? Porque `import foto from "*.jpg"`
-// solo lo entiende el bundler de Astro, y `scripts/check-datos.mjs` corre
-// con Node pelado. Si las imágenes estuvieran en carta.js, el validador
-// no podría importarlo. (02-sushiitto tiene ese problema en menu.js.)
+// SOLO la home lleva fotos. /carta y /bar van sin miniaturas: con 180
+// platos, las imágenes en la lista estorban más de lo que aportan.
+//
+// ¿Por qué vive aparte de carta.js? Porque `import foto from "*.jpg"` solo
+// lo entiende el bundler de Astro, y `scripts/check-datos.mjs` corre con
+// Node pelado. Si las imágenes estuvieran en carta.js, el validador no
+// podría importarlo. (02-sushiitto tiene ese problema en menu.js.)
 //
 // Regla: src/data/*.js se importa desde Node. Este archivo, solo desde Astro.
-//
-// PENDIENTE: estas fotos son recortes de la carta en PDF (~300 px). Sirven
-// de miniatura. Pedirle al dueño los originales en alta para el hero.
 // =========================================================
 
-import rollNikkey from "../assets/platos/roll-nikkey.jpg";
-import rollMidori from "../assets/platos/roll-midori.jpg";
-import gohanFuray from "../assets/platos/gohan-furay.jpg";
-import gohanSalmon from "../assets/platos/gohan-salmon.jpg";
-import sushiburger from "../assets/platos/sushiburger.jpg";
-import hamburguesa from "../assets/platos/hamburguesa.jpg";
-import ceviche from "../assets/platos/ceviche.jpg";
-import papas from "../assets/platos/papas.jpg";
-import coctelBlue from "../assets/platos/coctel-blue.jpg";
-import tequenos from "../assets/platos/tequenos.jpg";
+import logoRojo from "../assets/logo-rojo.png";
+import logoAzul from "../assets/logo-azul.png";
+import okinawaAtun from "../assets/platos/okinawa-atun.jpg";
+import sushiBurger from "../assets/platos/sushi-burger.jpg";
+import dragonEspecial from "../assets/platos/dragon-especial.jpg";
+import laBichota from "../assets/platos/la-bichota.jpg";
 
-/** id de categoría → foto. Las categorías sin foto simplemente no salen acá. */
-export const fotoCategoria = {
-  entradas: tequenos,
-  gohan: gohanFuray,
-  "takao-rolls": rollNikkey,
-  recomendaciones: rollMidori,
-  ceviches: ceviche,
-  "sushi-burger": sushiburger,
-  burgers: hamburguesa,
-  papas: papas,
-  "cocktails-autor": coctelBlue,
+/** id del destacado (ver `destacados` en carta.js) → foto y su alt. */
+export const fotoDestacado = {
+  "okinawa-atun": {
+    foto: okinawaAtun,
+    alt: "Okinawa de atún sobre pizarra, con topping de pollo furay",
+  },
+  "sushi-burger": {
+    foto: sushiBurger,
+    alt: "Sushi burger de salmón cortada por la mitad",
+  },
+  "dragon-especial": {
+    foto: dragonEspecial,
+    alt: "Dragon Especial envuelto en palta, con masago y salsa spicy",
+  },
+  "la-bichota": {
+    foto: laBichota,
+    alt: "Cóctel La Bichota en copa labrada",
+  },
 };
 
-/** Destacados de la portada: lo que se muestra para que den ganas de entrar. */
-export const destacados = [
-  {
-    foto: rollMidori,
-    alt: "Roll Sake Midori envuelto en palta",
-    titulo: "Sake Midori",
-    texto: "Envuelto en palta, camarón furay, queso crema y pepino.",
-    precio: 9990,
-    donde: "/carta#cat-takao-rolls",
-  },
-  {
-    foto: sushiburger,
-    alt: "Sushi burger cortada por la mitad",
-    titulo: "Sushi Burger",
-    texto: "El pan es arroz. Cinco versiones, desde pollo teriyaki a salmón.",
-    precio: 7990,
-    donde: "/carta#cat-sushi-burger",
-  },
-  {
-    foto: gohanSalmon,
-    alt: "Gohan de salmón fresco en bowl",
-    titulo: "Gohan de salmón",
-    texto: "Bowl de arroz con salmón fresco, queso crema, cebollín y palta.",
-    precio: 9990,
-    donde: "/carta#cat-gohan",
-  },
-  {
-    foto: coctelBlue,
-    alt: "Cóctel Takao Blue",
-    titulo: "Takao Blue",
-    texto: "Ron Malibú, maracuyá, piña y curaçao. De la carta de autor.",
-    precio: 7990,
-    donde: "/bar#cat-cocktails-autor",
-  },
-];
+/** Las dos tarjetas que llevan a /carta y a /bar. */
+export const fotoCarta = fotoDestacado["dragon-especial"];
+export const fotoBarra = fotoDestacado["la-bichota"];
+
+/** El logo, como asset de Astro para que salga en webp y al tamaño justo.
+ *  Antes vivía en public/, donde Astro no lo toca: eran 59 KB de PNG en /bar
+ *  para mostrarse a 40 px. */
+export const logo = { rojo: logoRojo, azul: logoAzul };

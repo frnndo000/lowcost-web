@@ -115,7 +115,7 @@ revisar(
   existsSync(publico(negocio.seo.ogImagen.replace(/^\//, ""))),
   `falta public${negocio.seo.ogImagen} (1200×630) — sin eso el link compartido por WhatsApp llega sin imagen`,
 );
-revisar(existsSync(publico("favicon.svg")), "falta public/favicon.svg");
+revisar(existsSync(publico("favicon.png")), "falta public/favicon.png");
 
 // --- Resultado ---
 if (problemas.length > 0) {

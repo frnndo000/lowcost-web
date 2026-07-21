@@ -60,7 +60,7 @@ const esActual = (href) => href === aqui;
       href={whatsapp}
       target="_blank"
       rel="noopener"
-      class="hidden shrink-0 rounded-suave bg-marca px-5 py-2.5 text-sm font-semibold transition-colors hover:bg-marca-hover md:inline-block"
+      class="hidden shrink-0 rounded-suave bg-marca px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-marca-hover md:inline-block"
     >
       Pedir
     </a>
@@ -92,7 +92,7 @@ const esActual = (href) => href === aqui;
                 aria-current={esActual(e.href) ? "page" : undefined}
                 class:list={[
                   "block rounded-suave px-4 py-3 text-lg transition-colors hover:bg-fondo",
-                  esActual(e.href) && "text-marca",
+                  esActual(e.href) && "text-marca-texto",
                 ]}
               >
                 {e.texto}
@@ -106,7 +106,7 @@ const esActual = (href) => href === aqui;
       href={whatsapp}
       target="_blank"
       rel="noopener"
-      class="mt-4 block rounded-suave bg-marca px-4 py-3 text-center font-semibold"
+      class="mt-4 block rounded-suave bg-marca px-4 py-3 text-center font-semibold text-white"
     >
       Pedir por WhatsApp
     </a>

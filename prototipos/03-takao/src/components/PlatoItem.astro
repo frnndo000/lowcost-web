@@ -19,8 +19,20 @@ const { nombre, precio, descripcion, picante, veggie } = Astro.props;
   <div class="min-w-0">
     <span class="text-texto">
       {nombre}
-      {picante && <span class="ml-1 text-marca" title="Picante">🌶</span>}
-      {veggie && <span class="ml-1" title="Vegetariano">🌱</span>}
+      {
+        picante && (
+          <span class="ml-2 align-middle text-[0.65rem] uppercase tracking-widest text-marca-texto">
+            Picante
+          </span>
+        )
+      }
+      {
+        veggie && (
+          <span class="ml-2 align-middle text-[0.65rem] uppercase tracking-widest text-texto-suave">
+            Vegetariano
+          </span>
+        )
+      }
     </span>
     {
       descripcion && (

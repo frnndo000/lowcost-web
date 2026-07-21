@@ -7,23 +7,22 @@
 import { Image } from "astro:assets";
 import PlatoItem from "../PlatoItem.astro";
 import { categorias, toppings, clp } from "../../data/carta.js";
-import { fotoCategoria } from "../../data/imagenes.js";
+import { logo } from "../../data/imagenes.js";
 
 interface Props {
   grupo: "cocina" | "bar";
-  kanji: string;
 }
 
-const { grupo, kanji } = Astro.props;
+const { grupo } = Astro.props;
 
 const delGrupo = categorias.filter((c) => c.grupo === grupo);
 
 // Clases literales para que Tailwind las vea en el código fuente.
 const esCocina = grupo === "cocina";
-const colorTexto = esCocina ? "text-marca" : "text-acento";
 const colorFondo = esCocina ? "bg-marca" : "bg-acento";
 const colorBorde = esCocina ? "hover:border-marca" : "hover:border-acento";
-const colorKanji = esCocina ? "text-marca/6" : "text-acento/6";
+// Marca de agua con el logo del local en vez de un kanji genérico.
+const marcaAgua = esCocina ? logo.rojo : logo.azul;
 ---
 
 <!-- Índice pegajoso: con 180 platos, poder saltar a una categoría importa
@@ -32,7 +31,7 @@ const colorKanji = esCocina ? "text-marca/6" : "text-acento/6";
   aria-label="Categorías"
   class="sticky top-[3.9rem] z-10 border-b border-borde bg-fondo/95 backdrop-blur"
 >
-  <ul class="mx-auto flex max-w-5xl gap-2 overflow-x-auto px-5 py-3 text-sm">
+  <ul class="fila-deslizante mx-auto flex max-w-5xl gap-2 px-5 py-3 text-sm">
     {
       delGrupo.map((categoria) => (
         <li>
@@ -52,33 +51,25 @@ const colorKanji = esCocina ? "text-marca/6" : "text-acento/6";
 </nav>
 
 <div class="relative overflow-hidden">
-  <span
+  {/* Se muestra a 26rem pero se sirve a 200px: al 6% de opacidad la
+      resolución es indistinguible y el archivo pasa de 42 KB a ~7 KB. */}
+  <Image
+    src={marcaAgua}
+    alt=""
     aria-hidden="true"
-    class:list={[
-      "kanji absolute -left-4 top-20 hidden text-[18rem] sm:block lg:text-[24rem]",
-      colorKanji,
-    ]}>{kanji}</span
-  >
+    width={200}
+    height={232}
+    loading="lazy"
+    class="pointer-events-none absolute -left-16 top-24 hidden w-[26rem] select-none opacity-6 sm:block"
+  />
 
   <div class="relative mx-auto max-w-3xl space-y-14 px-5 py-14">
     {
       delGrupo.map((categoria) => {
-        const foto = fotoCategoria[categoria.id];
         return (
           <section aria-labelledby={`cat-${categoria.id}`} class="scroll-ancla">
-            <header class="mb-4 flex items-center gap-4">
-              {foto && (
-                <div class="hidden h-20 w-20 shrink-0 overflow-hidden rounded-suave border border-borde sm:block">
-                  <Image
-                    src={foto}
-                    alt={`${categoria.nombre} de Takao Sushi Bar`}
-                    widths={[160, 320]}
-                    sizes="80px"
-                    class="h-full w-full object-cover"
-                  />
-                </div>
-              )}
-              <div class="min-w-0">
+            <header class="mb-4">
+              <div>
                 <h2
                   id={`cat-${categoria.id}`}
                   class="titulo-carta text-2xl font-semibold sm:text-3xl"

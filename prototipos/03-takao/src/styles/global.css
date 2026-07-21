@@ -16,9 +16,17 @@
   --color-texto: #f4f4f4;
   --color-texto-suave: #a1a1a1;
 
-  --color-marca: #e01f2d; /* rojo Takao — cocina */
+  --color-marca: #e01f2d; /* rojo Takao — cocina. Solo superficies */
   --color-marca-hover: #b3161f;
-  --color-acento: #2f6fed; /* azul Takao — barra */
+  /* El rojo de marca sobre negro da 4,13:1 y WCAG pide 4,5:1 para texto
+     chico. Mismo matiz, más claro: 4,95:1. El rojo puro se queda en
+     botones y líneas, donde no hay que leerlo. */
+  --color-marca-texto: #ea3e4c;
+  /* Azul de la sección BAR de su carta oficial: #2756aa. Sobre negro ese
+     tono da 2,5:1 de contraste y no se lee, así que el token de texto va
+     con el MISMO matiz pero más claro (5:1). El azul original queda en el
+     logo, donde no hay texto que leer. */
+  --color-acento: #5084d7; /* azul Takao — barra */
   --color-precio: #e8c39e; /* tostado de los precios en la carta */
 
   --font-sans: "Jost Variable", system-ui, sans-serif;
@@ -93,35 +101,33 @@
   letter-spacing: 0.12em;
 }
 
-/* Fila que se desliza en horizontal sin mostrar la barra del sistema, que
-   en Windows sale blanca y gruesa y arruina la sección. El degradado del
-   borde derecho reemplaza a la barra como pista de que hay más para el lado. */
+/* Fila que se desliza en horizontal.
+   La barra del sistema en Windows sale blanca y gruesa, pero ESCONDERLA del
+   todo es peor: con mouse quedas sin de dónde agarrar para explorar. Así que
+   se queda, delgada y con los colores del tema.
+   Sin mask-image: el degradado también desteñía la barra. */
 @utility fila-deslizante {
   overflow-x: auto;
   overscroll-behavior-x: contain;
-  scrollbar-width: none; /* Firefox */
-  -ms-overflow-style: none; /* Edge antiguo */
-  mask-image: linear-gradient(to right, #000 92%, transparent 100%);
 
+  /* Estándar (Firefox, Chrome 121+) */
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-borde) transparent;
+
+  /* WebKit antiguo */
   &::-webkit-scrollbar {
-    display: none; /* Chrome, Safari */
+    height: 6px;
   }
-}
-
-/* Kanji decorativos.
-   Se piden fuentes MINCHO (las serif japonesas, de trazo con remate) en vez
-   de dejar la gothic que el navegador elige por defecto: se ve mucho más
-   elegante y cuesta 0 KB. Self-hostear una japonesa de verdad son ~1,4 MB
-   porque arrastra todo el set CJK, y eso mata el PageSpeed que vendemos. */
-@utility kanji {
-  font-family: "Yu Mincho", "YuMincho", "Hiragino Mincho ProN",
-    "Noto Serif JP", "Songti SC", "SimSun", serif;
-  font-weight: 400;
-  writing-mode: vertical-rl;
-  letter-spacing: 0.1em;
-  line-height: 1;
-  user-select: none;
-  pointer-events: none;
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: var(--color-borde);
+    border-radius: 999px;
+  }
+  &::-webkit-scrollbar-thumb:hover {
+    background: var(--color-texto-suave);
+  }
 }
 
 /* Fuera de @layer a propósito: le gana a todas las capas. */

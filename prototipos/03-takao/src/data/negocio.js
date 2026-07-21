@@ -31,10 +31,10 @@ export const negocio = {
   // Diferenciadores que salieron de su propio Instagram y que hoy no
   // están en ninguna web de la competencia. Cada uno es una búsqueda.
   atributos: [
-    { icono: "🐾", texto: "Pet friendly" },
-    { icono: "💳", texto: "Aceptamos JUNAEB" },
-    { icono: "🍽️", texto: "Almuerzos" },
-    { icono: "🍸", texto: "Barra completa" },
+    "Pet friendly",
+    "Aceptamos JUNAEB",
+    "Almuerzos",
+    "Barra completa",
   ],
 
   // --- Ubicación (PENDIENTE: confirmar con el dueño) ---
