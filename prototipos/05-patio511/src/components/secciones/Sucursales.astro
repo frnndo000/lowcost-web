@@ -1,0 +1,98 @@
+---
+// Las dos sucursales, una al lado de la otra: dirección, ambiente, horario
+// y mapa. Cada una con su ancla (#suc-renaca / #suc-quilpue), que es a
+// donde apuntan los botones del hero.
+//
+// El mapa se arma con la búsqueda, sin API key ni costo. Cuando el dueño
+// confirme las coords exactas, este mismo embed las toma.
+import { sucursales, textoDias, consultaMapa } from "../../data/negocio.js";
+---
+
+<section id="sucursales" class="border-t border-borde">
+  <div class="mx-auto max-w-5xl px-5 py-16">
+    <header class="mb-10 text-center">
+      <p class="text-xs uppercase tracking-[0.3em] text-marca-texto">
+        Dónde estamos
+      </p>
+      <h2 class="titulo-carta mt-2 text-4xl font-semibold sm:text-5xl">
+        Dos patios
+      </h2>
+    </header>
+
+    <div class="grid gap-8 lg:grid-cols-2">
+      {
+        sucursales.map((s) => (
+          <article
+            id={`suc-${s.id}`}
+            class="scroll-ancla overflow-hidden rounded-suave border border-borde"
+          >
+            <div class="overflow-hidden border-b border-borde">
+              <iframe
+                src={`https://www.google.com/maps?q=${consultaMapa(s)}&output=embed`}
+                width="100%"
+                height="260"
+                style="border:0; display:block;"
+                loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"
+                title={`Ubicación de Patio 511 ${s.nombre}`}
+              />
+            </div>
+
+            <div class="space-y-5 p-6">
+              <div>
+                <h3 class="titulo-carta text-2xl font-semibold">{s.nombre}</h3>
+                <address class="mt-1 text-texto-suave">
+                  {s.direccion}
+                  <br />
+                  {s.comuna}, Región de Valparaíso
+                </address>
+                {s.referencia && (
+                  <p class="mt-1 text-sm text-marca-texto">{s.referencia}</p>
+                )}
+              </div>
+
+              <p class="text-sm leading-relaxed text-texto-suave">
+                {s.ambiente}
+              </p>
+
+              <div>
+                <h4 class="mb-2 text-xs uppercase tracking-widest text-texto-suave">
+                  Horario
+                </h4>
+                <ul class="space-y-1">
+                  {s.horario.map((bloque) => (
+                    <li class="flex justify-between gap-4 text-sm">
+                      <span>{textoDias(bloque.dias)}</span>
+                      <span class="tabular-nums text-texto-suave">
+                        {bloque.abre} – {bloque.cierra}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              <div class="grid grid-cols-2 gap-3">
+                <a
+                  href={`https://www.google.com/maps/search/?api=1&query=${consultaMapa(s)}`}
+                  target="_blank"
+                  rel="noopener"
+                  class="rounded-suave border border-borde px-4 py-3 text-center text-sm transition-colors hover:border-marca"
+                >
+                  Cómo llegar
+                </a>
+                <a
+                  href={`https://instagram.com/${s.instagram}`}
+                  target="_blank"
+                  rel="noopener"
+                  class="rounded-suave border border-borde px-4 py-3 text-center text-sm transition-colors hover:border-marca"
+                >
+                  @{s.instagram}
+                </a>
+              </div>
+            </div>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</section>

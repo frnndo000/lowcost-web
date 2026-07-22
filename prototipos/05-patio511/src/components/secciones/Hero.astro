@@ -1,0 +1,112 @@
+---
+// Portada. El "selector de sucursal" son dos anclas, no un toggle con
+// JavaScript: con dos locales, mostrar los dos y dejar que el visitante
+// baje al suyo es más rápido de leer y —lo que importa— deja las dos
+// direcciones visibles para Google. Un toggle escondería una de las dos.
+//
+// El fondo es una foto del local desenfocada: el negro pelado se veía
+// muerto. Desenfocada aporta color y textura sin competir con el texto,
+// y el zoom lento le da movimiento sin una línea de JavaScript.
+import { Image } from "astro:assets";
+import Logo from "../Logo.astro";
+import { negocio, sucursales } from "../../data/negocio.js";
+import { fotoHero } from "../../data/imagenes.js";
+---
+
+<section id="inicio" class="relative overflow-hidden border-b border-borde">
+  <Image
+    src={fotoHero.foto}
+    alt=""
+    aria-hidden="true"
+    width={fotoHero.ancho}
+    height={fotoHero.alto}
+    loading="eager"
+    class="hero-foto absolute inset-0 h-full w-full object-cover opacity-55 blur-[2px]"
+  />
+
+  <!-- Velos: mantienen legible el texto y funden la foto con el fondo.
+       El primero es turquesa a muy baja opacidad, para que el color de
+       marca esté en el aire y no solo en los botones. -->
+  <div class="absolute inset-0 bg-marca/12 mix-blend-overlay"></div>
+  <div
+    class="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_10%,var(--color-fondo)_88%)]"
+  >
+  </div>
+  <div class="absolute inset-0 bg-fondo/35"></div>
+
+  <div
+    class="relative mx-auto flex max-w-3xl flex-col items-center gap-6 px-5 py-20 text-center sm:py-28"
+  >
+    <Logo tamano={150} class="drop-shadow-2xl" />
+
+    <div>
+      <h1
+        class="titulo-carta text-5xl font-semibold tracking-[0.15em] drop-shadow-lg sm:text-7xl"
+      >
+        Patio 511
+      </h1>
+      <p
+        class="mt-2 text-sm uppercase tracking-[0.5em] text-marca-texto sm:text-base"
+      >
+        Sushi · Tapas · Bar
+      </p>
+    </div>
+
+    <p class="max-w-lg text-lg text-texto drop-shadow">{negocio.descripcion}</p>
+
+    <div class="mt-2 w-full">
+      <p class="mb-3 text-xs uppercase tracking-[0.3em] text-texto-suave">
+        Dos sucursales
+      </p>
+      <div class="flex flex-col gap-3 sm:flex-row sm:justify-center">
+        {
+          sucursales.map((s) => (
+            <a
+              href={`#suc-${s.id}`}
+              class="rounded-suave border border-borde bg-fondo/70 px-8 py-4 backdrop-blur-sm transition-colors hover:border-marca"
+            >
+              <span class="titulo-carta block text-xl font-semibold">
+                {s.nombre}
+              </span>
+              <span class="mt-1 block text-sm text-texto-suave">{s.comuna}</span>
+            </a>
+          ))
+        }
+      </div>
+    </div>
+
+    <div class="mt-4 flex w-full flex-col gap-3 sm:w-auto sm:flex-row">
+      <a
+        href="#pedir"
+        class="rounded-suave bg-marca px-8 py-4 text-lg font-semibold text-fondo shadow-lg shadow-marca/25 transition-colors hover:bg-marca-hover"
+      >
+        Pide aquí
+      </a>
+      <a
+        href="/carta"
+        class="rounded-suave border border-borde bg-fondo/60 px-8 py-4 text-lg font-semibold backdrop-blur-sm transition-colors hover:border-texto-suave"
+      >
+        Ver la carta
+      </a>
+    </div>
+  </div>
+</section>
+
+<style>
+  /* Zoom lentísimo, ida y vuelta. 40 segundos: se nota que la imagen
+     está viva, pero no alcanza a distraer de leer. El @media de
+     prefers-reduced-motion en global.css lo apaga solo. */
+  .hero-foto {
+    animation: respira 40s ease-in-out infinite alternate;
+    transform-origin: center 60%;
+  }
+
+  @keyframes respira {
+    from {
+      transform: scale(1.08);
+    }
+    to {
+      transform: scale(1.22);
+    }
+  }
+</style>

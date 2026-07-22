@@ -1,0 +1,89 @@
+---
+// Una sola sección de carta, usada en dos páginas: /carta (cocina) y
+// /bar (barra). Lo único que cambia entre las dos es el filtro y el tono
+// del turquesa, que lo pone el Layout con data-tono.
+//
+// Sin fotos, a propósito: son 200 ítems y las miniaturas estorbarían.
+import PlatoItem from "../PlatoItem.astro";
+import Franja from "../Franja.astro";
+import { categorias } from "../../data/carta.js";
+
+interface Props {
+  grupo: "cocina" | "bar";
+}
+
+const { grupo } = Astro.props;
+const delGrupo = categorias.filter((c) => c.grupo === grupo);
+---
+
+<!-- Índice pegajoso: con esta cantidad de ítems, poder saltar a una
+     categoría importa más que cualquier foto. Es <nav> con anclas, cero JS. -->
+<nav
+  aria-label="Categorías"
+  class="sticky top-[3.9rem] z-10 border-b border-borde bg-fondo/95 backdrop-blur"
+>
+  <ul class="fila-deslizante mx-auto flex max-w-5xl gap-2 px-5 py-3 text-sm">
+    {
+      delGrupo.map((categoria) => (
+        <li>
+          <a
+            href={`#cat-${categoria.id}`}
+            class="block whitespace-nowrap rounded-full border border-borde px-3 py-1.5 text-texto-suave transition-colors hover:border-marca hover:text-texto"
+          >
+            {categoria.nombre}
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</nav>
+
+<div class="relative overflow-hidden">
+  <Franja />
+
+  <div class="relative mx-auto max-w-3xl space-y-14 px-5 py-14">
+    {
+      delGrupo.map((categoria) => (
+        <section aria-labelledby={`cat-${categoria.id}`} class="scroll-ancla">
+          <header class="mb-4">
+            <h2
+              id={`cat-${categoria.id}`}
+              class="titulo-carta text-2xl font-semibold sm:text-3xl"
+            >
+              {categoria.nombre}
+            </h2>
+            <div class="mt-2 h-px w-14 bg-marca" />
+            {categoria.nota && (
+              <p class="mt-2 text-sm text-texto-suave">{categoria.nota}</p>
+            )}
+          </header>
+
+          {categoria.tipo === "simple" && (
+            <ul>
+              {categoria.platos.map((plato) => (
+                <PlatoItem {...plato} />
+              ))}
+            </ul>
+          )}
+
+          {categoria.tipo === "subgrupos" && (
+            <div class="space-y-6">
+              {categoria.subgrupos.map((sub) => (
+                <div>
+                  <h3 class="mb-1 text-sm font-semibold uppercase tracking-wider text-marca-texto">
+                    {sub.nombre}
+                  </h3>
+                  <ul>
+                    {sub.platos.map((plato) => (
+                      <PlatoItem {...plato} />
+                    ))}
+                  </ul>
+                </div>
+              ))}
+            </div>
+          )}
+        </section>
+      ))
+    }
+  </div>
+</div>

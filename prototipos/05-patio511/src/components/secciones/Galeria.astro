@@ -1,0 +1,57 @@
+---
+// Galería del local: el patio, la barra y el servicio. Las fotos salen
+// de `galeria` en src/data/imagenes.js y se agregan ahí, no acá.
+//
+// Si una entrada viene con `foto: null` se dibuja un placeholder rotulado
+// con lo que falta, en vez de un hueco roto. Sirvió mientras no teníamos
+// ninguna foto del local y se queda para la próxima que falte.
+import { Image } from "astro:assets";
+import { galeria } from "../../data/imagenes.js";
+---
+
+<section id="ambiente" class="border-t border-borde">
+  <div class="mx-auto max-w-5xl px-5 py-16">
+    <header class="mb-10">
+      <p class="text-xs uppercase tracking-[0.3em] text-marca-texto">
+        El lugar
+      </p>
+      <h2 class="titulo-carta mt-2 text-4xl font-semibold sm:text-5xl">
+        Ambiente
+      </h2>
+      <p class="mt-4 max-w-lg text-texto-suave">
+        De día, patio con árboles y mesas al aire libre. De noche, DJ y barra
+        hasta tarde.
+      </p>
+    </header>
+
+    <ul class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      {
+        galeria.map((item) => (
+          <li class="aspect-4/3 overflow-hidden rounded-suave border border-borde">
+            {item.foto ? (
+              <Image
+                src={item.foto}
+                alt={item.alt}
+                widths={[400, 800]}
+                sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+                class="h-full w-full object-cover"
+              />
+            ) : (
+              <div class="flex h-full flex-col items-center justify-center gap-2 border-2 border-dashed border-marca/40 bg-superficie p-4 text-center">
+                <span class="text-2xl" aria-hidden="true">
+                  📷
+                </span>
+                <span class="text-xs uppercase tracking-widest text-marca-texto">
+                  Falta foto
+                </span>
+                <span class="text-sm leading-snug text-texto-suave">
+                  {item.pedir}
+                </span>
+              </div>
+            )}
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>

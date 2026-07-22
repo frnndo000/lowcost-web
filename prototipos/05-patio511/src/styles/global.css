@@ -1,0 +1,148 @@
+@import "tailwindcss";
+
+/* =========================================================
+   TEMA PATIO 511 — negro y verde agua.
+   Los tres colores salen de la carta oficial, muestreados del PDF:
+   negro #010302, turquesa #00A29B, blanco #FFFFFD. No hay un cuarto
+   color de acento: la identidad es minimalista y así se queda.
+
+   Los tokens se llaman por SU ROL, no por su color: `--color-marca`,
+   no `--color-turquesa`. Así el próximo cliente cambia estas ocho
+   líneas y no 26 clases repartidas por los componentes.
+   ========================================================= */
+@theme {
+  --color-fondo: #010302; /* negro de la carta */
+  --color-superficie: #0c1211; /* tarjetas y bloques, con un dejo verde */
+  --color-borde: #1e2b29; /* líneas sutiles */
+  --color-texto: #fffffd;
+  --color-texto-suave: #9aa8a6;
+
+  /* El turquesa oficial. Solo superficies, líneas y fondos: sobre negro
+     da 4,1:1 y WCAG pide 4,5:1 para texto chico. */
+  --color-marca: #00a29b;
+  --color-marca-hover: #00817c;
+  /* Mismo matiz, más claro (7,3:1): este es el que puede llevar texto. */
+  --color-marca-texto: #2fd5cc;
+  /* Los precios van en blanco, como en la carta impresa. */
+  --color-precio: #fffffd;
+
+  --font-sans: "Jost Variable", system-ui, sans-serif;
+  --font-display: "Jost Variable", system-ui, sans-serif;
+
+  --radius-suave: 0.75rem;
+}
+
+@layer base {
+  body {
+    background-color: var(--color-fondo);
+    color: var(--color-texto);
+    font-family: var(--font-sans);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display);
+    line-height: 1.1;
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  /* Foco visible en todo lo que se navega con teclado. */
+  :focus-visible {
+    outline: 2px solid var(--color-marca-texto);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  address {
+    font-style: normal;
+  }
+
+  /* Con dos barras pegajosas encima (header + índice de categorías),
+     un ancla sin margen deja el título escondido debajo. */
+  :target,
+  .scroll-ancla {
+    scroll-margin-top: 8rem;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  /* La flecha por defecto del acordeón. Vive acá y en ningún otro lado. */
+  summary {
+    list-style: none;
+  }
+  summary::-webkit-details-marker {
+    display: none;
+  }
+}
+
+/* Títulos al estilo de la carta: mayúsculas, muy espaciadas. */
+@utility titulo-carta {
+  font-family: var(--font-display);
+  font-weight: 300;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+}
+
+/* La página del bar respira más oscuro: mismo turquesa, más apagado,
+   para separar el día (comida) de la noche (barra) sin inventar colores.
+   Se aplica en <body data-tono="noche"> desde el Layout. */
+@layer base {
+  [data-tono="noche"] {
+    --color-marca: #007a75;
+    --color-marca-hover: #005c58;
+    --color-marca-texto: #21b3ab;
+    --color-superficie: #080d0d;
+  }
+}
+
+/* Fila que se desliza en horizontal.
+   La barra del sistema en Windows sale blanca y gruesa, pero esconderla
+   del todo es peor: con mouse quedas sin de dónde agarrar para explorar. */
+@utility fila-deslizante {
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-borde) transparent;
+
+  &::-webkit-scrollbar {
+    height: 6px;
+  }
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: var(--color-borde);
+    border-radius: 999px;
+  }
+  &::-webkit-scrollbar-thumb:hover {
+    background: var(--color-texto-suave);
+  }
+}
+
+/* Fuera de @layer a propósito: le gana a todas las capas. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

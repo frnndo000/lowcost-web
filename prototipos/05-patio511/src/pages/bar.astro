@@ -1,0 +1,26 @@
+---
+// Misma carta, otro grupo y `tono="noche"`: el turquesa baja de brillo y
+// sube de saturación para separar el día de la noche sin inventar colores.
+import Layout from "../layouts/Layout.astro";
+import Carta from "../components/secciones/Carta.astro";
+import PideAqui from "../components/secciones/PideAqui.astro";
+import { negocio } from "../data/negocio.js";
+---
+
+<Layout
+  tono="noche"
+  titulo={`Bar — ${negocio.nombre}, Reñaca y Quilpué`}
+  descripcion="Barra de Patio 511: sours, mojitos, sangría, spritz, clásicos, combinados, vinos, cervezas y cafetería. Reñaca y Quilpué."
+>
+  <header class="border-b border-borde px-5 py-12 text-center">
+    <p class="text-xs uppercase tracking-[0.3em] text-marca-texto">Barra</p>
+    <h1 class="titulo-carta mt-2 text-4xl font-semibold sm:text-5xl">Bar</h1>
+    <p class="mx-auto mt-4 max-w-lg text-texto-suave">
+      Sours de la casa, mojitos, sangría y coctelería hasta las 02:00 los fines
+      de semana. Venta de alcohol solo a mayores de 18 años.
+    </p>
+  </header>
+
+  <Carta grupo="bar" />
+  <PideAqui />
+</Layout>

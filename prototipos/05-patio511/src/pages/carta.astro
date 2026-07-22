@@ -1,0 +1,23 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Carta from "../components/secciones/Carta.astro";
+import PideAqui from "../components/secciones/PideAqui.astro";
+import { negocio } from "../data/negocio.js";
+---
+
+<Layout
+  titulo={`Carta — ${negocio.nombre}, Reñaca y Quilpué`}
+  descripcion="Carta completa de Patio 511: tapas y montaditos, quesadillas, ceviches, sushi, tablas para compartir, platos de fondo, ensaladas y postres."
+>
+  <header class="border-b border-borde px-5 py-12 text-center">
+    <p class="text-xs uppercase tracking-[0.3em] text-marca-texto">Cocina</p>
+    <h1 class="titulo-carta mt-2 text-4xl font-semibold sm:text-5xl">Carta</h1>
+    <p class="mx-auto mt-4 max-w-lg text-texto-suave">
+      Los mismos precios en las dos sucursales. Pidiendo por WhatsApp no pagas
+      comisión de app.
+    </p>
+  </header>
+
+  <Carta grupo="cocina" />
+  <PideAqui />
+</Layout>

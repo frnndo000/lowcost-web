@@ -1,0 +1,64 @@
+---
+// La portada sí lleva fotos: en gastronomía la foto es el producto.
+// Las listas de /carta y /bar van sin ellas a propósito.
+//
+// Nada escondido tras hover: todo el texto se lee siempre, también en móvil.
+import { Image } from "astro:assets";
+import { destacados, clp } from "../../data/carta.js";
+import { fotoDestacado } from "../../data/imagenes.js";
+---
+
+<section id="destacados" class="mx-auto max-w-5xl px-5 py-16">
+  <header class="mb-10">
+    <p class="text-xs uppercase tracking-[0.3em] text-marca-texto">
+      Recomendados
+    </p>
+    <h2 class="titulo-carta mt-2 text-4xl font-semibold sm:text-5xl">
+      Lo que más piden
+    </h2>
+  </header>
+
+  <ul class="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+    {
+      destacados.map((item) => {
+        const imagen = fotoDestacado[item.id];
+        return (
+          <li>
+            <a
+              href={item.donde}
+              class="group flex h-full flex-col overflow-hidden rounded-suave border border-borde bg-superficie transition-colors hover:border-marca"
+            >
+              <div class="aspect-4/3 overflow-hidden">
+                <Image
+                  src={imagen.foto}
+                  alt={imagen.alt}
+                  widths={[300, 600]}
+                  sizes="(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw"
+                  class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                />
+              </div>
+
+              <div class="flex flex-1 flex-col gap-1 p-5">
+                <div class="flex items-baseline justify-between gap-3">
+                  <h3 class="titulo-carta text-lg font-semibold">
+                    {item.titulo}
+                  </h3>
+                  <span class="shrink-0 font-semibold tabular-nums text-precio">
+                    {clp(item.precio)}
+                  </span>
+                </div>
+                <p class="text-sm leading-snug text-texto-suave">{item.texto}</p>
+                <span class="mt-auto pt-3 text-sm text-marca-texto">
+                  Ver en la carta{" "}
+                  <span class="ml-0.5 inline-block transition-transform group-hover:translate-x-1">
+                    →
+                  </span>
+                </span>
+              </div>
+            </a>
+          </li>
+        );
+      })
+    }
+  </ul>
+</section>

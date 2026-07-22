@@ -1,0 +1,87 @@
+---
+import { negocio, sucursales, textoDias, linkWhatsapp } from "../data/negocio.js";
+
+// El horario es el mismo en ambas sucursales, así que se muestra una vez.
+// Si algún día difieren, esto pasa a ir dentro de la tarjeta de cada una.
+const horario = sucursales[0].horario;
+const mismoHorario = sucursales.every(
+  (s) => JSON.stringify(s.horario) === JSON.stringify(horario),
+);
+---
+
+<footer class="border-t border-borde bg-superficie">
+  <div class="mx-auto grid max-w-5xl gap-8 px-5 py-12 sm:grid-cols-3">
+    <div class="space-y-2">
+      <p class="titulo-carta text-lg font-semibold tracking-[0.2em]">
+        Patio 511
+      </p>
+      <p class="text-sm text-texto-suave">{negocio.bajada}</p>
+      <p class="text-sm text-texto-suave">Región de {negocio.region}, Chile</p>
+    </div>
+
+    {
+      sucursales.map((s) => (
+        <div class="space-y-1">
+          <h2 class="mb-2 text-xs uppercase tracking-widest text-marca-texto">
+            {s.nombre}
+          </h2>
+          <address class="text-sm text-texto-suave">
+            {s.direccion}
+            <br />
+            {s.comuna}
+          </address>
+          <p>
+            <a
+              href={linkWhatsapp(s)}
+              target="_blank"
+              rel="noopener"
+              class="text-sm transition-colors hover:text-marca-texto"
+            >
+              WhatsApp +{s.whatsapp}
+            </a>
+          </p>
+          <p>
+            <a
+              href={`https://instagram.com/${s.instagram}`}
+              target="_blank"
+              rel="noopener"
+              class="text-sm text-texto-suave transition-colors hover:text-texto"
+            >
+              @{s.instagram}
+            </a>
+          </p>
+        </div>
+      ))
+    }
+  </div>
+
+  {
+    mismoHorario && (
+      <div class="mx-auto max-w-5xl px-5 pb-10">
+        <h2 class="mb-2 text-xs uppercase tracking-widest text-texto-suave">
+          Horario · ambas sucursales
+        </h2>
+        <ul class="grid gap-x-8 gap-y-1 sm:grid-cols-2 lg:grid-cols-4">
+          {horario.map((bloque) => (
+            <li class="flex justify-between gap-4 text-sm">
+              <span class="text-texto">{textoDias(bloque.dias)}</span>
+              <span class="tabular-nums text-texto-suave">
+                {bloque.abre} – {bloque.cierra}
+              </span>
+            </li>
+          ))}
+        </ul>
+        <p class="mt-2 text-xs text-texto-suave">
+          La cocina y la barra cierran un poco antes.
+        </p>
+      </div>
+    )
+  }
+
+  <div
+    class="border-t border-borde px-5 py-6 text-center text-xs text-texto-suave"
+  >
+    <p>&copy; {new Date().getFullYear()} {negocio.nombre} · Reñaca y Quilpué</p>
+    <p class="mt-1">Venta de alcohol solo a mayores de 18 años.</p>
+  </div>
+</footer>
