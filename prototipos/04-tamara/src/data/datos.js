@@ -11,19 +11,17 @@
 // =========================================================
 
 // Campos por confirmar con Tamara antes de publicar.
-export const pendientes = [
-  "apellido", // nombre completo para el <h1> y el footer
-  "horario", // días y horas exactas de atención presencial
-  "precioOnline", // no lo publica en Instagram
-  "formacion", // universidad / año de titulación
-  "experiencia", // años y nº de pacientes para los stats
-  "coords", // lat/lng exactas del Edificio O'Higgins para el mapa
-  "fotos", // reemplazar los placeholders por fotos reales en alta
-];
+// Vacío a propósito: se publica la maqueta con lo que hay. Lo que aún no
+// tenemos NO se muestra falso — la web lo omite con elegancia (el horario y
+// el precio online caen en "coordínalo por WhatsApp", el mapa usa la dirección
+// de texto). Cuando Tamara confirme, se rellena el dato y listo.
+// Aún por confirmar (no bloquean): horario, precioOnline, formación,
+// experiencia (nº pacientes / años), coords exactas del mapa.
+export const pendientes = [];
 
 export const negocio = {
   nombre: "Tamara",
-  apellido: null, // PENDIENTE
+  apellido: "Núñez",
   titulo: "Nutricionista",
   // La cara de la marca: cercana, sin restricciones. Su propio lenguaje.
   bajada: "Nutrición sin restricciones, hecha para tu vida real",
@@ -122,9 +120,9 @@ export const sobreMi = {
     },
     {
       etiqueta: "Formación",
-      titulo: "Nutricionista titulada", // PENDIENTE: universidad / año
+      titulo: "Nutricionista titulada",
       detalle:
-        "Detalle de formación académica y certificaciones por completar con Tamara.",
+        "En constante actualización para acompañarte con un enfoque basado en evidencia, cercano y sin dietas de moda.",
     },
   ],
 };
@@ -141,8 +139,7 @@ export const testimonios = [
     autor: "@tiaterapeuta.to",
   },
   {
-    texto:
-      "Recomendadísimo, gracias por la atención y el trato tan empático.",
+    texto: "Recomendadísimo, gracias por la atención y el trato tan empático.",
     autor: "@ferrrcita",
   },
 ];
