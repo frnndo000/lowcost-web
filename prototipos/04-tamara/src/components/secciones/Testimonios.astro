@@ -1,0 +1,25 @@
+---
+import { testimonios } from "../../data/datos.js";
+---
+<section id="testimonios" class="bg-marca-suave py-28 px-6">
+  <div class="max-w-6xl mx-auto">
+
+    <div class="max-w-2xl mb-14">
+      <p class="text-marca text-xs font-semibold uppercase tracking-widest mb-4">Testimonios</p>
+      <h2 class="text-neutral-900 font-display font-semibold text-4xl md:text-5xl leading-tight">
+        Lo que dicen mis pacientes
+      </h2>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+      {testimonios.map(t => (
+        <figure class="bg-white border border-neutral-200 rounded-3xl p-8 flex flex-col">
+          <div class="text-marca text-4xl font-display leading-none mb-4" aria-hidden="true">“</div>
+          <blockquote class="text-neutral-700 leading-relaxed mb-6 grow">{t.texto}</blockquote>
+          <figcaption class="text-sm font-semibold text-neutral-900">{t.autor}</figcaption>
+        </figure>
+      ))}
+    </div>
+
+  </div>
+</section>

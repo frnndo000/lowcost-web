@@ -1,0 +1,29 @@
+@import "tailwindcss";
+
+/* =========================================================
+   IDENTIDAD TAMARA — rosa/magenta + morado, base clara.
+   Tomada de su Instagram (@nutricionista.tamara).
+
+   Los tokens se llaman por SU ROL, no por su color (`--color-marca`,
+   no `--color-rosa`). Así el próximo cliente cambia estas líneas y
+   no las clases repartidas por los componentes.
+   ========================================================= */
+@theme {
+  /* Magenta principal. Texto blanco encima da 5,9:1 (WCAG ok para botones)
+     y sobre blanco da el mismo contraste para etiquetas y links. */
+  --color-marca: #be185d;
+  --color-marca-suave: #fce7f0; /* fondos tenues (equiv. al emerald-50 de Isaac) */
+  --color-acento: #7b3fa0; /* morado de acento — marcos y detalles */
+
+  /* Serif elegante para títulos, sans limpia para el cuerpo. */
+  --font-display: "Fraunces", Georgia, serif;
+  --font-sans: "Inter", system-ui, sans-serif;
+}
+
+/* Oculta la flechita por defecto del acordeón (<summary>). */
+summary::-webkit-details-marker {
+  display: none;
+}
+summary::marker {
+  content: "";
+}

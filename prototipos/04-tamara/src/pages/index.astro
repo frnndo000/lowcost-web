@@ -1,0 +1,23 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Hero from '../components/secciones/Hero.astro';
+import Servicios from '../components/secciones/Servicios.astro';
+import SobreMi from '../components/secciones/SobreMi.astro';
+import Testimonios from '../components/secciones/Testimonios.astro';
+import Contacto from '../components/secciones/Contacto.astro';
+import Footer from '../components/Footer.astro';
+import Faq from '../components/secciones/Faq.astro';
+import BotonWhatsapp from '../components/BotonWhatsapp.astro';
+import { nombreCompleto } from '../data/datos.js';
+---
+<Layout titulo={`${nombreCompleto} · Nutricionista en Viña del Mar`}>
+  <Hero />
+  <Servicios />
+  <SobreMi />
+  <Testimonios />
+  <Faq />
+  <Contacto />
+  <Footer />
+
+  <BotonWhatsapp />
+</Layout>

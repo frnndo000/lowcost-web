@@ -1,0 +1,24 @@
+---
+import { negocio, wa } from "../data/datos.js";
+---
+<header class="fixed top-0 inset-x-0 z-50 bg-white/80 backdrop-blur-md border-b border-neutral-200">
+  <div class="max-w-6xl mx-auto flex items-center justify-between px-6 py-4">
+    <a href="#inicio" class="text-neutral-900 font-display font-semibold text-lg tracking-tight">
+      {negocio.nombre} <span class="text-neutral-400 font-normal font-sans">· {negocio.titulo}</span>
+    </a>
+    <nav class="hidden md:flex items-center gap-6">
+      <a href="#servicio" class="text-sm text-neutral-600 hover:text-neutral-900 transition-colors">Servicio</a>
+      <a href="#sobre-mi" class="text-sm text-neutral-600 hover:text-neutral-900 transition-colors">Sobre mí</a>
+      <a href="#testimonios" class="text-sm text-neutral-600 hover:text-neutral-900 transition-colors">Testimonios</a>
+      <a href="#faq" class="text-sm text-neutral-600 hover:text-neutral-900 transition-colors">Preguntas frecuentes</a>
+      <a href={wa()} target="_blank" rel="noopener"
+         class="bg-marca text-white px-6 py-2.5 rounded-full text-sm font-semibold hover:bg-acento transition-colors">
+        Agendar hora
+      </a>
+    </nav>
+    <a href={wa()} target="_blank" rel="noopener"
+       class="md:hidden bg-marca text-white px-5 py-2 rounded-full text-xs font-semibold">
+      Agendar
+    </a>
+  </div>
+</header>

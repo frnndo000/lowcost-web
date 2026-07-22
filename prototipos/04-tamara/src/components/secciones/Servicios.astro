@@ -1,0 +1,116 @@
+---
+import { sesiones, wa, clp } from "../../data/datos.js";
+
+const pilares = [
+  {
+    numero: "01",
+    titulo: "Evaluación real",
+    texto: "Mido tu composición corporal con antropometría y bioimpedancia (BodyPro), y conversamos tus hábitos y objetivos."
+  },
+  {
+    numero: "02",
+    titulo: "Un plan a tu medida",
+    texto: "Adaptado a tu rutina, tus horarios y lo que de verdad te gusta comer. Sin prohibiciones absurdas."
+  },
+  {
+    numero: "03",
+    titulo: "Acompañamiento",
+    texto: "Nos vemos en controles para ajustar el plan y sostener los cambios en el tiempo, no solo tres semanas."
+  }
+];
+
+const modalidades = [sesiones.presencial, sesiones.online];
+---
+<section id="servicio" class="bg-neutral-50 py-28 px-6">
+  <div class="max-w-6xl mx-auto">
+
+    <div class="max-w-2xl mb-16">
+      <p class="text-marca text-xs font-semibold uppercase tracking-widest mb-4">Servicio</p>
+      <h2 class="text-neutral-900 font-display font-semibold text-4xl md:text-5xl leading-tight mb-6">
+        Atención personalizada
+      </h2>
+      <p class="text-neutral-600 text-lg leading-relaxed">
+        Un espacio seguro y enfocado en tu caso, según tus necesidades y tu ritmo.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+      {pilares.map(p => (
+        <article class="group relative bg-white border border-neutral-200 rounded-3xl p-8
+                        transition-all duration-500 hover:border-marca/30 hover:shadow-lg hover:-translate-y-1">
+
+          <span class="absolute top-8 right-8 text-6xl font-display font-semibold text-neutral-100
+                       transition-colors duration-500 group-hover:text-marca-suave">
+            {p.numero}
+          </span>
+
+          <div class="relative">
+            <div class="w-10 h-10 rounded-full bg-marca/10 flex items-center justify-center mb-5
+                        transition-all duration-500 group-hover:bg-marca group-hover:scale-110">
+              <span class="text-marca group-hover:text-white transition-colors duration-500">✓</span>
+            </div>
+            <h3 class="text-xl font-bold text-neutral-900 mb-3">{p.titulo}</h3>
+            <p class="text-neutral-600 leading-relaxed text-sm max-w-sm">{p.texto}</p>
+          </div>
+
+          <div class="absolute bottom-0 left-8 right-8 h-px bg-marca scale-x-0 origin-left
+                      group-hover:scale-x-100 transition-transform duration-700"></div>
+        </article>
+      ))}
+    </div>
+
+    <!-- Modalidades y valores -->
+    <div class="mt-16 grid md:grid-cols-2 gap-6 items-stretch">
+      {modalidades.map(m => (
+        <div class="bg-white border border-neutral-200 rounded-3xl p-8 flex flex-col
+                    hover:border-marca hover:-translate-y-1 transition-all duration-300">
+          <p class="text-[11px] uppercase tracking-widest text-marca mb-2">{m.titulo}</p>
+          <p class="text-neutral-500 text-sm mb-6">{m.lugar}</p>
+
+          {m.precios ? (
+            <div class="space-y-2 mb-6">
+              {m.precios.map(pr => (
+                <div class="flex items-baseline justify-between gap-3 border-b border-neutral-100 pb-2">
+                  <span class="text-neutral-700 text-sm">{pr.nombre}</span>
+                  <span class="font-display font-semibold text-2xl text-neutral-900">{clp(pr.valor)}</span>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <div class="mb-6">
+              <span class="font-display font-semibold text-2xl text-neutral-900">Consúltalo por WhatsApp</span>
+              <p class="text-neutral-500 text-sm mt-1">Coordinamos el valor y la modalidad.</p>
+            </div>
+          )}
+
+          <ul class="space-y-3 text-sm text-neutral-700 mb-6">
+            {m.incluye.map(item => (
+              <li class="flex gap-3">
+                <span class="text-marca shrink-0">✓</span>
+                {item}
+              </li>
+            ))}
+          </ul>
+
+          <p class="text-neutral-400 text-xs mt-auto">{m.nota}</p>
+        </div>
+      ))}
+    </div>
+
+    <!-- CTA -->
+    <div class="mt-6 bg-marca rounded-3xl p-10 md:p-14 flex flex-col justify-center text-center">
+      <p class="text-white text-2xl md:text-3xl font-display font-semibold mb-4 leading-snug">
+        Es momento de invertir en ti.
+      </p>
+      <p class="text-white/80 mb-8 max-w-md mx-auto">
+        Estás a un paso de lograr lo que te propones y ver cambios que se mantienen.
+      </p>
+      <a href={wa()} target="_blank" rel="noopener"
+         class="group inline-flex items-center justify-center gap-2 bg-white text-marca px-8 py-4 rounded-full font-semibold hover:bg-neutral-100 transition-colors mx-auto">
+        Agendar por WhatsApp
+        <span class="transition-transform group-hover:translate-x-1">→</span>
+      </a>
+    </div>
+
+  </div>
+</section>

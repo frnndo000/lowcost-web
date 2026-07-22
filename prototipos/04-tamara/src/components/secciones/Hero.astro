@@ -1,0 +1,90 @@
+---
+import { Image } from "astro:assets";
+import tamara from "../../assets/tamara.jpg";
+import { negocio, nombreCompleto, wa } from "../../data/datos.js";
+---
+<section id="inicio" class="relative min-h-screen flex items-center bg-white pt-24 pb-16 overflow-hidden">
+
+  <!-- FOTO DE FONDO (solo móvil) -->
+  <div id="hero-foto" class="absolute inset-0 md:hidden will-change-transform">
+  <Image src={tamara}
+       alt=""
+       aria-hidden="true"
+       loading="eager"
+       class="w-full h-full object-cover object-[center_15%]" />
+  <!-- Velo: sólido abajo, transparente arriba para que el rostro se vea -->
+  <div class="absolute inset-0"
+     style="background: linear-gradient(to top, #fff 0%, #fff 34%, rgba(255,255,255,0.55) 45%, rgba(255,255,255,0) 58%);">
+</div>
+</div>
+
+  <div class="relative z-10 max-w-6xl mx-auto px-6 grid md:grid-cols-2 gap-8 md:gap-16 items-center w-full pt-[45vh] md:pt-0">
+
+    <!-- TEXTO -->
+    <div>
+      <h1 class="font-display text-neutral-900 leading-[1.02] text-5xl md:text-7xl mb-6 font-semibold">
+        Nutrición<br />
+        <span class="text-marca italic">sin restricciones</span>
+      </h1>
+
+      <p class="inline-flex items-center gap-2 text-marca text-xs font-semibold uppercase tracking-widest mb-6">
+        <span class="w-8 h-px bg-marca"></span>
+        Viña del Mar · Presencial y online
+      </p>
+
+      <p class="text-neutral-700 text-lg leading-relaxed max-w-md mb-10">
+        {negocio.descripcion}
+      </p>
+
+      <div class="flex flex-col sm:flex-row gap-4">
+        <a href={wa()} target="_blank" rel="noopener"
+           class="group bg-marca text-white px-8 py-4 rounded-full font-semibold
+                  hover:bg-acento transition-all inline-flex items-center justify-center gap-2 shadow-lg">
+          Agendar mi consulta
+          <span class="transition-transform group-hover:translate-x-1">→</span>
+        </a>
+        <a href="#servicio"
+           class="border border-neutral-300 bg-white/70 backdrop-blur-sm text-neutral-900 px-8 py-4 rounded-full font-semibold
+                  hover:border-neutral-900 transition-all text-center">
+          Cómo funciona
+        </a>
+      </div>
+    </div>
+
+    <!-- FOTO CON MARCO (solo escritorio) -->
+    <div class="relative hidden md:block">
+      <div class="absolute -inset-6 bg-marca-suave rounded-[3rem] -rotate-3"></div>
+      <Image src={tamara}
+       alt={`${nombreCompleto}, nutricionista en Viña del Mar`}
+       loading="eager"
+       class="relative w-full aspect-4/5 object-cover rounded-4xl shadow-xl" />
+    </div>
+
+  </div>
+</section>
+
+<script>
+  const foto = document.getElementById('hero-foto');
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  if (foto && !reduceMotion) {
+    let ticking = false;
+
+    const actualizar = () => {
+      const y = window.scrollY;
+      const avance = Math.min(y / window.innerHeight, 1);
+      foto.style.opacity = `${1 - avance}`;
+      foto.style.transform = `translate3d(0, ${y * 0.3}px, 0)`;
+      ticking = false;
+    };
+
+    window.addEventListener('scroll', () => {
+      if (!ticking) {
+        requestAnimationFrame(actualizar);
+        ticking = true;
+      }
+    }, { passive: true });
+
+    actualizar();
+  }
+</script>

@@ -1,0 +1,71 @@
+---
+import { negocio, nombreCompleto, wa } from "../data/datos.js";
+const anio = new Date().getFullYear();
+const { ubicacion, instagram } = negocio;
+const instagramUrl = `https://www.instagram.com/${instagram}/`;
+---
+<footer class="bg-neutral-900 text-white pt-20 pb-10 px-6">
+  <div class="max-w-6xl mx-auto">
+
+    <!-- CTA final -->
+    <div class="border-b border-neutral-800 pb-14 mb-14 flex flex-col md:flex-row md:items-end justify-between gap-8">
+      <div>
+        <h2 class="font-display font-semibold text-4xl md:text-5xl leading-none mb-3">
+          ¿Empezamos?
+        </h2>
+        <p class="text-neutral-400 max-w-md">
+          Agenda tu consulta y demos el primer paso hacia un plan que sí puedas mantener.
+        </p>
+      </div>
+      <a href={wa()} target="_blank" rel="noopener"
+         class="group shrink-0 inline-flex items-center gap-2 bg-marca text-white px-8 py-4 rounded-full font-semibold hover:bg-acento transition-colors">
+        Agendar hora
+        <span class="transition-transform group-hover:translate-x-1">→</span>
+      </a>
+    </div>
+
+    <!-- Columnas -->
+    <div class="grid md:grid-cols-4 gap-10 mb-14">
+
+      <div class="md:col-span-2">
+        <p class="font-display font-semibold text-xl mb-2">{negocio.nombre} <span class="text-neutral-500 font-normal font-sans">· {negocio.titulo}</span></p>
+        <p class="text-neutral-400 text-sm leading-relaxed max-w-xs">
+          Nutrición sin restricciones, enfocada en tus hábitos y tu composición corporal.
+          Atención presencial en Viña del Mar y online.
+        </p>
+      </div>
+
+      <div>
+        <p class="text-[11px] uppercase tracking-widest text-neutral-500 mb-4">Navegación</p>
+        <nav class="flex flex-col gap-2.5 text-sm">
+          <a href="#servicio" class="text-neutral-300 hover:text-white transition-colors">Servicio</a>
+          <a href="#sobre-mi" class="text-neutral-300 hover:text-white transition-colors">Sobre mí</a>
+          <a href="#testimonios" class="text-neutral-300 hover:text-white transition-colors">Testimonios</a>
+          <a href="#faq" class="text-neutral-300 hover:text-white transition-colors">Preguntas frecuentes</a>
+          <a href="#contacto" class="text-neutral-300 hover:text-white transition-colors">Contacto</a>
+        </nav>
+      </div>
+
+      <div>
+        <p class="text-[11px] uppercase tracking-widest text-neutral-500 mb-4">Contacto</p>
+        <nav class="flex flex-col gap-2.5 text-sm">
+          <a href={wa()} target="_blank" rel="noopener"
+             class="text-neutral-300 hover:text-white transition-colors">WhatsApp</a>
+          <a href={instagramUrl} target="_blank" rel="noopener"
+             class="text-neutral-300 hover:text-white transition-colors">@{instagram}</a>
+          <span class="text-neutral-500">{ubicacion.edificio}</span>
+          <span class="text-neutral-500">{ubicacion.comuna}, Chile</span>
+        </nav>
+      </div>
+    </div>
+
+    <!-- Línea final -->
+    <div class="border-t border-neutral-800 pt-8 flex flex-col md:flex-row justify-between gap-4 text-xs text-neutral-500">
+      <p>© {anio} · {nombreCompleto}. Todos los derechos reservados.</p>
+      <p>
+        Sitio por <a href="#" class="text-neutral-400 hover:text-white transition-colors underline underline-offset-4">Hustlewebs</a>
+      </p>
+    </div>
+
+  </div>
+</footer>
