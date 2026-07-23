@@ -98,4 +98,9 @@ el sitio equivocado con todo el repo (node_modules, .git) como assets. Ver
 - **PDFs de carta sin capa de texto:** las cartas oficiales suelen venir vectorizadas (0 fuentes,
   todo curvas). No se puede extraer texto; hay que renderizar las páginas a imagen (pymupdf, 170-200
   DPI) y transcribir a ojo. Precios de 5 dígitos: verificar, no adivinar.
+- **Cascada de Tailwind v4 (`@utility` vs `@layer`):** un `@utility` (ej. `titulo-carta`) vive en la
+  capa `utilities`, que por ORDEN DE CAPA le gana a cualquier regla dentro de `@layer base`, aunque
+  el selector sea más específico. Para sobrescribir un `@utility` (ej. poner el título en mayúsculas
+  bajo `[data-tono="noche"]`), la regla debe ir SIN capa: lo no-capado le gana a todas las capas.
+  Mismo truco que usa el bloque de `prefers-reduced-motion` al final de `global.css`.
 - **Idioma:** todo el contenido, comentarios y nombres de commit van en español chileno.
