@@ -38,7 +38,15 @@ const tarjetas = [
 ];
 ---
 
-<section class="mx-auto max-w-5xl px-5 py-16">
+<section class="mx-auto max-w-5xl px-5 py-16 sm:py-20">
+  <header class="mb-10 max-w-xl">
+    <h2 class="titulo-carta text-titulo">La carta completa</h2>
+    <p class="mt-3 text-texto-suave">
+      Esos eran los más pedidos. Acá está todo: la cocina y la barra, cada una
+      por su lado.
+    </p>
+  </header>
+
   <ul class="grid gap-5 sm:grid-cols-2">
     {
       tarjetas.map((t) => (

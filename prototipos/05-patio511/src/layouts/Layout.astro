@@ -1,7 +1,6 @@
 ---
 // Marco de todas las páginas: el <head> completo, el header y el footer.
 // El contenido único de cada página entra por el <slot />.
-import "@fontsource-variable/jost";
 import "../styles/global.css";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
@@ -34,6 +33,24 @@ const ogImagen = new URL(negocio.seo.ogImagen, Astro.site);
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Fuentes autohospedadas: las dos van sobre el fold (Hanken es el
+         body, Bricolage es el H1 del hero), así que se precargan. -->
+    <link
+      rel="preload"
+      href="/fonts/hanken-grotesk-latin.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="/fonts/bricolage-grotesque-latin.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+
     <title>{titulo}</title>
     <meta name="description" content={descripcion} />
     <link rel="canonical" href={canonical} />

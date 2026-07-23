@@ -22,7 +22,6 @@ import sangriaBarra from "../assets/platos/sangria-barra.jpg";
 import iconoRappi from "../assets/apps/rappi.png";
 import iconoPedidosya from "../assets/apps/pedidosya.png";
 import patioNoche from "../assets/local/patio-noche.jpg";
-import servicioDia from "../assets/local/servicio-dia.jpg";
 import servicioNoche from "../assets/local/servicio-noche.jpg";
 import barra from "../assets/local/barra.jpg";
 
@@ -46,16 +45,36 @@ export const fotoDestacado = {
   },
 };
 
-/** Fondo del hero: el patio de Reñaca de noche con las guirnaldas.
- *  Es la foto que mejor vende el lugar y la de mejor resolución que
- *  tenemos (1080×1080), así que se sirve a su tamaño nativo. La anterior
- *  era de 828 px y el navegador la estiraba a 1200: se veía pixelada.
- *  Por eso NO está en la galería — se vería la misma foto dos veces. */
-export const fotoHero = {
-  foto: patioNoche,
-  ancho: 1080,
-  alto: 1080,
-};
+/** Carrusel del hero: las 4 fotos del local, apiladas y con crossfade CSS
+ *  (ver Hero.astro). Reemplazó a la sección "Ambiente", que como bloque
+ *  aparte no cuajaba; acá las mismas fotos son el fondo con más personalidad
+ *  de la portada.
+ *
+ *  Orden: las oscuras primero. La primera es el LCP y la que se ve al
+ *  cargar, así que el patio de noche —oscuro y el que mejor vende— deja el
+ *  texto bien legible de entrada. La de servicio de día es la más clara y
+ *  va al final. `ancho`/`alto` son los reales de cada archivo, para que
+ *  Astro no deforme ni haga upscale. */
+export const fotosHero = [
+  {
+    foto: patioNoche,
+    ancho: 1080,
+    alto: 1080,
+    alt: "Patio de Reñaca de noche, con guirnaldas de luces entre los árboles",
+  },
+  {
+    foto: barra,
+    ancho: 1440,
+    alto: 1149,
+    alt: "Bartender sirviendo dos sours desde las cocteleras",
+  },
+  {
+    foto: servicioNoche,
+    ancho: 1080,
+    alto: 720,
+    alt: "Bandeja con montaditos de salmón, quesadillas y papas fritas de noche",
+  },
+];
 
 /** Las dos tarjetas que llevan a /carta y a /bar. */
 export const fotoCarta = {
@@ -81,34 +100,3 @@ export const iconoApp = {
 /** El logo, como asset de Astro para que salga en webp y al tamaño justo.
  *  Es el sello circular recortado de la portada de la carta oficial. */
 export const logo = logoPatio;
-
-// =========================================================
-// GALERÍA — el local, no los platos.
-//
-// El orden cuenta la historia del día: llega la tarde, se prende el
-// patio, se arma la barra, sale la comida. La del patio de noche va
-// primera porque es la que mejor vende el lugar.
-//
-// Son tres y no cuatro a propósito: la del patio de noche se fue al
-// hero, y repetirla acá abajo se notaba al hacer scroll. Tres tarjetas
-// más grandes se ven mejor que cuatro chicas.
-//
-// Si algún día se agrega una foto sin tener el archivo todavía, dejar
-// `foto: null` y llenar `pedir`: la tarjeta se dibuja como un
-// placeholder rotulado en vez de un hueco roto (ver Galeria.astro).
-// Falta una de Quilpué: todas estas son de Reñaca.
-// =========================================================
-export const galeria = [
-  {
-    foto: servicioDia,
-    alt: "Mesera llevando una bandeja con rolls y montaditos en la terraza",
-  },
-  {
-    foto: barra,
-    alt: "Bartender sirviendo dos sours desde las cocteleras",
-  },
-  {
-    foto: servicioNoche,
-    alt: "Bandeja con montaditos de salmón, quesadillas y papas fritas servida de noche",
-  },
-];

@@ -2,6 +2,10 @@
 // Una línea de la carta. El precio se formatea con clp(), el único
 // formateador del proyecto: no se repite un Intl.NumberFormat suelto
 // en las páginas como pasó en 02-sushiitto.
+//
+// La línea de puntos entre el nombre y el precio es la convención de
+// carta impresa: guía el ojo del plato a su valor. Es un <span> decorativo
+// (aria-hidden) que rellena el espacio con un borde punteado.
 import { clp } from "../data/carta.js";
 
 interface Props {
@@ -15,32 +19,41 @@ interface Props {
 const { nombre, precio, descripcion, picante, veggie } = Astro.props;
 ---
 
-<li class="flex items-baseline gap-4 border-b border-borde/60 py-3">
-  <div class="min-w-0">
+<li class="border-b border-borde/60 py-3">
+  <div class="flex items-baseline gap-1">
     <span class="text-texto">
       {nombre}
       {
         picante && (
-          <span class="ml-2 align-middle text-[0.65rem] uppercase tracking-widest text-marca-texto">
+          <span class="ml-2 rounded-full border border-marca/50 px-1.5 py-px align-middle text-[0.6rem] uppercase tracking-widest text-marca-texto">
             Picante
           </span>
         )
       }
       {
         veggie && (
-          <span class="ml-2 align-middle text-[0.65rem] uppercase tracking-widest text-texto-suave">
-            Vegetariano
+          <span class="ml-2 rounded-full border border-borde px-1.5 py-px align-middle text-[0.6rem] uppercase tracking-widest text-texto-suave">
+            Veggie
           </span>
         )
       }
     </span>
-    {
-      descripcion && (
-        <p class="mt-0.5 text-sm leading-snug text-texto-suave">{descripcion}</p>
-      )
-    }
+
+    <span
+      aria-hidden="true"
+      class="mx-1 min-w-6 flex-1 translate-y-[-0.28em] border-b border-dotted border-texto-suave/40"
+    ></span>
+
+    <span class="shrink-0 font-semibold tabular-nums text-precio">
+      {clp(precio)}
+    </span>
   </div>
-  <span class="ml-auto shrink-0 font-semibold tabular-nums text-precio">
-    {clp(precio)}
-  </span>
+
+  {
+    descripcion && (
+      <p class="mt-0.5 max-w-prose text-sm leading-snug text-texto-suave">
+        {descripcion}
+      </p>
+    )
+  }
 </li>
