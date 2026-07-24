@@ -1,0 +1,32 @@
+---
+// El sello visual de la marca: las dos franjas verticales de verde agua
+// pegadas al borde izquierdo de cada página de la carta impresa.
+//
+// No son rectángulos: están pintadas a mano y los bordes ondulan. Por eso
+// son dos <path> con curvas y no un `border-left`. `preserveAspectRatio
+// ="none"` las estira a lo alto de la sección, así que la misma pincelada
+// sirve para una página de 800 px o de 4.000.
+//
+// Va SOLO en /carta y /bar, que son las páginas sin fotos: ahí la franja
+// es lo único que sostiene la identidad visual. En la portada mandan las
+// fotos y la franja sobraba.
+//
+// Decorativa: aria-hidden y sin ancho en móvil, donde solo robaría espacio.
+---
+
+<svg
+  class="pointer-events-none absolute inset-y-0 left-0 hidden h-full w-10 text-marca sm:block"
+  viewBox="0 0 40 800"
+  preserveAspectRatio="none"
+  fill="currentColor"
+  aria-hidden="true"
+>
+  <!-- Franja ancha, pegada al borde -->
+  <path
+    d="M0 0 h14 c-3 90 4 180 1 270 c-3 90 3 175 0 265 c-2 90 3 175 1 265 H0 Z"
+  ></path>
+  <!-- Franja delgada, con la ondulación desfasada para que no se vean gemelas -->
+  <path
+    d="M24 0 h7 c-2 105 3 195 0 300 c-3 105 2 190 1 290 c-1 75 2 145 1 210 h-8 c2 -70 -1 -140 0 -215 c1 -95 -3 -185 0 -290 c3 -100 -3 -190 -1 -295 Z"
+  ></path>
+</svg>

@@ -1,0 +1,29 @@
+---
+// El sello circular de la marca, recortado de la portada de la carta
+// oficial y con el fondo negro vuelto transparente, para que se pueda
+// poner encima de una foto sin que se le note el recuadro.
+//
+// Va por <Image> de astro:assets: cada uso recibe su tamaño en webp.
+// Para cambiar el logo basta reemplazar src/assets/logo-sello.png —
+// pero ojo, en dev la URL de /_image no lleva hash y el navegador la
+// cachea: si lo reemplazas, renombra el archivo o recarga con Ctrl+F5.
+import { Image } from "astro:assets";
+import { logo } from "../data/imagenes.js";
+
+interface Props {
+  tamano?: number;
+  class?: string;
+}
+
+const { tamano = 44, class: clase = "" } = Astro.props;
+---
+
+<Image
+  src={logo}
+  alt="Patio 511"
+  width={tamano}
+  height={tamano}
+  densities={[1, 2]}
+  loading="eager"
+  class={`shrink-0 object-contain ${clase}`}
+/>

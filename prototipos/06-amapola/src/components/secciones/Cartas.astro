@@ -1,0 +1,87 @@
+---
+// Las dos puertas de entrada al contenido pesado: la carta de cocina y la
+// del bar. Separarlas no es solo por largo: "sushi Reñaca" y "bar Quilpué"
+// son búsquedas distintas, y con dos URLs competimos por las dos.
+import { Image } from "astro:assets";
+import { categorias } from "../../data/carta.js";
+import { fotoCarta, fotoBarra } from "../../data/imagenes.js";
+
+const contar = (grupo) =>
+  categorias
+    .filter((c) => c.grupo === grupo)
+    .reduce(
+      (n, c) =>
+        n +
+        (c.tipo === "subgrupos"
+          ? c.subgrupos.reduce((m, s) => m + s.platos.length, 0)
+          : c.platos.length),
+      0,
+    );
+
+const tarjetas = [
+  {
+    href: "/carta",
+    kicker: "Cocina",
+    titulo: "La carta",
+    texto: "Tapas, montaditos, sushi, tablas, platos de fondo y postres.",
+    imagen: fotoCarta,
+    total: contar("cocina"),
+  },
+  {
+    href: "/bar",
+    kicker: "Barra",
+    titulo: "El bar",
+    texto: "Sours, mojitos, sangría, spritz, combinados, vinos y cervezas.",
+    imagen: fotoBarra,
+    total: contar("bar"),
+  },
+];
+---
+
+<section class="mx-auto max-w-5xl px-5 py-16 sm:py-20">
+  <header class="mb-10 max-w-xl">
+    <h2 class="titulo-carta text-titulo">La carta completa</h2>
+    <p class="mt-3 text-texto-suave">
+      Esos eran los más pedidos. Acá está todo: la cocina y la barra, cada una
+      por su lado.
+    </p>
+  </header>
+
+  <ul class="grid gap-5 sm:grid-cols-2">
+    {
+      tarjetas.map((t) => (
+        <li>
+          <a
+            href={t.href}
+            class="group relative flex h-72 items-end overflow-hidden rounded-suave border border-borde transition-colors hover:border-marca"
+          >
+            <Image
+              src={t.imagen.foto}
+              alt={t.imagen.alt}
+              widths={[400, 800]}
+              sizes="(min-width: 640px) 50vw, 100vw"
+              class="absolute inset-0 h-full w-full object-cover opacity-55 transition-transform duration-500 group-hover:scale-105"
+            />
+            <div class="absolute inset-0 bg-gradient-to-t from-fondo via-fondo/70 to-transparent" />
+
+            <div class="relative w-full p-6">
+              <p class="text-xs uppercase tracking-[0.3em] text-marca-texto">
+                {t.kicker}
+              </p>
+              <h2 class="titulo-carta mt-1 text-3xl font-semibold">
+                {t.titulo}
+              </h2>
+              <p class="mt-2 text-sm text-texto-suave">{t.texto}</p>
+              <p class="mt-3 text-sm">
+                Ver los {t.total} ítems{" "}
+                <span class="inline-block transition-transform group-hover:translate-x-1">
+                  →
+                </span>
+              </p>
+            </div>
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</section>

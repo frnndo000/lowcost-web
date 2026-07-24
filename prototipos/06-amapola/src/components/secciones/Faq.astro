@@ -1,0 +1,30 @@
+---
+// Acordeón con <details>: cero JavaScript, accesible por defecto y el
+// contenido está en el HTML aunque esté cerrado, así que Google lo indexa.
+import { preguntas } from "../../data/faq.js";
+---
+
+<section id="preguntas" class="border-t border-borde">
+  <div class="mx-auto max-w-3xl px-5 py-16">
+    <h2 class="titulo-carta mb-8 text-titulo">Preguntas</h2>
+
+    <div class="divide-y divide-borde border-y border-borde">
+      {
+        preguntas.map(({ p, r }) => (
+          <details class="group">
+            <summary class="flex cursor-pointer items-center justify-between gap-4 py-4 font-medium transition-colors hover:text-marca-texto">
+              {p}
+              <span
+                class="shrink-0 text-marca-texto transition-transform group-open:rotate-45"
+                aria-hidden="true"
+              >
+                +
+              </span>
+            </summary>
+            <p class="pb-4 leading-relaxed text-texto-suave">{r}</p>
+          </details>
+        ))
+      }
+    </div>
+  </div>
+</section>
