@@ -1,0 +1,66 @@
+---
+// Comentarios de las apps de delivery. Como las apps no dejan extraer el
+// texto de las reseñas, mostramos su feedback REAL agregado: el % de gente
+// que recomienda cada producto en Uber Eats (dato público del local).
+// Cuando la dueña quiera, se pueden pegar reseñas textuales aquí.
+import { negocio } from "../../data/negocio.js";
+
+const comentarios = [
+  { producto: "Torta Amor", aprueba: 93, n: 211 },
+  { producto: "Torta Puerto Varas", aprueba: 96, n: 204 },
+  { producto: "Torta Mixta", aprueba: 97, n: 182 },
+  { producto: "Torta de Chocolate", aprueba: 97, n: 149 },
+  { producto: "Pie de limón", aprueba: 92, n: 129 },
+  { producto: "Kuchen de mora y frambuesa", aprueba: 94, n: 76 },
+];
+const uberEats = negocio.canales.ubereats;
+---
+
+<section id="comentarios" class="border-t border-borde bg-marca/5">
+  <div class="mx-auto max-w-5xl px-5 py-16 sm:py-20">
+    <header class="mb-8 max-w-xl">
+      <p class="text-xs uppercase tracking-[0.3em] text-marca-texto">
+        Comentarios
+      </p>
+      <h2 class="titulo-carta mt-1 text-titulo">Lo que dicen en las apps</h2>
+      <p class="mt-3 text-texto-suave">
+        Miles de pedidos en Uber Eats, Rappi y PedidosYa. Esto es lo que más
+        recomiendan nuestros clientes.
+      </p>
+    </header>
+
+    <ul class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      {
+        comentarios.map((c) => (
+          <li class="flex flex-col gap-2 rounded-suave border border-borde bg-fondo p-6">
+            <div class="flex items-center gap-1 text-marca" aria-hidden="true">
+              {Array.from({ length: 5 }).map(() => (
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M12 2l2.9 6.1 6.6.9-4.8 4.6 1.2 6.6L12 17.8 5.9 20.2l1.2-6.6L2.3 9l6.6-.9L12 2z" />
+                </svg>
+              ))}
+            </div>
+            <p class="text-lg font-semibold text-texto">
+              {c.aprueba}% lo recomienda
+            </p>
+            <p class="text-texto-suave">
+              <span class="text-texto">{c.producto}</span> · {c.n} valoraciones
+            </p>
+          </li>
+        ))
+      }
+    </ul>
+
+    <div class="mt-6 text-center">
+      <a
+        href={uberEats}
+        target="_blank"
+        rel="noopener"
+        class="inline-flex items-center gap-2 text-sm font-semibold text-marca-texto hover:underline"
+      >
+        Ver más reseñas en Uber Eats
+        <span aria-hidden="true">→</span>
+      </a>
+    </div>
+  </div>
+</section>

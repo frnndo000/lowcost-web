@@ -1,0 +1,56 @@
+---
+// Promociones vigentes: los afiches reales del local (Dúo Dulce, Promo 2x).
+import { Image } from "astro:assets";
+import { ofertas } from "../../data/imagenes.js";
+import { linkWhatsapp } from "../../data/negocio.js";
+---
+
+<section id="ofertas" class="mx-auto max-w-5xl px-5 py-16 sm:py-20">
+  <header class="mb-8 max-w-xl">
+    <p class="text-xs uppercase tracking-[0.3em] text-marca-texto">Promos</p>
+    <h2 class="titulo-carta mt-1 text-titulo">Ofertas de la semana</h2>
+    <p class="mt-3 text-texto-suave">
+      De lunes a jueves. Pídelas por WhatsApp o en las apps de delivery.
+    </p>
+  </header>
+
+  <ul class="grid gap-5 sm:grid-cols-2">
+    {
+      ofertas.map((o) => (
+        <li class="overflow-hidden rounded-suave border border-borde bg-superficie">
+          <div class="aspect-3/4 overflow-hidden sm:aspect-4/5">
+            <Image
+              src={o.foto}
+              alt={o.alt}
+              widths={[360, 640]}
+              sizes="(min-width: 640px) 50vw, 100vw"
+              class="h-full w-full object-cover"
+            />
+          </div>
+          <div class="flex flex-wrap items-center justify-between gap-3 p-5">
+            <div>
+              <h3 class="titulo-carta text-item">{o.titulo}</h3>
+              <p class="text-sm text-texto-suave">{o.detalle}</p>
+              <p class="mt-1 text-xs uppercase tracking-widest text-marca-texto">
+                {o.dias}
+              </p>
+            </div>
+            <span class="titulo-carta text-2xl text-marca-texto">{o.precio}</span>
+          </div>
+        </li>
+      ))
+    }
+  </ul>
+
+  <div class="mt-6 text-center">
+    <a
+      href={linkWhatsapp("¡Hola Amapola! Quiero aprovechar una promo:")}
+      target="_blank"
+      rel="noopener"
+      class="inline-flex items-center gap-2 rounded-suave bg-marca px-6 py-3 font-semibold text-white transition-colors hover:bg-marca-hover"
+    >
+      Pedir una promo
+      <span aria-hidden="true">→</span>
+    </a>
+  </div>
+</section>

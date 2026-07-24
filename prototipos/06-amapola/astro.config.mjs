@@ -9,8 +9,8 @@ import { negocio } from "./src/data/negocio.js";
 // y la tarjeta de WhatsApp no carga la imagen.
 export default defineConfig({
   site: negocio.sitio,
-  // 4321 lo ocupa 03-takao: así se pueden levantar los dos a la vez.
-  server: { port: 4322 },
+  // 4321/4322 los ocupan 03-takao y 05-patio511: este va en 4323.
+  server: { port: 4323 },
   integrations: [sitemap()],
   vite: { plugins: [tailwindcss()] },
 });

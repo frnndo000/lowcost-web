@@ -1,19 +1,19 @@
 ---
 // El menú móvil usa la Popover API nativa: cierra con Esc y con clic
-// afuera sin una sola línea de JavaScript. `popover` sin valor es
-// `popover="auto"`, que es el que trae el cierre por clic afuera.
+// afuera sin una sola línea de JavaScript.
 import Logo from "./Logo.astro";
+import { linkWhatsapp } from "../data/negocio.js";
 
 const enlaces = [
   { href: "/carta", texto: "Carta" },
-  { href: "/bar", texto: "Bar" },
-  { href: "/#sucursales", texto: "Sucursales" },
+  { href: "/#pedir", texto: "Encargos" },
+  { href: "/#ubicacion", texto: "Ubicación" },
   { href: "/#preguntas", texto: "Preguntas" },
 ];
 
 // Marca la página actual.
 const aqui = Astro.url.pathname.replace(/\/$/, "") || "/";
-const esActual = (href) => href === aqui;
+const esActual = (href: string) => href === aqui;
 ---
 
 <header
@@ -22,15 +22,10 @@ const esActual = (href) => href === aqui;
   <div class="mx-auto flex max-w-5xl items-center gap-4 px-5 py-3">
     <a
       href="/"
-      class="mr-auto flex shrink-0 items-center gap-3"
-      aria-label="Patio 511, inicio"
+      class="mr-auto flex shrink-0 items-center"
+      aria-label="Amapola, inicio"
     >
-      <Logo tamano={40} />
-      <span
-        class="titulo-carta hidden text-lg font-semibold leading-none sm:inline"
-      >
-        Patio 511
-      </span>
+      <Logo class="h-9 sm:h-10" />
     </a>
 
     <nav class="hidden md:block" aria-label="Principal">
@@ -57,10 +52,12 @@ const esActual = (href) => href === aqui;
     </nav>
 
     <a
-      href="/#pedir"
-      class="hidden shrink-0 rounded-suave bg-marca px-5 py-2.5 text-sm font-semibold text-fondo transition-colors hover:bg-marca-hover md:inline-block"
+      href={linkWhatsapp()}
+      target="_blank"
+      rel="noopener"
+      class="hidden shrink-0 rounded-suave bg-marca px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-marca-hover md:inline-block"
     >
-      Pide aquí
+      Pedir por WhatsApp
     </a>
 
     <button
@@ -101,10 +98,12 @@ const esActual = (href) => href === aqui;
       </ul>
     </nav>
     <a
-      href="/#pedir"
-      class="mt-4 block rounded-suave bg-marca px-4 py-3 text-center font-semibold text-fondo"
+      href={linkWhatsapp()}
+      target="_blank"
+      rel="noopener"
+      class="mt-4 block rounded-suave bg-marca px-4 py-3 text-center font-semibold text-white"
     >
-      Pide aquí
+      Pedir por WhatsApp
     </a>
     <button
       type="button"
@@ -135,7 +134,7 @@ const esActual = (href) => href === aqui;
   }
 
   .menu-movil::backdrop {
-    background-color: rgb(0 0 0 / 0.6);
+    background-color: rgb(0 0 0 / 0.4);
     backdrop-filter: blur(2px);
   }
 </style>

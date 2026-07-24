@@ -1,16 +1,10 @@
 ---
-// Portada. El "selector de sucursal" son dos anclas, no un toggle con
-// JavaScript: con dos locales, mostrar los dos y dejar que el visitante
-// baje al suyo es más rápido de leer y —lo que importa— deja las dos
-// direcciones visibles para Google. Un toggle escondería una de las dos.
-//
-// El fondo es un carrusel de las 4 fotos del local, desenfocadas: el negro
-// pelado se veía muerto. El cambio de foto es un crossfade con CSS puro
-// —imágenes apiladas y opacity animada, cero JavaScript—, respetando la
-// línea del proyecto (menú, FAQ e índice también son sin JS).
+// Portada. El fondo es un carrusel de fotos de las tortas, con crossfade
+// en CSS puro —imágenes apiladas y opacity animada, cero JavaScript—,
+// respetando la línea del proyecto (menú, FAQ e índice también son sin JS).
 import { Image } from "astro:assets";
 import Logo from "../Logo.astro";
-import { negocio, sucursales } from "../../data/negocio.js";
+import { negocio, linkWhatsapp } from "../../data/negocio.js";
 import { fotosHero } from "../../data/imagenes.js";
 ---
 
@@ -34,103 +28,71 @@ import { fotosHero } from "../../data/imagenes.js";
     }
   </div>
 
-  <!-- Velos: mantienen legible el texto y funden la foto con el fondo.
-       Las fotos van nítidas y bien brillantes (opacidad 0.8 en el keyframe);
-       para que el texto siga legible sin apagar la foto entera, el peso lo
-       lleva un scrim radial oscuro DETRÁS DEL TEXTO (centro), no un velo
-       plano encima de todo. Así la comida se ve viva en los bordes y el
-       título tiene fondo donde lo necesita. -->
-  <div class="absolute inset-0 bg-marca/10 mix-blend-overlay"></div>
-  <!-- Vignette: oscurece los bordes para fundir con el fondo del sitio. -->
+  <!-- Velos: funden la foto con el fondo claro y dan respaldo al texto.
+       El peso lo lleva un scrim radial claro DETRÁS DEL TEXTO (centro),
+       para que las tortas se vean vivas en los bordes. -->
+  <div class="absolute inset-0 bg-marca/5"></div>
   <div
     class="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_35%,var(--color-fondo)_100%)]"
   >
   </div>
-  <!-- Scrim del texto: mancha oscura centrada, difuminada, justo donde va
-       el logo + título + botones. Le da respaldo al texto aunque abajo
-       pase la foto más clara (servicio de día). -->
   <div
-    class="absolute inset-0 bg-[radial-gradient(ellipse_60%_75%_at_center,var(--color-fondo)_20%,transparent_75%)] opacity-70"
+    class="absolute inset-0 bg-[radial-gradient(ellipse_60%_75%_at_center,var(--color-fondo)_20%,transparent_75%)] opacity-80"
   >
   </div>
 
   <div
-    class="relative mx-auto flex min-h-[88svh] max-w-2xl flex-col items-center justify-center gap-5 px-5 py-16 text-center"
+    class="relative mx-auto flex min-h-[86svh] max-w-2xl flex-col items-center justify-center gap-5 px-5 py-16 text-center"
   >
-    <Logo tamano={112} class="drop-shadow-2xl" />
+    <Logo class="h-24 drop-shadow-sm sm:h-32" />
 
-    <div>
-      <h1 class="titulo-carta text-hero drop-shadow-lg">Patio 511</h1>
-      <p
-        class="mt-3 text-sm uppercase tracking-[0.45em] text-marca-texto sm:text-base"
-      >
-        Sushi · Tapas · Bar
-      </p>
-    </div>
+    <h1 class="titulo-carta text-hero font-bold text-texto drop-shadow-sm">
+      Pastelería <span class="text-marca-texto">sureña</span><br />
+      en {negocio.comuna}
+    </h1>
+    <p
+      class="text-sm uppercase tracking-[0.4em] text-marca-texto sm:text-base"
+    >
+      Tortas · Kuchen · Postres
+    </p>
 
-    <p class="max-w-md text-balance text-lg text-texto drop-shadow">
+    <p class="max-w-md text-balance text-lg text-texto">
       {negocio.descripcion}
     </p>
 
-    <!-- Una sola acción primaria (WhatsApp es el canal que el local
-         prefiere) y una secundaria. Sin tarjetas compitiendo. -->
+    <!-- Una acción primaria (WhatsApp, el canal preferido) y una secundaria. -->
     <div class="mt-2 flex w-full flex-col gap-3 sm:w-auto sm:flex-row">
       <a
-        href="#pedir"
-        class="rounded-suave bg-marca px-8 py-4 text-lg font-semibold text-fondo shadow-lg shadow-marca/25 transition-colors hover:bg-marca-hover"
+        href={linkWhatsapp()}
+        target="_blank"
+        rel="noopener"
+        class="rounded-suave bg-marca px-8 py-4 text-lg font-semibold text-white shadow-lg shadow-marca/25 transition-colors hover:bg-marca-hover"
       >
-        Pide aquí
+        Pedir por WhatsApp
       </a>
       <a
         href="/carta"
-        class="rounded-suave border border-borde bg-fondo/60 px-8 py-4 text-lg font-semibold backdrop-blur-sm transition-colors hover:border-texto-suave"
+        class="rounded-suave border border-borde bg-fondo/60 px-8 py-4 text-lg font-semibold backdrop-blur-sm transition-colors hover:border-marca"
       >
         Ver la carta
       </a>
     </div>
 
-    <!-- Las dos sucursales, ahora como salto compacto. Se conservan las
-         dos anclas (#suc-*) y los dos nombres visibles para Google, sin
-         robarle peso a la acción primaria. -->
-    <p class="mt-1 flex flex-wrap items-center justify-center gap-x-3 gap-y-1 text-sm text-texto-suave">
-      <span>Dos patios:</span>
-      {
-        sucursales.map((s, i) => (
-          <>
-            {i > 0 && <span aria-hidden="true">·</span>}
-            <a
-              href="#sucursales"
-              class="text-texto underline decoration-borde decoration-2 underline-offset-4 transition-colors hover:decoration-marca"
-            >
-              {s.nombre}
-            </a>
-          </>
-        ))
-      }
+    <p class="mt-1 text-sm text-texto-suave">
+      {negocio.direccion}, {negocio.comuna}
     </p>
   </div>
 </section>
 
 <style>
-  /* Carrusel por crossfade, sin JavaScript: las 4 fotos van apiladas y
-     comparten el mismo keyframe de opacidad, desfasado 6 s (T/4) en cada
+  /* Carrusel por crossfade, sin JavaScript: las 3 fotos van apiladas y
+     comparten el mismo keyframe de opacidad, desfasado T/3 (6 s) en cada
      una con animation-delay. El navegador funde una en otra solo.
-
-     SIN zoom Ken Burns a propósito: las fotos son exports de Instagram
-     (1080-1440 px) y el hero va a pantalla completa; cualquier escala las
-     agranda y se ven blandas. Quietas y nítidas se ven mejor. El "cambia
-     de a poco" lo da el crossfade solo.
-
-     Nivel de opacidad tope: 0.8. La legibilidad del texto la resuelve el
-     scrim radial del centro, no apagar la foto. La opacidad va en el
-     keyframe, no en Tailwind, para que la animación la controle. */
+     Opacidad tope 0.85: la legibilidad la resuelve el scrim del centro. */
   .hero-slide {
     opacity: 0;
     animation: carrusel 18s linear infinite;
   }
-  /* 3 fotos, ciclo de 18 s → cada una 6 s. El desfase es T/3 (6 s), que
-     es también donde el keyframe funde: mientras una baja de 0.8 a 0, la
-     siguiente sube de 0 a 0.8. Así el navegador hace el crossfade solo. */
   .hero-slide:nth-child(1) {
     animation-delay: 0s;
   }
@@ -141,20 +103,14 @@ import { fotosHero } from "../../data/imagenes.js";
     animation-delay: -12s;
   }
 
-  /* Arranca en 0.8 para que la primera foto se vea al cargar sin flash
-     negro; se mantiene, y funde a la siguiente.
-
-     Los fundidos son ANCHOS (10%, ~1.8 s) a propósito: el desfase entre
-     fotos es 33% y el fundido de salida (28→38%) se solapa de sobra con
-     el de entrada de la siguiente (que va 90→100% → cae en 23→33% de la
-     de al lado). En el cruce las dos están bien visibles a la vez, así
-     que nunca hay un instante en negro. Fundidos cortos = bajón oscuro. */
+  /* Fundidos anchos para que en el cruce las dos fotos estén visibles a la
+     vez y nunca haya un frame en blanco. */
   @keyframes carrusel {
     0% {
-      opacity: 0.8;
+      opacity: 0.85;
     }
     28% {
-      opacity: 0.8;
+      opacity: 0.85;
     }
     38% {
       opacity: 0;
@@ -163,18 +119,17 @@ import { fotosHero } from "../../data/imagenes.js";
       opacity: 0;
     }
     100% {
-      opacity: 0.8;
+      opacity: 0.85;
     }
   }
 
-  /* Sin animación (usuario con reduced-motion, apagada en global.css):
-     que quede UNA foto visible, no las cuatro apiladas. */
+  /* Sin animación (reduced-motion): que quede UNA foto visible. */
   @media (prefers-reduced-motion: reduce) {
     .hero-slide {
       opacity: 0;
     }
     .hero-slide:first-child {
-      opacity: 0.8;
+      opacity: 0.85;
     }
   }
 </style>

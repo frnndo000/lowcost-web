@@ -1,0 +1,111 @@
+---
+// Dónde estamos: un mapa, la dirección y el horario. El mapa se arma con
+// la búsqueda de texto (sin API key ni costo); cuando la dueña confirme
+// las coords exactas, se puede cambiar el embed.
+import { negocio, textoDias, consultaMapa, linkWhatsapp } from "../../data/negocio.js";
+const mapa = consultaMapa();
+---
+
+<section id="ubicacion" class="border-t border-borde">
+  <div class="mx-auto max-w-5xl px-5 py-16 sm:py-20">
+    <header class="mb-8 max-w-xl">
+      <h2 class="titulo-carta text-titulo">Dónde estamos</h2>
+      <p class="mt-3 text-texto-suave">
+        En pleno {negocio.comuna}. Pasa a la tienda o pide despacho.
+      </p>
+    </header>
+
+    <div class="overflow-hidden rounded-suave border border-borde bg-superficie">
+      <div class="grid sm:grid-cols-2">
+        <div class="relative min-h-[260px] border-b border-borde sm:min-h-[360px] sm:border-b-0 sm:border-r">
+          <iframe
+            src={`https://www.google.com/maps?q=${mapa}&output=embed`}
+            class="absolute inset-0 h-full w-full"
+            style="border:0; display:block;"
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            title={`Ubicación de ${negocio.marca}`}
+          ></iframe>
+        </div>
+
+        <div class="flex flex-col gap-5 p-6 sm:p-8">
+          <div>
+            <h3 class="titulo-carta text-sub">{negocio.nombre}</h3>
+            <address class="mt-1 text-texto-suave">
+              {negocio.direccion}
+              <br />
+              {negocio.comuna}, Región de {negocio.region}
+            </address>
+          </div>
+
+          <div>
+            <h4 class="mb-2 text-xs uppercase tracking-widest text-texto-suave">
+              Horario
+            </h4>
+            <ul class="space-y-1">
+              {
+                negocio.horario.map((bloque) => (
+                  <li class="flex justify-between gap-4 text-sm">
+                    <span>{textoDias(bloque.dias)}</span>
+                    <span class="tabular-nums text-texto-suave">
+                      {bloque.abre} – {bloque.cierra}
+                    </span>
+                  </li>
+                ))
+              }
+            </ul>
+          </div>
+
+          <div>
+            <h4 class="mb-2 text-xs uppercase tracking-widest text-texto-suave">
+              Cómo comprar
+            </h4>
+            <ul class="space-y-1.5 text-sm text-texto-suave">
+              <li class="flex items-start gap-2">
+                <span class="text-marca-texto" aria-hidden="true">•</span>
+                Retiro en tienda
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-marca-texto" aria-hidden="true">•</span>
+                Despacho a domicilio por WhatsApp
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-marca-texto" aria-hidden="true">•</span>
+                Delivery por Rappi, PedidosYa y Uber Eats
+              </li>
+            </ul>
+          </div>
+
+          <a
+            href={linkWhatsapp()}
+            target="_blank"
+            rel="noopener"
+            class="inline-flex items-center justify-center gap-2 rounded-suave bg-marca px-5 py-3 font-semibold text-white transition-colors hover:bg-marca-hover"
+          >
+            Escríbenos por WhatsApp
+            <span aria-hidden="true">→</span>
+          </a>
+
+          <div class="mt-auto flex flex-wrap items-center gap-x-4 gap-y-1 text-sm text-texto-suave">
+            <a
+              href={`https://www.google.com/maps/search/?api=1&query=${mapa}`}
+              target="_blank"
+              rel="noopener"
+              class="transition-colors hover:text-texto"
+            >
+              Cómo llegar →
+            </a>
+            <a
+              href={`https://instagram.com/${negocio.instagram}`}
+              target="_blank"
+              rel="noopener"
+              class="transition-colors hover:text-texto"
+            >
+              @{negocio.instagram}
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

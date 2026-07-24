@@ -1,29 +1,20 @@
 ---
-// El sello circular de la marca, recortado de la portada de la carta
-// oficial y con el fondo negro vuelto transparente, para que se pueda
-// poner encima de una foto sin que se le note el recuadro.
-//
-// Va por <Image> de astro:assets: cada uso recibe su tamaño en webp.
-// Para cambiar el logo basta reemplazar src/assets/logo-sello.png —
-// pero ojo, en dev la URL de /_image no lleva hash y el navegador la
-// cachea: si lo reemplazas, renombra el archivo o recarga con Ctrl+F5.
+// Wordmark de la marca (imagen "Amapola · Pastelería Sureña", con el fondo
+// blanco recortado a transparente). El tamaño se controla con una clase de
+// alto (h-*); el ancho se ajusta solo manteniendo la proporción.
 import { Image } from "astro:assets";
 import { logo } from "../data/imagenes.js";
 
 interface Props {
-  tamano?: number;
   class?: string;
 }
-
-const { tamano = 44, class: clase = "" } = Astro.props;
+const { class: clase = "h-10" } = Astro.props;
 ---
 
 <Image
   src={logo}
-  alt="Patio 511"
-  width={tamano}
-  height={tamano}
-  densities={[1, 2]}
+  alt="Amapola · Pastelería Sureña"
   loading="eager"
-  class={`shrink-0 object-contain ${clase}`}
+  densities={[1, 2]}
+  class:list={["w-auto object-contain", clase]}
 />

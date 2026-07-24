@@ -1,117 +1,82 @@
 // =========================================================
-// PATIO 511 — fuente única de verdad del negocio.
+// AMAPOLA · Pastelería Sureña — fuente única de verdad.
 //
-// Este es EL archivo que se edita. Nada de datos de contacto sueltos
-// en los componentes: si un dato aparece dos veces en el código, está mal.
+// Este es EL archivo que se edita. Nada de datos de contacto sueltos en
+// los componentes: si un dato aparece dos veces en el código, está mal.
 //
-// Novedad respecto a los prototipos anteriores: acá hay DOS SUCURSALES.
-// Lo que es de la marca vive en `negocio`; lo que cambia según el local
-// vive en `sucursales`. Ningún componente hardcodea una dirección.
+// Un solo local (a diferencia de 05-patio511, que era multi-sucursal).
+// Datos reales sacados de su Instagram, Linktree y las apps de delivery.
 // =========================================================
 
-// Campos por confirmar con el dueño antes de publicar.
-// `npm run check` falla mientras esta lista no esté vacía, así que es
-// imposible publicar el sitio con datos de mentira.
+// Datos por confirmar con la dueña. NO bloquea el build (build = astro build);
+// solo documenta lo que falta. Los componentes muestran fallback elegante.
 export const pendientes = [
-  "coords de ambas sucursales",
-  "dirección exacta de Quilpué",
-  "confirmar si el horario de Quilpué es el mismo que el de Reñaca",
+  "coords exactas para el mapa (hoy usa la dirección de texto)",
+  "confirmar horario de tienda (11:00–19:45 es el de delivery)",
+  "precios de tortas enteras y personalizado (hoy 'por encargo')",
+  "logo real y colores hex definitivos",
+  "fotos propias en alta de tortas y kuchen",
 ];
 
 export const negocio = {
-  nombre: "Patio 511",
-  bajada: "Sushi, tapas y tablas para compartir",
-  // La cara de la marca. Lo que hace único al local no es el sushi
-  // (eso lo tiene todo el mundo): es el patio y las dos cocinas juntas.
+  nombre: "Amapola",
+  marca: "Amapola · Pastelería Sureña",
+  bajada: "Sabores y porciones sureñas",
+  // La cara de la marca: repostería casera del sur, recetas de familia.
   descripcion:
-    "Sushi, tapas españolas y tablas para compartir, en un patio al aire libre. De día familia, de noche bar.",
+    "Tortas, kuchen sureños y postres caseros en Viña del Mar. Recetas familiares, hechas como en casa. Retira, pide delivery o encarga tu torta.",
 
   region: "Valparaíso",
   pais: "CL",
+  sitio: "https://amapolapasteleria.cl", // dominio final (PENDIENTE de comprar)
 
-  // Dominio final. El local ya lo tiene impreso en su carta.
-  sitio: "https://patio511.cl",
+  // --- Contacto ---
+  whatsapp: "56961190145", // solo dígitos, con código país
+  mensajeWhatsapp: "¡Hola Amapola! Quiero hacer un pedido:",
+  instagram: "amapolapasteleriasurena",
+  // Las tortas temáticas fondant las hace su cuenta hermana.
+  blooomCakes: "blooom.cakes",
 
-  mensajeWhatsapp: "Hola! Quiero hacer un pedido:",
+  // --- Ubicación (local único) ---
+  direccion: "5 Norte 380, entre 3 y 4 Poniente",
+  comuna: "Viña del Mar",
+  referencia: "",
+  coords: null, // PENDIENTE: el mapa usa la dirección de texto mientras tanto
+
+  // --- Horario ---
+  // 11:00–19:45 todos los días (horario de delivery según Rappi/UberEats;
+  // confirmar si el de tienda coincide).
+  horario: [
+    { dias: ["Mo", "Tu", "We", "Th", "Fr", "Sa", "Su"], abre: "11:00", cierra: "19:45" },
+  ],
+
+  // --- Delivery ---
+  // El pedido directo por WhatsApp es el principal (sin comisión para el local).
+  // Las apps van como respaldo. El orden acá es el orden en pantalla.
+  canales: {
+    rappi: "https://www.rappi.cl/restaurantes/900038512-amapola-pasteleria-surena",
+    pedidosya: "https://www.pedidosya.cl/restaurantes/vina-del-mar/amapola-pasteleria-surena-menu",
+    ubereats: "https://www.ubereats.com/cl/store/amapola-pasteleria-surena/QX7UM8kyQhKR3bK0S8FG5A",
+  },
+
+  // Prueba social real (de UberEats). Un activo que Instagram no muestra.
+  valoracion: { estrellas: "4,7", resenas: "1.000+", fuente: "Uber Eats" },
 
   seo: {
     descripcion:
-      "Sushi, tapas españolas y tablas para compartir en Reñaca y Quilpué. Patio al aire libre, barra completa y delivery. Pide directo por WhatsApp.",
-    // Imagen que se ve al compartir el link por WhatsApp. 1200×630.
-    ogImagen: "/og.jpg",
+      "Pastelería sureña en Viña del Mar: tortas, kuchen y postres caseros con recetas familiares. Retiro, delivery o por encargo. Pide directo por WhatsApp.",
+    ogImagen: "/og.jpg", // 1200×630 para el link compartido por WhatsApp
   },
 };
 
-// --- Las dos sucursales ---
-// Mismo componente, distinto set de datos. Agregar una tercera sucursal
-// es agregar un objeto acá: ninguna página hay que tocar.
-export const sucursales = [
-  {
-    id: "renaca",
-    nombre: "Reñaca",
-    // Aparece en el <h3> de cada tarjeta y en el título del mapa.
-    etiqueta: "Reñaca, Viña del Mar",
-    direccion: "Bernardo O'Higgins 1100",
-    comuna: "Viña del Mar",
-    referencia: "Dentro del Club Español de Reñaca",
-    ambiente:
-      "Patio al aire libre con árboles, juegos para niños y estacionamiento. De noche, DJ y baile.",
-    whatsapp: "56935818476", // solo dígitos, con código país
-    instagram: "patio511renaca",
-    coords: { lat: 0, lng: 0 }, // PENDIENTE: sacar de Google Maps
-    // Horario de la carta oficial (página 14). El domingo cierra temprano.
-    horario: [
-      { dias: ["Mo", "Tu", "We"], abre: "13:00", cierra: "00:00" },
-      { dias: ["Th"], abre: "13:00", cierra: "01:00" },
-      { dias: ["Fr", "Sa"], abre: "13:00", cierra: "02:00" },
-      { dias: ["Su"], abre: "13:00", cierra: "18:00" },
-    ],
-    // Apps de delivery. Vacío = el botón no se renderiza. Nada de links
-    // rotos: 01-nutricionista se publicó con tres y el cliente los vio.
-    // No trabajan con Uber Eats, así que esa clave no existe.
-    // El orden acá es el orden de los botones en pantalla.
-    canales: {
-      rappi: "https://www.rappi.cl/restaurantes/900035319-patio-511",
-      pedidosya:
-        "https://www.pedidosya.cl/restaurantes/vina-del-mar/patio-511-club-espanol-de-renaca-a405797e-0cfb-40f5-b8b7-2449a788c43e-menu",
-    },
-  },
-  {
-    id: "quilpue",
-    nombre: "Quilpué",
-    etiqueta: "Quilpué",
-    direccion: "Dagoberto Godoy 2385, esquina Puelma",
-    comuna: "Quilpué",
-    referencia: "",
-    ambiente:
-      "Más tranquilo y con poco ruido ambiente. El de conversar sin gritar.",
-    whatsapp: "56938667387",
-    instagram: "patio511_quilpue",
-    coords: { lat: 0, lng: 0 }, // PENDIENTE
-    horario: [
-      { dias: ["Mo", "Tu", "We"], abre: "13:00", cierra: "00:00" },
-      { dias: ["Th"], abre: "13:00", cierra: "01:00" },
-      { dias: ["Fr", "Sa"], abre: "13:00", cierra: "02:00" },
-      { dias: ["Su"], abre: "13:00", cierra: "18:00" },
-    ],
-    canales: {
-      rappi: "https://www.rappi.cl/restaurantes/900098051-patio-511",
-      pedidosya:
-        "https://www.pedidosya.cl/restaurantes/quilpue/patio-511--quilpue-fd64b72c-719d-454b-866b-2cf3599a3a3d-menu",
-    },
-  },
-];
-
 /** Link de WhatsApp ya armado, con el mensaje pre-llenado. */
-export const linkWhatsapp = (sucursal) =>
-  `https://wa.me/${sucursal.whatsapp}?text=${encodeURIComponent(negocio.mensajeWhatsapp)}`;
+export const linkWhatsapp = (mensaje = negocio.mensajeWhatsapp) =>
+  `https://wa.me/${negocio.whatsapp}?text=${encodeURIComponent(mensaje)}`;
 
 /** Consulta para el iframe de Google Maps: sin API key ni costo.
- *  Cuando el dueño confirme la dirección exacta, este embed la toma solo. */
-export const consultaMapa = (sucursal) =>
-  encodeURIComponent(
-    `${negocio.nombre} ${sucursal.direccion} ${sucursal.comuna}`,
-  );
+ *  Cuando la dueña confirme coords exactas, se puede cambiar el embed. */
+export const consultaMapa = () =>
+  encodeURIComponent(`${negocio.marca} ${negocio.direccion} ${negocio.comuna}`);
 
 // --- Días: orden de la semana, nombre humano y nombre Schema.org ---
 const DIAS = [
@@ -128,12 +93,13 @@ const orden = (id) => DIAS.findIndex((d) => d.id === id);
 
 /**
  * Convierte ["Mo","Tu","We","Th"] en "Lunes a jueves".
- * Si los días no son corridos, los enumera: "Lunes, miércoles y viernes".
+ * Si son los 7 días, "Todos los días". Si no son corridos, los enumera.
  */
 export function textoDias(dias) {
   const indices = dias.map(orden).sort((a, b) => a - b);
   const nombres = indices.map((i) => DIAS[i].nombre);
   if (nombres.length === 1) return nombres[0];
+  if (nombres.length === 7) return "Todos los días";
 
   const corridos = indices.every((n, i) => i === 0 || n === indices[i - 1] + 1);
   const minuscula = (s) => s.toLowerCase();

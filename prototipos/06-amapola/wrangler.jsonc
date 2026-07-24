@@ -3,7 +3,7 @@
   // Sin este archivo, wrangler sube por el árbol y usa el wrangler.jsonc
   // de la raíz (name "hustlewebs", directory "."), publicando el sitio
   // equivocado y todo el repo (node_modules, .git) como assets.
-  "name": "patio511",
+  "name": "amapola",
   "compatibility_date": "2026-07-21",
   "assets": { "directory": "./dist" },
 }

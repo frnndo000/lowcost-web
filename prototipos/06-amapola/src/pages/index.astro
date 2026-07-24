@@ -1,21 +1,27 @@
 ---
-// Portada: gancho, destacados y las dos sucursales.
-// Las listas completas viven en /carta y /bar.
+// Portada: gancho, prueba social, destacados, promos, carta, comentarios,
+// cómo pedir, ubicación y preguntas. La lista completa vive en /carta.
 // La página solo compone; los datos están en src/data/.
 import Layout from "../layouts/Layout.astro";
 import Hero from "../components/secciones/Hero.astro";
+import Valoracion from "../components/secciones/Valoracion.astro";
 import Destacados from "../components/secciones/Destacados.astro";
+import Ofertas from "../components/secciones/Ofertas.astro";
 import Cartas from "../components/secciones/Cartas.astro";
+import Comentarios from "../components/secciones/Comentarios.astro";
 import PideAqui from "../components/secciones/PideAqui.astro";
-import Sucursales from "../components/secciones/Sucursales.astro";
+import Ubicacion from "../components/secciones/Ubicacion.astro";
 import Faq from "../components/secciones/Faq.astro";
 ---
 
 <Layout conFaq>
   <Hero />
+  <Valoracion />
   <Destacados />
+  <Ofertas />
   <Cartas />
+  <Comentarios />
   <PideAqui />
-  <Sucursales />
+  <Ubicacion />
   <Faq />
 </Layout>

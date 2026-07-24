@@ -10,7 +10,8 @@ import { clp } from "../data/carta.js";
 
 interface Props {
   nombre: string;
-  precio: number;
+  /** null = "Por encargo" (se cotiza por WhatsApp). */
+  precio: number | null;
   descripcion?: string;
   picante?: boolean;
   veggie?: boolean;
@@ -45,7 +46,7 @@ const { nombre, precio, descripcion, picante, veggie } = Astro.props;
     ></span>
 
     <span class="shrink-0 font-semibold tabular-nums text-precio">
-      {clp(precio)}
+      {precio ? clp(precio) : "Por encargo"}
     </span>
   </div>
 

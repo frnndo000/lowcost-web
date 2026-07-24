@@ -2,77 +2,69 @@
 
 /* =========================================================
    FUENTES — autohospedadas, subset latin (cubre el español).
-   Dos variables woff2 (~76KB total, bajo el presupuesto de 200KB).
-   Los archivos viven en public/fonts/ y se precargan desde Layout.astro.
-
-   Bricolage Grotesque = display (personalidad, "un momento").
-   Hanken Grotesk      = body (workhorse invisible, "para vivir con él").
-   La diferencia comida/bar NO es otra fuente: es el mismo Bricolage
-   seteado distinto según data-tono (ver `titulo-carta` más abajo).
+   Bricolage Grotesque = display (títulos de sección).
+   Hanken Grotesk      = body.
+   El wordmark "Amapola" usa Pacifico (script), cargada en Layout.astro.
    ========================================================= */
 @font-face {
   font-family: "Bricolage Grotesque";
   src: url("/fonts/bricolage-grotesque-latin.woff2") format("woff2");
-  font-weight: 200 800; /* variable */
-  font-display: swap; /* muestra el fallback ya, sin FOIT */
+  font-weight: 200 800;
+  font-display: swap;
   unicode-range: U+0000-00FF;
 }
 @font-face {
   font-family: "Hanken Grotesk";
   src: url("/fonts/hanken-grotesk-latin.woff2") format("woff2");
-  font-weight: 100 900; /* variable */
+  font-weight: 100 900;
   font-display: swap;
   unicode-range: U+0000-00FF;
 }
 
 /* =========================================================
-   TEMA PATIO 511 — negro y verde agua.
-   Los tres colores salen de la carta oficial, muestreados del PDF:
-   negro #010302, turquesa #00A29B, blanco #FFFFFD. No hay un cuarto
-   color de acento: la identidad es minimalista y así se queda.
+   TEMA AMAPOLA — crema, rosa/magenta y morado.
+   Repostería casera del sur: base clara y cálida, acentos dulces.
+   Tomado de su identidad en redes (Instagram/Linktree). Sin neón.
 
    Los tokens se llaman por SU ROL, no por su color: `--color-marca`,
-   no `--color-turquesa`. Así el próximo cliente cambia estas ocho
-   líneas y no 26 clases repartidas por los componentes.
+   no `--color-rosa`. Así el próximo cliente cambia estas líneas y no
+   las clases repartidas por los componentes.
    ========================================================= */
 @theme {
-  --color-fondo: #010302; /* negro de la carta */
-  --color-superficie: #0c1211; /* tarjetas y bloques, con un dejo verde */
-  --color-borde: #1e2b29; /* líneas sutiles */
-  --color-texto: #fffffd;
-  --color-texto-suave: #9aa8a6;
+  --color-fondo: #fffdfb; /* blanco cálido (base) */
+  --color-superficie: #fdf1f6; /* tarjetas y bloques, rosa muy tenue */
+  --color-borde: #f2dde7; /* líneas sutiles */
+  --color-texto: #2c1a23; /* casi negro cálido */
+  --color-texto-suave: #77596a; /* plum apagado (5:1 sobre crema, WCAG AA) */
 
-  /* El turquesa oficial. Solo superficies, líneas y fondos: sobre negro
-     da 4,1:1 y WCAG pide 4,5:1 para texto chico. */
-  --color-marca: #00a29b;
-  --color-marca-hover: #00817c;
-  /* Mismo matiz, más claro (7,3:1): este es el que puede llevar texto. */
-  --color-marca-texto: #2fd5cc;
-  /* Los precios van en blanco, como en la carta impresa. */
-  --color-precio: #fffffd;
+  /* Magenta de marca. Texto blanco encima da 5,9:1 (ok para botones). */
+  --color-marca: #c2185b;
+  --color-marca-hover: #9d1450;
+  /* Para texto/links sobre la base clara (5,9:1 sobre blanco). */
+  --color-marca-texto: #b0165a;
+  --color-acento: #7b3fa0; /* morado de acento */
+  --color-precio: #2c1a23; /* precios en el texto oscuro, legibles */
 
   --font-sans: "Hanken Grotesk", system-ui, sans-serif;
   --font-display: "Bricolage Grotesque", "Hanken Grotesk", system-ui, sans-serif;
 
-  /* --- Escala tipográfica fluida (clamp: mín / preferido / máx) ---
-     Sin saltos de breakpoint: interpola solo entre ~360px y ~1280px.
-     El par --text-*--line-height es la sintaxis v4 para el line-height. */
+  /* --- Escala tipográfica fluida (clamp: mín / preferido / máx) --- */
   --text-hero: clamp(2.75rem, 1.85rem + 4.2vw, 4.5rem);
-  --text-hero--line-height: 1.04; /* display grande: muy apretado */
+  --text-hero--line-height: 1.04;
 
-  --text-titulo: clamp(2rem, 1.45rem + 2.5vw, 3rem); /* h2 de sección */
+  --text-titulo: clamp(2rem, 1.45rem + 2.5vw, 3rem);
   --text-titulo--line-height: 1.1;
 
-  --text-sub: clamp(1.35rem, 1.15rem + 0.9vw, 1.75rem); /* h3 grandes */
+  --text-sub: clamp(1.35rem, 1.15rem + 0.9vw, 1.75rem);
   --text-sub--line-height: 1.15;
 
-  --text-item: clamp(1.0625rem, 1rem + 0.25vw, 1.1875rem); /* nombre de plato/trago */
+  --text-item: clamp(1.0625rem, 1rem + 0.25vw, 1.1875rem);
   --text-item--line-height: 1.25;
 
-  --text-body: clamp(1rem, 0.97rem + 0.15vw, 1.0625rem); /* 16 → 17px */
+  --text-body: clamp(1rem, 0.97rem + 0.15vw, 1.0625rem);
   --text-body--line-height: 1.6;
 
-  --radius-suave: 0.75rem;
+  --radius-suave: 0.9rem;
 }
 
 @layer base {
@@ -106,7 +98,7 @@
 
   /* Foco visible en todo lo que se navega con teclado. */
   :focus-visible {
-    outline: 2px solid var(--color-marca-texto);
+    outline: 2px solid var(--color-marca);
     outline-offset: 3px;
     border-radius: 2px;
   }
@@ -126,7 +118,6 @@
     scroll-behavior: smooth;
   }
 
-  /* La flecha por defecto del acordeón. Vive acá y en ningún otro lado. */
   summary {
     list-style: none;
   }
@@ -135,10 +126,7 @@
   }
 }
 
-/* Título de marca. Misma fuente display, dos personalidades según el
-   tono de la página (ver más abajo el override de noche):
-   COMIDA/día = Title Case apretado (cálido, carta editorial).
-   BAR/noche  = MAYÚSCULAS espaciadas (nocturno, cóctel). */
+/* Título de sección: display cálido, apretado. */
 @utility titulo-carta {
   font-family: var(--font-display);
   font-weight: 620;
@@ -146,32 +134,7 @@
   text-transform: none;
 }
 
-/* La página del bar respira más oscuro: mismo turquesa, más apagado,
-   para separar el día (comida) de la noche (barra) sin inventar colores.
-   Se aplica en <body data-tono="noche"> desde el Layout. */
-@layer base {
-  [data-tono="noche"] {
-    --color-marca: #007a75;
-    --color-marca-hover: #005c58;
-    --color-marca-texto: #21b3ab;
-    --color-superficie: #080d0d;
-  }
-}
-
-/* La otra mitad del tono noche: el título de carta pasa a MAYÚSCULAS
-   espaciadas y más liviano. Mismo Bricolage, seteo de cóctel.
-   Va FUERA de @layer a propósito: `titulo-carta` es un @utility (capa
-   utilities), que por orden de capa le gana a cualquier regla en @layer.
-   Sin capa, esta regla vuelve a ganar. */
-[data-tono="noche"] .titulo-carta {
-  font-weight: 480;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-}
-
-/* Fila que se desliza en horizontal.
-   La barra del sistema en Windows sale blanca y gruesa, pero esconderla
-   del todo es peor: con mouse quedas sin de dónde agarrar para explorar. */
+/* Fila que se desliza en horizontal (índice de categorías). */
 @utility fila-deslizante {
   overflow-x: auto;
   overscroll-behavior-x: contain;

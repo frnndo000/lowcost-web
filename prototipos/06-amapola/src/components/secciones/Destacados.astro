@@ -1,35 +1,24 @@
 ---
-// La portada sí lleva fotos: en gastronomía la foto es el producto.
-// Las listas de /carta y /bar van sin ellas a propósito.
-//
-// Comida y barra van SEPARADAS: los platos en grilla (tono día) y el
-// trago en su propia banda con data-tono="noche", que reusa el mismo
-// mecanismo de /bar para pintar un bolsillo nocturno acá en la portada.
-// El origen se deduce del destino del ítem (donde), no se hardcodea.
-//
-// Nada escondido tras hover: todo el texto se lee siempre, también en móvil.
+// La portada sí lleva fotos: en repostería la foto es el producto.
+// La lista de /carta va sin ellas a propósito. Nada escondido tras hover:
+// todo el texto se lee siempre, también en móvil.
 import { Image } from "astro:assets";
 import { destacados, clp } from "../../data/carta.js";
 import { fotoDestacado } from "../../data/imagenes.js";
-
-const esBar = (d) => d.donde.startsWith("/bar");
-const comida = destacados.filter((d) => !esBar(d));
-const barra = destacados.filter(esBar);
 ---
 
 <section id="destacados" class="mx-auto max-w-5xl px-5 py-16 sm:py-20">
   <header class="mb-10 max-w-xl">
-    <h2 class="titulo-carta text-titulo">Lo que más piden</h2>
+    <h2 class="titulo-carta text-titulo">Las más pedidas</h2>
     <p class="mt-3 text-texto-suave">
-      De la cocina a la barra, los que nunca fallan.
+      Recetas de familia, hechas como en casa. Estas nunca fallan.
     </p>
   </header>
 
-  <!-- Cocina: los platos, como pares. -->
   <ul class="grid gap-5 sm:grid-cols-3">
     {
-      comida.map((item) => {
-        const imagen = fotoDestacado[item.id];
+      destacados.map((item) => {
+        const imagen = fotoDestacado[item.id as keyof typeof fotoDestacado];
         return (
           <li>
             <a
@@ -41,7 +30,7 @@ const barra = destacados.filter(esBar);
                   src={imagen.foto}
                   alt={imagen.alt}
                   widths={[300, 600]}
-                  sizes="(min-width: 1024px) 33vw, (min-width: 640px) 33vw, 100vw"
+                  sizes="(min-width: 640px) 33vw, 100vw"
                   class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
                 />
               </div>
@@ -67,51 +56,4 @@ const barra = destacados.filter(esBar);
       })
     }
   </ul>
-
-  <!-- Barra: banda aparte en tono noche. data-tono pinta el turquesa
-       apagado y pone el título en mayúsculas, igual que en /bar. -->
-  {
-    barra.length > 0 && (
-      <div data-tono="noche" class="mt-5 grid gap-5">
-        {barra.map((item) => {
-          const imagen = fotoDestacado[item.id];
-          return (
-            <a
-              href={item.donde}
-              class="group grid overflow-hidden rounded-suave border border-borde bg-superficie transition-colors hover:border-marca sm:grid-cols-2"
-            >
-              <div class="aspect-4/3 overflow-hidden sm:aspect-auto">
-                <Image
-                  src={imagen.foto}
-                  alt={imagen.alt}
-                  widths={[400, 800]}
-                  sizes="(min-width: 640px) 50vw, 100vw"
-                  class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-                />
-              </div>
-
-              <div class="flex flex-col justify-center gap-2 p-6 sm:p-8">
-                <p class="text-xs uppercase tracking-[0.3em] text-marca-texto">
-                  De la barra
-                </p>
-                <div class="flex items-baseline justify-between gap-3">
-                  <h3 class="titulo-carta text-sub">{item.titulo}</h3>
-                  <span class="shrink-0 font-semibold tabular-nums text-precio">
-                    {clp(item.precio)}
-                  </span>
-                </div>
-                <p class="text-texto-suave">{item.texto}</p>
-                <span class="mt-2 text-sm text-marca-texto">
-                  Ver en el bar{" "}
-                  <span class="ml-0.5 inline-block transition-transform group-hover:translate-x-1">
-                    →
-                  </span>
-                </span>
-              </div>
-            </a>
-          );
-        })}
-      </div>
-    )
-  }
 </section>

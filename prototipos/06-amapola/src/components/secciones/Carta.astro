@@ -1,89 +1,150 @@
 ---
-// Una sola sección de carta, usada en dos páginas: /carta (cocina) y
-// /bar (barra). Lo único que cambia entre las dos es el filtro y el tono
-// del turquesa, que lo pone el Layout con data-tono.
-//
-// Sin fotos, a propósito: son 200 ítems y las miniaturas estorbarían.
+// La carta completa (/carta). Un solo grupo de productos. Dos vistas,
+// conmutables sin JavaScript (radios + `:has()`, misma línea del proyecto):
+//   · Lista   → nombre + precio con línea de puntos (rápida de leer).
+//   · Bloques → tarjeta con la foto de cada postre.
+// La foto por producto sale de fotoPlato(); si no hay, va un placeholder.
+import { Image } from "astro:assets";
 import PlatoItem from "../PlatoItem.astro";
 import Franja from "../Franja.astro";
-import { categorias } from "../../data/carta.js";
-
-interface Props {
-  grupo: "cocina" | "bar";
-}
-
-const { grupo } = Astro.props;
-const delGrupo = categorias.filter((c) => c.grupo === grupo);
+import { categorias, clp } from "../../data/carta.js";
+import { fotoPlato } from "../../data/imagenes.js";
 ---
 
-<!-- Índice pegajoso: con esta cantidad de ítems, poder saltar a una
-     categoría importa más que cualquier foto. Es <nav> con anclas, cero JS. -->
-<nav
-  aria-label="Categorías"
-  class="sticky top-[3.9rem] z-10 border-b border-borde bg-fondo/95 backdrop-blur"
->
-  <ul class="fila-deslizante mx-auto flex max-w-5xl gap-2 px-5 py-3 text-sm">
-    {
-      delGrupo.map((categoria) => (
-        <li>
-          <a
-            href={`#cat-${categoria.id}`}
-            class="block whitespace-nowrap rounded-full border border-borde px-3 py-1.5 text-texto-suave transition-colors hover:border-marca hover:text-texto"
-          >
-            {categoria.nombre}
-          </a>
-        </li>
-      ))
-    }
-  </ul>
-</nav>
+<div class="vista-carta">
+  <!-- Barra pegajosa: índice de categorías + selector de vista. -->
+  <div
+    class="sticky top-[3.9rem] z-10 border-b border-borde bg-fondo/95 backdrop-blur"
+  >
+    <div class="mx-auto flex max-w-5xl items-center gap-3 px-5 py-2.5">
+      <nav aria-label="Categorías" class="min-w-0 flex-1">
+        <ul class="fila-deslizante flex gap-2 text-sm">
+          {
+            categorias.map((categoria) => (
+              <li>
+                <a
+                  href={`#cat-${categoria.id}`}
+                  class="block whitespace-nowrap rounded-full border border-borde px-3 py-1.5 text-texto-suave transition-colors hover:border-marca hover:text-texto"
+                >
+                  {categoria.nombre}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </nav>
 
-<div class="relative overflow-hidden">
-  <Franja />
+      <fieldset class="shrink-0">
+        <legend class="sr-only">Ver la carta como</legend>
+        <div class="inline-flex rounded-full border border-borde p-0.5">
+          <label class="cursor-pointer">
+            <input
+              type="radio"
+              name="vista"
+              value="lista"
+              checked
+              class="peer sr-only"
+            />
+            <span class="block rounded-full px-3 py-1 text-sm text-texto-suave transition-colors peer-checked:bg-marca peer-checked:font-semibold peer-checked:text-white peer-focus-visible:ring-2 peer-focus-visible:ring-marca">
+              Lista
+            </span>
+          </label>
+          <label class="cursor-pointer">
+            <input type="radio" name="vista" value="bloques" class="peer sr-only" />
+            <span class="block rounded-full px-3 py-1 text-sm text-texto-suave transition-colors peer-checked:bg-marca peer-checked:font-semibold peer-checked:text-white peer-focus-visible:ring-2 peer-focus-visible:ring-marca">
+              Bloques
+            </span>
+          </label>
+        </div>
+      </fieldset>
+    </div>
+  </div>
 
-  <div class="relative mx-auto max-w-3xl space-y-14 px-5 py-14">
-    {
-      delGrupo.map((categoria) => (
-        <section aria-labelledby={`cat-${categoria.id}`} class="scroll-ancla">
-          <header class="mb-4">
-            <h2
-              id={`cat-${categoria.id}`}
-              class="titulo-carta text-2xl font-semibold sm:text-3xl"
-            >
-              {categoria.nombre}
-            </h2>
-            <div class="mt-2 h-[3px] w-16 rounded-full bg-gradient-to-r from-marca to-transparent" />
-            {categoria.nota && (
-              <p class="mt-2 text-sm text-texto-suave">{categoria.nota}</p>
-            )}
-          </header>
+  <div class="relative overflow-hidden">
+    <Franja />
 
-          {categoria.tipo === "simple" && (
-            <ul>
+    <div class="relative mx-auto max-w-3xl space-y-14 px-5 py-14">
+      {
+        categorias.map((categoria) => (
+          <section aria-labelledby={`cat-${categoria.id}`} class="scroll-ancla">
+            <header class="mb-4">
+              <h2
+                id={`cat-${categoria.id}`}
+                class="titulo-carta text-2xl font-semibold sm:text-3xl"
+              >
+                {categoria.nombre}
+              </h2>
+              <div class="mt-2 h-0.75 w-16 rounded-full bg-linear-to-r from-marca to-transparent" />
+              {categoria.nota && (
+                <p class="mt-2 text-sm text-texto-suave">{categoria.nota}</p>
+              )}
+            </header>
+
+            {/* Vista LISTA */}
+            <ul data-vista="lista">
               {categoria.platos.map((plato) => (
                 <PlatoItem {...plato} />
               ))}
             </ul>
-          )}
 
-          {categoria.tipo === "subgrupos" && (
-            <div class="space-y-6">
-              {categoria.subgrupos.map((sub) => (
-                <div>
-                  <h3 class="mb-1 text-sm font-semibold uppercase tracking-wider text-marca-texto">
-                    {sub.nombre}
-                  </h3>
-                  <ul>
-                    {sub.platos.map((plato) => (
-                      <PlatoItem {...plato} />
-                    ))}
-                  </ul>
-                </div>
-              ))}
+            {/* Vista BLOQUES */}
+            <div data-vista="bloques" class="grid gap-4 sm:grid-cols-2">
+              {categoria.platos.map(
+                (plato: {
+                  nombre: string;
+                  precio: number | null;
+                  descripcion?: string;
+                }) => {
+                  const foto = fotoPlato(plato.nombre);
+                return (
+                  <article class="flex flex-col overflow-hidden rounded-suave border border-borde bg-superficie">
+                    <div class="aspect-4/3 overflow-hidden">
+                      {foto ? (
+                        <Image
+                          src={foto}
+                          alt={plato.nombre}
+                          widths={[300, 600]}
+                          sizes="(min-width: 640px) 50vw, 100vw"
+                          class="h-full w-full object-cover"
+                        />
+                      ) : (
+                        <div class="flex h-full items-center justify-center bg-linear-to-br from-marca/15 to-acento/15 text-[0.65rem] uppercase tracking-widest text-marca-texto/60">
+                          Foto pronto
+                        </div>
+                      )}
+                    </div>
+                    <div class="flex flex-1 flex-col p-4">
+                      <div class="flex items-baseline justify-between gap-2">
+                        <h3 class="text-item text-texto">{plato.nombre}</h3>
+                        <span class="shrink-0 font-semibold tabular-nums text-precio">
+                          {plato.precio ? clp(plato.precio) : "Por encargo"}
+                        </span>
+                      </div>
+                      {plato.descripcion && (
+                        <p class="mt-1 text-sm leading-snug text-texto-suave">
+                          {plato.descripcion}
+                        </p>
+                      )}
+                    </div>
+                  </article>
+                );
+              })}
             </div>
-          )}
-        </section>
-      ))
-    }
+          </section>
+        ))
+      }
+    </div>
   </div>
 </div>
+
+<style is:global>
+  /* Toggle de vista sin JS: el radio marcado oculta la otra vista. */
+  .vista-carta:has(input[name="vista"][value="lista"]:checked)
+    [data-vista="bloques"] {
+    display: none;
+  }
+  .vista-carta:has(input[name="vista"][value="bloques"]:checked)
+    [data-vista="lista"] {
+    display: none;
+  }
+</style>

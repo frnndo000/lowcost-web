@@ -1,102 +1,86 @@
 // =========================================================
 // Fotos del sitio.
 //
-// SOLO la portada lleva fotos. /carta y /bar van sin miniaturas: con
-// 200 ítems, las imágenes en la lista estorban más de lo que aportan.
+// Vive aparte de carta.js/negocio.js porque `import foto from "*.png"`
+// solo lo entiende el bundler de Astro, y scripts/check-datos.mjs corre
+// con Node pelado. Regla: src/data/*.js se importa desde Node; este
+// archivo, solo desde Astro.
 //
-// ¿Por qué vive aparte de carta.js? Porque `import foto from "*.jpg"`
-// solo lo entiende el bundler de Astro, y `scripts/check-datos.mjs`
-// corre con Node pelado. Si las imágenes estuvieran en carta.js, el
-// validador no podría importarlo.
-//
-// Regla: src/data/*.js se importa desde Node. Este archivo, solo desde Astro.
+// PENDIENTE: hoy son placeholders (degradados en la paleta de Amapola).
+// Reemplazar por fotos reales de las tortas/kuchen cuando lleguen.
 // =========================================================
 
-import logoPatio from "../assets/logo-sello.png";
-import montaditoJugosa from "../assets/platos/montadito-jugosa.jpg";
-import montaditoPobre from "../assets/platos/montadito-pobre.jpg";
-import acevichado from "../assets/platos/acevichado.jpg";
-import acevichadoTabla from "../assets/platos/acevichado-tabla.jpg";
-import sangria from "../assets/platos/sangria.jpg";
-import sangriaBarra from "../assets/platos/sangria-barra.jpg";
-import iconoRappi from "../assets/apps/rappi.png";
-import iconoPedidosya from "../assets/apps/pedidosya.png";
-import patioNoche from "../assets/local/patio-noche.jpg";
-import servicioNoche from "../assets/local/servicio-noche.jpg";
-import barra from "../assets/local/barra.jpg";
+import logoImg from "../assets/logo.png";
+import hero1 from "../assets/hero/hero1.jpg";
+import hero2 from "../assets/hero/hero2.jpg";
+import hero3 from "../assets/hero/hero3.jpg";
+import tortaMixta from "../assets/productos/tortamixta.jpg";
+import tortaAmapola from "../assets/productos/tortaamapola.jpg";
+import kuchenMora from "../assets/productos/kuchenmora.jpg";
+import cartaFoto from "../assets/productos/carta.jpg";
+import oferta1 from "../assets/oferta7000.jpg";
+import oferta2 from "../assets/oferta2x8000.jpg";
+
+/** Foto por nombre de producto, para la vista en bloques de la carta.
+ *  Hoy solo las 3 con foto real; el resto cae en un placeholder (ver Carta).
+ *  Al llegar más fotos, se agregan acá. */
+const PLATO_FOTO = {
+  "Torta Mixta": tortaMixta,
+  "Torta de Amapola": tortaAmapola,
+  "Kuchen de mora y frambuesa": kuchenMora,
+};
+export const fotoPlato = (nombre) => PLATO_FOTO[nombre] ?? null;
 
 /** id del destacado (ver `destacados` en carta.js) → foto y su alt. */
 export const fotoDestacado = {
-  "montadito-jugosa": {
-    foto: montaditoJugosa,
-    alt: "Tres montaditos de carne mechada con queso fundido sobre pizarra negra",
+  "torta-mixta": { foto: tortaMixta, alt: "Torta mixta de Amapola" },
+  "torta-amapola": {
+    foto: tortaAmapola,
+    alt: "Torta de amapola, la de la casa",
   },
-  "montadito-pobre": {
-    foto: montaditoPobre,
-    alt: "Cuatro montaditos a lo pobre con huevo de codorniz sobre papa dorada",
-  },
-  acevichado: {
-    foto: acevichado,
-    alt: "Tabla de roll acevichado con topping de salmón y cebolla morada",
-  },
-  sangria: {
-    foto: sangria,
-    alt: "Copa de sangría con frutas sobre la mesa del patio",
-  },
+  "kuchen-mora": { foto: kuchenMora, alt: "Kuchen sureño de mora y frambuesa" },
 };
 
-/** Carrusel del hero: las 4 fotos del local, apiladas y con crossfade CSS
- *  (ver Hero.astro). Reemplazó a la sección "Ambiente", que como bloque
- *  aparte no cuajaba; acá las mismas fotos son el fondo con más personalidad
- *  de la portada.
- *
- *  Orden: las oscuras primero. La primera es el LCP y la que se ve al
- *  cargar, así que el patio de noche —oscuro y el que mejor vende— deja el
- *  texto bien legible de entrada. La de servicio de día es la más clara y
- *  va al final. `ancho`/`alto` son los reales de cada archivo, para que
- *  Astro no deforme ni haga upscale. */
+/** Carrusel del hero: fotos apiladas con crossfade CSS (ver Hero.astro).
+ *  La primera es el LCP (carga eager); las demás, lazy. `ancho`/`alto` son
+ *  los reales de cada archivo para que Astro no deforme ni haga upscale. */
 export const fotosHero = [
+  { foto: hero1, ancho: 1400, alto: 1000, alt: "Vitrina de tortas de Amapola" },
   {
-    foto: patioNoche,
-    ancho: 1080,
-    alto: 1080,
-    alt: "Patio de Reñaca de noche, con guirnaldas de luces entre los árboles",
+    foto: hero2,
+    ancho: 1400,
+    alto: 1000,
+    alt: "Kuchen sureños recién horneados",
   },
-  {
-    foto: barra,
-    ancho: 1440,
-    alto: 1149,
-    alt: "Bartender sirviendo dos sours desde las cocteleras",
-  },
-  {
-    foto: servicioNoche,
-    ancho: 1080,
-    alto: 720,
-    alt: "Bandeja con montaditos de salmón, quesadillas y papas fritas de noche",
-  },
+  { foto: hero3, ancho: 1400, alto: 1000, alt: "Porciones de torta servidas" },
 ];
 
-/** Las dos tarjetas que llevan a /carta y a /bar. */
+/** La tarjeta que lleva a /carta. */
 export const fotoCarta = {
-  foto: acevichadoTabla,
-  alt: "Roll acevichado completo servido en tabla larga",
-};
-export const fotoBarra = {
-  foto: sangriaBarra,
-  alt: "Copa de sangría en la barra, con mojitos preparándose atrás",
+  foto: cartaFoto,
+  alt: "Selección de tortas y kuchen de Amapola",
 };
 
-/** Íconos oficiales de las apps de delivery, bajados del ícono PWA de
- *  cada una (rappi.cl/pwa-icons, live.pystatic.com/webassets/pwa/icons).
- *  El de WhatsApp no está acá: va como SVG inline en PideAqui.astro,
- *  porque al ser monocromo se pinta con el color del botón.
- *  Marcas registradas de sus dueños; se usan solo para indicar que el
- *  local está en esas plataformas. */
-export const iconoApp = {
-  rappi: iconoRappi,
-  pedidosya: iconoPedidosya,
-};
+/** El logo de la marca (wordmark "Amapola · Pastelería Sureña"), con el
+ *  fondo blanco ya recortado a transparente. */
+export const logo = logoImg;
 
-/** El logo, como asset de Astro para que salga en webp y al tamaño justo.
- *  Es el sello circular recortado de la portada de la carta oficial. */
-export const logo = logoPatio;
+/** Promociones vigentes (afiches reales del local). */
+export const ofertas = [
+  {
+    foto: oferta1,
+    titulo: "Dúo Dulce",
+    detalle: "Trozo de torta + kuchen",
+    precio: "$7.000",
+    dias: "Lunes a jueves",
+    alt: "Promo Dúo Dulce: trozo de torta más kuchen a $7.000",
+  },
+  {
+    foto: oferta2,
+    titulo: "Promo 2x",
+    detalle: "Dos trozos de torta, cualquier sabor",
+    precio: "$8.000",
+    dias: "Lunes a jueves",
+    alt: "Promo 2x: dos trozos de torta a $8.000",
+  },
+];
