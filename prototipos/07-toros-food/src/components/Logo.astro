@@ -1,9 +1,8 @@
 ---
-// Logo de la marca: el toro oficial + el wordmark "TOROS FOOD".
-// El logo oficial apila el toro sobre "TOROS"; en la barra horizontal se
-// arma con el toro al lado del nombre para que quede compacto y legible.
-import { Image } from "astro:assets";
-import { marca } from "../data/imagenes.js";
+// Logo de la marca: el toro oficial (vectorizado, nítido) + el wordmark
+// "TOROS FOOD". El logo oficial apila el toro sobre "TOROS"; en la barra
+// horizontal se arma con el toro al lado del nombre para que quede compacto.
+import Toro from "./Toro.astro";
 
 interface Props {
   tamano?: number;
@@ -16,14 +15,7 @@ const alto = Math.round(tamano * 0.72);
 ---
 
 <span class={`flex items-center gap-2.5 ${clase}`}>
-  <Image
-    src={marca.toro}
-    alt={conTexto ? "" : "Toros Food"}
-    height={alto}
-    loading="eager"
-    class="w-auto shrink-0 object-contain"
-    style={`height:${alto}px`}
-  />
+  <Toro class="shrink-0 text-marca" style={`height:${alto}px;width:auto`} />
   {
     conTexto && (
       <span class="titulo-toros text-xl leading-none tracking-tight">

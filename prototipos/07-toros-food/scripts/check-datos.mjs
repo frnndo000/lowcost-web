@@ -10,7 +10,7 @@
 import assert from "node:assert/strict";
 import { existsSync } from "node:fs";
 import { fileURLToPath } from "node:url";
-import { negocio, pendientes, textoDias } from "../src/data/negocio.js";
+import { negocio, pendientes, textoDias, diaSchema } from "../src/data/negocio.js";
 import { categorias, destacados } from "../src/data/carta.js";
 import { preguntas } from "../src/data/faq.js";
 import { schemaRestaurant } from "../src/data/schema.js";
@@ -29,9 +29,12 @@ assert.equal(textoDias(["Th", "Mo", "We", "Tu"]), "Lunes a jueves");
 // --- 2. Lógica: el Schema sale bien armado desde el horario ---
 const schema = schemaRestaurant();
 assert.equal(schema.openingHoursSpecification.length, negocio.horario.length);
-assert.deepEqual(schema.openingHoursSpecification[0].dayOfWeek, [
-  "Monday", "Tuesday", "Wednesday", "Thursday",
-]);
+// El Schema mapea cada bloque a los días de Schema.org. Se compara contra los
+// datos reales (no valores fijos) para que no se rompa al cambiar el horario.
+assert.deepEqual(
+  schema.openingHoursSpecification[0].dayOfWeek,
+  negocio.horario[0].dias.map(diaSchema),
+);
 assert.equal(schema["@type"], "Restaurant");
 
 // --- 3. Datos de contacto que rompen el sitio si están mal ---

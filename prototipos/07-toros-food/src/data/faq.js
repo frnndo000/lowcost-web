@@ -21,7 +21,7 @@ export const preguntas = [
   },
   {
     p: "¿Hacen delivery?",
-    r: "Sí. Puedes pedir directo por WhatsApp —así pagas el precio de la carta, sin comisión— o por Uber Eats, Rappi y PedidosYa.",
+    r: "Sí. Puedes pedir directo por WhatsApp (así pagas el precio de la carta, sin comisión) o por Uber Eats, Rappi y PedidosYa.",
   },
   {
     p: "¿Tienen opciones vegetarianas?",

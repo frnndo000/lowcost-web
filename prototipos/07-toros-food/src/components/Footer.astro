@@ -10,7 +10,7 @@ const delivery = [
 ---
 
 <footer class="relative overflow-hidden border-t border-borde bg-superficie">
-  <Toro class="pointer-events-none absolute -right-10 -top-12 hidden w-64 select-none text-marca opacity-[0.05] sm:block" />
+  <Toro class="pointer-events-none absolute right-0 top-1/2 hidden w-72 -translate-y-1/2 translate-x-[22%] select-none text-marca opacity-[0.06] sm:block" />
 
   <div class="relative mx-auto grid max-w-5xl gap-8 px-5 py-14 sm:grid-cols-3">
     <div class="space-y-2">
@@ -52,7 +52,7 @@ const delivery = [
             <li class="flex justify-between gap-4 text-sm">
               <span class="text-texto">{textoDias(bloque.dias)}</span>
               <span class="tabular-nums text-texto-suave">
-                {bloque.abre} – {bloque.cierra}
+                {bloque.abre} a {bloque.cierra}
               </span>
             </li>
           ))

@@ -17,7 +17,7 @@ const apps = [
 ---
 
 <section id="pedidos" class="mx-auto max-w-5xl px-5 py-20">
-  <header class="mb-10 text-center">
+  <header class="revelar mb-10 text-center">
     <p class="text-sm uppercase tracking-[0.3em] text-texto-suave">
       Pide aquí
     </p>
@@ -25,7 +25,7 @@ const apps = [
       Directo a la parrilla
     </h2>
     <p class="mx-auto mt-4 max-w-md text-texto-suave">
-      Escríbenos por WhatsApp y te tomamos el pedido al tiro —así pagas el
+      Escríbenos por WhatsApp y te tomamos el pedido al tiro. Así pagas el
       precio de la carta, sin comisión. O pídelo por tu app favorita.
     </p>
   </header>
@@ -34,7 +34,7 @@ const apps = [
     href={whatsapp}
     target="_blank"
     rel="noopener"
-    class="mx-auto flex max-w-md items-center justify-center gap-3 rounded-suave bg-marca px-8 py-5 text-lg font-semibold text-white shadow-lg shadow-marca/25 transition-colors hover:bg-marca-hover"
+    class="revelar mx-auto flex max-w-md items-center justify-center gap-3 rounded-suave bg-marca px-8 py-5 text-lg font-semibold text-white shadow-lg shadow-marca/25 transition hover:bg-marca-hover active:translate-y-px active:scale-[0.98]"
   >
     <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor" aria-hidden="true">
       <path
@@ -44,7 +44,7 @@ const apps = [
     Pedir por WhatsApp
   </a>
 
-  <div class="mt-8">
+  <div class="revelar mt-8">
     <p class="mb-4 text-center text-xs uppercase tracking-widest text-texto-suave">
       O en delivery
     </p>
@@ -56,7 +56,7 @@ const apps = [
               href={app.href}
               target="_blank"
               rel="noopener"
-              class="flex items-center justify-center gap-2.5 rounded-suave border border-borde bg-superficie px-5 py-4 font-semibold transition-colors hover:border-texto-suave hover:bg-superficie-alta"
+              class="flex items-center justify-center gap-2.5 rounded-suave border border-borde bg-superficie px-5 py-4 font-semibold transition duration-300 hover:-translate-y-0.5 hover:border-texto-suave hover:bg-superficie-alta hover:shadow-lg hover:shadow-black/30"
             >
               <span
                 class="h-2.5 w-2.5 shrink-0 rounded-full"

@@ -14,32 +14,30 @@ const whatsappHref = "/#pedidos";
       id="combos"
       class="relative overflow-hidden border-y border-borde bg-superficie"
     >
-      <Toro class="pointer-events-none absolute -left-16 -bottom-16 hidden w-80 select-none text-marca opacity-[0.05] md:block" />
+      <Toro class="pointer-events-none absolute right-0 top-1/2 hidden w-[26rem] -translate-y-1/2 translate-x-[18%] select-none text-marca opacity-[0.06] md:block" />
 
       <div class="relative mx-auto max-w-5xl px-5 py-16">
         <div class="grid items-center gap-10 md:grid-cols-[minmax(0,1fr)_1.4fr]">
-          <header>
-            <p class="text-sm uppercase tracking-[0.3em] text-texto-suave">
-              Para compartir
-            </p>
-            <h2 class="neon titulo-toros mt-2 text-4xl sm:text-5xl">
-              Combos
-            </h2>
+          <header class="revelar">
+            <h2 class="neon titulo-toros text-4xl sm:text-5xl">Combos</h2>
             <p class="mt-4 max-w-sm text-texto-suave">
-              Pensados para dos, para la familia o para el hambre en serio.
+              Para compartir de a dos, en familia o para el hambre en serio.
               Más comida, mejor precio.
             </p>
             <a
               href={whatsappHref}
-              class="mt-6 inline-flex items-center gap-2 rounded-suave bg-marca px-6 py-3 font-semibold text-white transition-colors hover:bg-marca-hover"
+              class="mt-6 inline-flex items-center gap-2 rounded-suave bg-marca px-6 py-3 font-semibold text-white transition hover:bg-marca-hover active:translate-y-px active:scale-[0.98]"
             >
               Pedir un combo →
             </a>
           </header>
 
           <ul class="divide-y divide-borde border-y border-borde">
-            {combos.platos.map((plato) => (
-              <li class="flex items-baseline gap-4 py-4">
+            {combos.platos.map((plato, i) => (
+              <li
+                class="revelar flex items-baseline gap-4 py-4"
+                style={`animation-range: entry ${5 + i * 8}% entry ${45 + i * 8}%`}
+              >
                 <div class="min-w-0">
                   <h3 class="titulo-toros text-lg leading-tight">
                     {plato.nombre}

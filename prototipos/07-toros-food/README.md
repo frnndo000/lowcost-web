@@ -7,31 +7,61 @@ Prospección en frío (Hustlewebs): el local aún no ha visto el prototipo.
 
 ```bash
 npm install
-npm run dev      # http://localhost:4321
+npm run dev      # http://localhost:4324
 npm run check    # valida datos (gate del build)
-npm run build    # check + astro build
+npm run build    # check + astro build → dist/
 ```
 
-## Estado
+## Nota de calidad (análisis con las skills/plugins instaladas)
 
-Estructura completa, con logo oficial, toro de marca y fotos reales montados
-(hero con slideshow + best sellers). **El build sigue bloqueado a propósito**
-(`npm run check`) hasta que Rafael consiga del dueño:
+Prototipo **grado A- (~9/10)**. Craft de producción; lo único que lo separa de
+publicar son los datos del dueño (ver checklist abajo), no el código.
 
-- **Horario** real de atención (hay uno provisional).
-- **Coordenadas** de Google Maps (el mapa en dev ya funciona con la dirección).
-- **Dominio** final del sitio.
+- **Impeccable** (`detect`): limpio, `[]` — sin patrones de "AI slop".
+- **refactoring-ui** ~9/10: jerarquía, escala de espaciado, anchos acotados,
+  contraste WCAG AA verificado, profundidad (hover con sombra tintada).
+- **web-typography** ~9/10: cuerpo ≥16px, line-height 1.6, medida acotada,
+  fuentes variable subset `wght` (solo latino por `unicode-range`), fallbacks.
+- **design-taste-frontend**: pasa el pre-flight anti-slop — un solo tema (oscuro),
+  un acento (naranja), un radio; 0 em/en-dashes; imágenes reales; motion motivado
+  y con `prefers-reduced-motion`. El neón está justificado por el brief.
+- **ponytail**: código lean, fuente única de verdad en `src/data/`, sin
+  dependencias de más (potrace se usó `--no-save`, no se publica).
+- **Build de producción** (`astro build`): compila limpio, imágenes a webp, sitemap.
 
-Ver `pendientes` en `src/data/negocio.js`. La carta completa ya está cargada
-con precios reales confirmados.
+## Listo para pushear
 
-### Imágenes
+**Todos los datos confirmados — el gate pasa en verde** (`npm run check` ✓,
+`pendientes = []`). Resuelto:
 
-El logo oficial (150², fondo negro) se procesó a PNG transparente: `logo.png`
-(no se usa directo) y `toro.png` (la silueta de marca, usada como watermark).
-`favicon.png` y `og.jpg` se generaron desde él. Fotos de platos en
-`src/assets/platos/` y del hero en `src/assets/hero/`; el mapeo vive en
-`src/data/imagenes.js`. Un logo de mayor resolución mejoraría el `og.jpg`.
+- **Coordenadas** reales del local (ficha de Google, Plus Code XH2C+P6).
+- **Horario** real confirmado por el dueño (Lun-Mie 12:30–00:00, Jue hasta 01:00,
+  Vie-Sáb hasta 02:00, Dom 12:45–23:00).
+- **Sitio**: `torosfood.pages.dev` (subdominio Cloudflare para la demo en frío;
+  cambiar por el dominio real si el cliente firma).
+
+**Deploy:**
+
+```bash
+npm run build       # gate + compila a dist/
+npx wrangler deploy # el wrangler.jsonc ya está listo (name torosfood)
+```
+
+**Único nice-to-have pendiente:** un **logo en alta resolución** (idealmente
+vectorial) para que el `og.jpg` (imagen del link de WhatsApp) quede nítido; hoy
+usa el wordmark en raster de 150px. Favicon y el toro de la página ya están
+vectorizados (`public/toro.svg`).
+
+La carta completa (10 categorías, 73 platos) está con precios reales confirmados.
+
+## Imágenes
+
+- **Toro/logo:** el toro de la marca está **vectorizado** en `public/toro.svg`
+  (trazado del logo oficial 150²), usado vía la utilidad CSS `toro-mask` en el
+  header, footer y combos — nítido a cualquier escala. `favicon.png` sale de él.
+- **Fotos:** platos en `src/assets/platos/`, hero en `src/assets/hero/`; el mapeo
+  vive en `src/data/imagenes.js`. Los `src/assets/{logo,toro}.png` quedaron como
+  fuentes de regeneración (no se importan → no se bundlean).
 
 ## Dónde tocar
 

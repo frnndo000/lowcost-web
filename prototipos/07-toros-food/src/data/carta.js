@@ -384,12 +384,12 @@ export const destacados = [
     donde: "/carta#cat-pepitos",
   },
   {
-    id: "toros-premium-italiano",
-    titulo: "Toro's Premium Italiano",
+    id: "completo-italiano",
+    titulo: "Completo Italiano Grande",
     texto:
-      "Doble carne de vacuno, doble queso fundido, tomate y palta en pan de 16 cm.",
-    precio: 12990,
-    donde: "/carta#cat-sandwiches",
+      "El clásico chileno: pan grande, vienesa, tomate, palta y mayonesa casera.",
+    precio: 3890,
+    donde: "/carta#cat-completos",
   },
   {
     id: "hamburguesa-toros-food",
@@ -400,11 +400,11 @@ export const destacados = [
     donde: "/carta#cat-hamburguesas",
   },
   {
-    id: "perro-toros-food",
-    titulo: "Perro Toro's Food",
+    id: "perro-sencillo",
+    titulo: "Perro Sencillo",
     texto:
-      "Salchicha, carne, pollo, tocineta, papas hilo y queso llanero. El perro venezolano completo.",
-    precio: 8990,
+      "El perro de siempre: salchicha, papas hilo, cebolla, repollo, queso llanero y salsas.",
+    precio: 3000,
     donde: "/carta#cat-perros",
   },
 ];

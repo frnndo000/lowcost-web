@@ -12,11 +12,8 @@
 // Campos por confirmar con el dueño (vía Rafael).
 // `npm run check` falla mientras esta lista no esté vacía, así que
 // es imposible publicar el sitio con datos de mentira.
-export const pendientes = [
-  "horario", // hay uno provisional abajo; confirmar días y horas reales
-  "coords", // sacar de Google Maps (el mapa en dev usa la dirección de texto)
-  "sitio", // dominio final, lo compra el cliente
-];
+// Vacío: todos los datos confirmados. El build pasa.
+export const pendientes = [];
 
 export const negocio = {
   nombre: "Toros Food",
@@ -40,11 +37,11 @@ export const negocio = {
   comuna: "Quilpué",
   region: "Valparaíso",
   pais: "CL",
-  coords: { lat: 0, lng: 0 }, // PENDIENTE: sacar de Google Maps
+  coords: { lat: -33.0481582, lng: -71.4294164 }, // ficha de Google del local (Plus Code XH2C+P6)
 
   // --- Contacto ---
-  telefono: "+56 9 6819 9773",
-  whatsapp: "56968199773", // solo dígitos, con código país
+  telefono: "+56 9 6819 8773",
+  whatsapp: "56968198773", // solo dígitos, con código país
   mensajeWhatsapp: "Hola! Quiero hacer un pedido en Toros Food:",
 
   // --- Redes ---
@@ -52,19 +49,21 @@ export const negocio = {
   facebook: "https://web.facebook.com/p/Toros-Food-61560320313848/",
   google: "https://share.google/WbaoBCdUoS5TA6Jh2",
 
-  // --- Dominio final del sitio (PENDIENTE: lo compra el cliente) ---
-  sitio: "https://torosfood.cl",
+  // --- Sitio ---
+  // Subdominio de Cloudflare Pages para la demo en frío (coincide con el
+  // `name` del wrangler.jsonc). Cambiar por el dominio real si el cliente firma.
+  sitio: "https://torosfood.pages.dev",
 
-  // --- Horario (PENDIENTE: confirmar días y horas reales con el dueño) ---
+  // --- Horario (confirmado con el dueño vía Rafael, jul 2026) ---
   // Estructurado, NO texto: de acá salen el horario que se muestra
   // y el openingHoursSpecification del Schema.org. Un dato, tres usos.
-  // Este bloque es PROVISIONAL para que la demo tenga algo que mostrar;
-  // "horario" está en `pendientes`, así que el build no pasa hasta
-  // reemplazarlo por el real.
+  // Cierre pasada la medianoche (ej. 12:30 → 02:00) es válido: `cierra`
+  // menor que `abre` significa que cierra al día siguiente.
   horario: [
-    { dias: ["Mo", "Tu", "We", "Th"], abre: "12:00", cierra: "23:00" },
-    { dias: ["Fr", "Sa"], abre: "12:00", cierra: "00:30" },
-    { dias: ["Su"], abre: "12:00", cierra: "22:30" },
+    { dias: ["Mo", "Tu", "We"], abre: "12:30", cierra: "00:00" },
+    { dias: ["Th"], abre: "12:30", cierra: "01:00" },
+    { dias: ["Fr", "Sa"], abre: "12:30", cierra: "02:00" },
+    { dias: ["Su"], abre: "12:45", cierra: "23:00" },
   ],
 
   // --- Cómo pedir ---

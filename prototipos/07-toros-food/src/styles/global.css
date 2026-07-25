@@ -112,6 +112,33 @@
     0 0 22px color-mix(in srgb, var(--color-marca) 40%, transparent);
 }
 
+/* Píldora del índice de categorías con encendido tipo letrero de neón:
+   sobria en reposo, "prende" al hover/foco (borde + texto + halo glow).
+   Es el único gesto de presencia de la carta; el cuerpo va limpio. */
+@utility letrero-pill {
+  &:hover,
+  &:focus-visible {
+    color: var(--color-marca-texto);
+    border-color: var(--color-marca);
+    text-shadow: 0 0 8px color-mix(in srgb, var(--color-marca) 60%, transparent);
+    box-shadow:
+      0 0 12px color-mix(in srgb, var(--color-marca) 32%, transparent),
+      inset 0 0 8px color-mix(in srgb, var(--color-marca) 14%, transparent);
+  }
+}
+
+/* El toro de la marca, vectorizado del logo oficial (public/toro.svg).
+   Se pinta con una máscara CSS: el color sale de currentColor (text-*), el
+   tamaño de width/height y la opacidad de la clase que lo use. Un solo SVG
+   externo cacheado, nítido a cualquier escala. La proporción sale del viewBox. */
+@utility toro-mask {
+  display: inline-block;
+  aspect-ratio: 720 / 672;
+  background-color: currentColor;
+  -webkit-mask: url("/toro.svg") center / contain no-repeat;
+  mask: url("/toro.svg") center / contain no-repeat;
+}
+
 /* Fila que se desliza en horizontal (índice de categorías en móvil).
    La barra del sistema en Windows sale blanca y gruesa; esconderla del
    todo deja al mouse sin de dónde agarrar, así que se queda delgada y
@@ -135,6 +162,40 @@
   }
   &::-webkit-scrollbar-thumb:hover {
     background: var(--color-texto-suave);
+  }
+}
+
+/* =========================================================
+   MOVIMIENTO — entrada del hero y revelado al hacer scroll.
+   CSS puro con scroll-driven animations (animation-timeline: view()),
+   sin JavaScript, fiel al espíritu no-JS del repo. Donde el navegador no
+   lo soporta, el contenido simplemente aparece (progressive enhancement).
+   Todo se apaga con prefers-reduced-motion (bloque de más abajo).
+   ========================================================= */
+@media (prefers-reduced-motion: no-preference) {
+  /* Entrada del hero al cargar: sube y aparece. */
+  .aparece {
+    animation: subir-fade 0.85s cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+
+  @supports (animation-timeline: view()) {
+    /* Revelado de secciones a medida que entran en pantalla. */
+    .revelar {
+      animation: subir-fade linear both;
+      animation-timeline: view();
+      animation-range: entry 5% entry 45%;
+    }
+  }
+
+  @keyframes subir-fade {
+    from {
+      opacity: 0;
+      transform: translateY(1.75rem);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
   }
 }
 

@@ -11,7 +11,7 @@ const whatsapp = `https://wa.me/${negocio.whatsapp}?text=${encodeURIComponent(ne
 
 <section id="ubicacion" class="border-t border-borde bg-superficie">
   <div class="mx-auto max-w-5xl px-5 py-20">
-    <header class="mb-10 text-center">
+    <header class="revelar mb-10 text-center">
       <h2 class="titulo-toros text-4xl sm:text-5xl">Dónde estamos</h2>
       <p class="mx-auto mt-4 max-w-md text-texto-suave">
         En pleno {negocio.comuna}. Retiro en local o delivery.
@@ -40,7 +40,7 @@ const whatsapp = `https://wa.me/${negocio.whatsapp}?text=${encodeURIComponent(ne
                 <li class="flex justify-between gap-4">
                   <span>{textoDias(bloque.dias)}</span>
                   <span class="tabular-nums text-texto-suave">
-                    {bloque.abre} – {bloque.cierra}
+                    {bloque.abre} a {bloque.cierra}
                   </span>
                 </li>
               ))
@@ -73,7 +73,7 @@ const whatsapp = `https://wa.me/${negocio.whatsapp}?text=${encodeURIComponent(ne
           href={whatsapp}
           target="_blank"
           rel="noopener"
-          class="block rounded-suave bg-marca px-6 py-4 text-center text-lg font-semibold text-white transition-colors hover:bg-marca-hover"
+          class="block rounded-suave bg-marca px-6 py-4 text-center text-lg font-semibold text-white transition hover:bg-marca-hover active:translate-y-px active:scale-[0.99]"
         >
           Hacer mi pedido
         </a>

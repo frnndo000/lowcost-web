@@ -46,7 +46,7 @@ const whatsapp = `https://wa.me/${negocio.whatsapp}?text=${encodeURIComponent(ne
   </div>
 
   <!-- Contenido centrado: el nombre manda, la ubicación va debajo -->
-  <div class="relative mx-auto w-full max-w-3xl px-5 py-24">
+  <div class="aparece relative mx-auto w-full max-w-3xl px-5 py-24">
     <h1
       aria-label="Toros Food"
       class="titulo-toros text-7xl leading-[0.85] drop-shadow-xl sm:text-8xl xl:text-9xl"
@@ -77,13 +77,13 @@ const whatsapp = `https://wa.me/${negocio.whatsapp}?text=${encodeURIComponent(ne
         href={whatsapp}
         target="_blank"
         rel="noopener"
-        class="rounded-suave bg-marca px-8 py-4 text-center text-lg font-semibold text-white shadow-lg shadow-marca/30 transition-colors hover:bg-marca-hover"
+        class="rounded-suave bg-marca px-8 py-4 text-center text-lg font-semibold text-white shadow-lg shadow-marca/30 transition hover:bg-marca-hover active:translate-y-px active:scale-[0.98]"
       >
         Pedir por WhatsApp
       </a>
       <a
         href="/carta"
-        class="rounded-suave border border-borde bg-fondo/50 px-8 py-4 text-center text-lg font-semibold backdrop-blur-sm transition-colors hover:border-texto-suave"
+        class="rounded-suave border border-borde bg-fondo/50 px-8 py-4 text-center text-lg font-semibold backdrop-blur-sm transition hover:border-texto-suave active:translate-y-px active:scale-[0.98]"
       >
         Ver la carta
       </a>

@@ -1,23 +1,16 @@
 ---
-// Motivo del toro — la silueta oficial de la marca (extraída del logo a PNG
-// transparente), usada como firma gráfica recurrente: marca de agua en la
-// carta, los combos y el footer.
+// Motivo del toro — la silueta oficial de la marca, VECTORIZADA del logo
+// (public/toro.svg) para que se vea nítida a cualquier tamaño. Se pinta con
+// una máscara CSS: el color viene de `currentColor` (una clase text-*), el
+// tamaño de width/height y la opacidad de la clase que lo usa.
 //
-// Ya viene en el naranja de la marca; la intensidad se controla con la
-// opacidad de la clase que lo usa (ej. opacity-[0.05]).
-import { Image } from "astro:assets";
-import { marca } from "../data/imagenes.js";
-
+// Firma gráfica recurrente: marca de agua en la carta, los combos y el footer,
+// y el logo del header.
 interface Props {
   class?: string;
+  style?: string;
 }
-const { class: clase = "" } = Astro.props;
+const { class: clase = "", style } = Astro.props;
 ---
 
-<Image
-  src={marca.toro}
-  alt=""
-  aria-hidden="true"
-  loading="lazy"
-  class={clase}
-/>
+<span class={`toro-mask ${clase}`} style={style} aria-hidden="true"></span>

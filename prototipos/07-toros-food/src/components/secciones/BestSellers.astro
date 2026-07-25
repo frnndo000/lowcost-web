@@ -8,7 +8,7 @@ import { fotoDestacado } from "../../data/imagenes.js";
 ---
 
 <section id="destacados" class="mx-auto max-w-5xl px-5 py-20">
-  <header class="mb-10">
+  <header class="revelar mb-10">
     <h2 class="neon titulo-toros text-4xl sm:text-5xl">Los más pedidos</h2>
     <p class="mt-3 max-w-md text-texto-suave">
       Lo que sale sin parar de la parrilla. Chileno y venezolano, en un solo
@@ -18,13 +18,13 @@ import { fotoDestacado } from "../../data/imagenes.js";
 
   <ul class="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
     {
-      destacados.map((item) => {
+      destacados.map((item, i) => {
         const imagen = fotoDestacado[item.id];
         return (
-        <li>
+        <li class="revelar" style={`animation-range: entry ${5 + i * 7}% entry ${45 + i * 7}%`}>
           <a
             href={item.donde}
-            class="group flex h-full flex-col overflow-hidden rounded-suave border border-borde bg-superficie transition-colors hover:border-marca"
+            class="group flex h-full flex-col overflow-hidden rounded-suave border border-borde bg-superficie transition duration-300 hover:-translate-y-1 hover:border-marca hover:shadow-xl hover:shadow-black/40"
           >
             <div class="aspect-4/3 overflow-hidden bg-superficie-alta">
               <Image
