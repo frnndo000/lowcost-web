@@ -1,0 +1,26 @@
+---
+// Página propia para la carta completa. Separarla de la home no es solo
+// por largo: "carta / precios Toros Food Quilpué" es una búsqueda con
+// intención de compra, y una URL dedicada compite mejor por ella.
+import Layout from "../layouts/Layout.astro";
+import Carta from "../components/secciones/Carta.astro";
+import { negocio } from "../data/negocio.js";
+---
+
+<Layout
+  titulo={`Carta y precios — ${negocio.nombre}, ${negocio.comuna}`}
+  descripcion="Carta completa de Toros Food, Quilpué: completos, churrascos, hamburguesas, pepitos venezolanos, perros, combos y más. Precios directos, sin comisión de app."
+>
+  <header class="border-b border-borde px-5 py-14 text-center">
+    <p class="text-xs uppercase tracking-[0.3em] text-texto-suave">
+      Toros Food · {negocio.comuna}
+    </p>
+    <h1 class="neon titulo-toros mt-3 text-5xl sm:text-6xl">Carta</h1>
+    <p class="mx-auto mt-4 max-w-lg text-texto-suave">
+      Precios de la carta directa. Pidiendo por WhatsApp no pagas comisión de
+      app.
+    </p>
+  </header>
+
+  <Carta />
+</Layout>

@@ -1,0 +1,151 @@
+@import "tailwindcss";
+
+/* =========================================================
+   TEMA TOROS FOOD — parrilla urbana nocturna.
+   Negro casi puro, rojo-naranja del logo como único acento.
+   Sacado de la identidad real del local (Instagram @_torosfood):
+   fondo negro, tipografía condensada bold, el toro como ícono.
+
+   Los tokens se llaman por SU ROL, no por su color: `--color-marca`,
+   no `--color-naranja`. Así el próximo cliente cambia estas líneas
+   y no 30 clases repartidas por los componentes.
+   ========================================================= */
+@theme {
+  --color-fondo: #0a0a0a; /* negro de la marca */
+  --color-superficie: #1c1c1c; /* tarjetas y bloques */
+  --color-superficie-alta: #262626; /* tarjeta sobre tarjeta / hover */
+  --color-borde: #2c2c2c; /* líneas sutiles */
+  --color-texto: #f5f5f0; /* blanco cálido */
+  /* Gris cálido, tintado hacia el fondo (no gris puro): 6:1 sobre el
+     negro, así el texto secundario se lee sin gritar. */
+  --color-texto-suave: #b3ada5;
+
+  /* Rojo-naranja del logo. Sobre el negro da 5,9:1 y sobre la superficie
+     5:1, así que sirve tanto de acento de superficie como de texto. */
+  --color-marca: #ff4b1f;
+  --color-marca-hover: #e63e15;
+  --color-marca-texto: #ff5c33; /* mismo matiz, un pelo más claro para texto largo */
+  /* Los precios van en la familia del acento, un punto más cálidos y
+     claros para que el número se lea de un vistazo (7:1 sobre el negro). */
+  --color-precio: #ff6b3d;
+
+  --font-sans: "Inter Variable", system-ui, sans-serif;
+  --font-display: "Oswald Variable", "Inter Variable", sans-serif;
+
+  --radius-suave: 0.625rem;
+}
+
+@layer base {
+  body {
+    background-color: var(--color-fondo);
+    color: var(--color-texto);
+    font-family: var(--font-sans);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display);
+    line-height: 1.05;
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  /* Foco visible en todo lo que se navega con teclado. */
+  :focus-visible {
+    outline: 2px solid var(--color-marca-texto);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  address {
+    font-style: normal;
+  }
+
+  /* Con dos barras pegajosas encima (header + índice de categorías),
+     un ancla sin margen deja el título escondido debajo. */
+  :target,
+  .scroll-ancla {
+    scroll-margin-top: 8rem;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  /* La flecha por defecto del acordeón. Vive acá y en ningún otro lado. */
+  summary {
+    list-style: none;
+  }
+  summary::-webkit-details-marker {
+    display: none;
+  }
+}
+
+/* Título display condensado, en mayúsculas apretadas: el estilo del
+   letrero y del logo "TOROS". Un solo lugar define esa voz tipográfica. */
+@utility titulo-toros {
+  font-family: var(--font-display);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.01em;
+}
+
+/* Letrero neón: el tratamiento firma de las categorías, calcado del letrero
+   rojo-naranja real del local. Es text-shadow (un halo de luz), no gradiente.
+   Solo para texto GRANDE: en tamaño chico el halo emborrona la lectura. */
+@utility neon {
+  color: var(--color-marca-texto);
+  text-shadow:
+    0 0 6px color-mix(in srgb, var(--color-marca) 65%, transparent),
+    0 0 22px color-mix(in srgb, var(--color-marca) 40%, transparent);
+}
+
+/* Fila que se desliza en horizontal (índice de categorías en móvil).
+   La barra del sistema en Windows sale blanca y gruesa; esconderla del
+   todo deja al mouse sin de dónde agarrar, así que se queda delgada y
+   con los colores del tema. */
+@utility fila-deslizante {
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-borde) transparent;
+
+  &::-webkit-scrollbar {
+    height: 6px;
+  }
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: var(--color-borde);
+    border-radius: 999px;
+  }
+  &::-webkit-scrollbar-thumb:hover {
+    background: var(--color-texto-suave);
+  }
+}
+
+/* Fuera de @layer a propósito: le gana a todas las capas. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

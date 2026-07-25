@@ -1,0 +1,66 @@
+---
+// La carta completa: todas las categorías en orden, sin fotos (con esta
+// cantidad de platos las miniaturas estorban más de lo que aportan).
+// La personalidad la ponen la tipografía condensada, el acento rojo-naranja
+// y el tratamiento neón en los nombres de categoría (el letrero del local).
+//
+// Una sola cocina, así que no hay filtro por grupo: se muestran todas.
+import Toro from "../Toro.astro";
+import PlatoItem from "../PlatoItem.astro";
+import { categorias } from "../../data/carta.js";
+---
+
+<!-- Índice pegajoso: poder saltar a una categoría importa más que cualquier
+     adorno. Es <nav> con anclas, cero JavaScript. -->
+<nav
+  aria-label="Categorías"
+  class="sticky top-[3.75rem] z-10 border-b border-borde bg-fondo/95 backdrop-blur"
+>
+  <ul class="fila-deslizante mx-auto flex max-w-5xl gap-2 px-5 py-3 text-sm">
+    {
+      categorias.map((categoria) => (
+        <li>
+          <a
+            href={`#cat-${categoria.id}`}
+            class="block whitespace-nowrap rounded-full border border-borde px-3 py-1.5 text-texto-suave transition-colors hover:border-marca hover:text-texto"
+          >
+            {categoria.nombre}
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</nav>
+
+<div class="relative overflow-hidden">
+  <Toro
+    class="pointer-events-none absolute -left-24 top-32 hidden w-[30rem] select-none text-marca opacity-[0.04] sm:block"
+  />
+
+  <div class="relative mx-auto max-w-3xl space-y-14 px-5 py-14">
+    {
+      categorias.map((categoria) => (
+        <section aria-labelledby={`cat-${categoria.id}`} class="scroll-ancla">
+          <header class="mb-4">
+            <h2
+              id={`cat-${categoria.id}`}
+              class="neon titulo-toros text-3xl sm:text-4xl"
+            >
+              {categoria.nombre}
+            </h2>
+            <div class="mt-2 h-px w-14 bg-marca" />
+            {categoria.nota && (
+              <p class="mt-2 text-sm text-texto-suave">{categoria.nota}</p>
+            )}
+          </header>
+
+          <ul>
+            {categoria.platos.map((plato) => (
+              <PlatoItem {...plato} />
+            ))}
+          </ul>
+        </section>
+      ))
+    }
+  </div>
+</div>

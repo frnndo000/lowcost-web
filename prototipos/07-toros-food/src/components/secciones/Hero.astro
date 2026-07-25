@@ -1,0 +1,138 @@
+---
+// Hero inmersivo a pantalla completa: la foto llena el fondo y el texto va
+// abajo sobre un velo oscuro, tipo afiche. En celular calza natural (fotos
+// verticales, pantalla vertical); en desktop el velo integra el recorte.
+// Fotos en alta resolución (1440px) para que no se vean borrosas. Slideshow
+// en crossfade, cero JavaScript. Fotos distintas a las de best sellers.
+import { Image } from "astro:assets";
+import { negocio } from "../../data/negocio.js";
+import { heroSlides } from "../../data/imagenes.js";
+
+const whatsapp = `https://wa.me/${negocio.whatsapp}?text=${encodeURIComponent(negocio.mensajeWhatsapp)}`;
+---
+
+<section
+  id="inicio"
+  class="relative flex min-h-[88svh] items-center justify-center overflow-hidden border-b border-borde text-center"
+>
+  <!-- Slideshow a pantalla completa -->
+  <div class="slideshow absolute inset-0">
+    {
+      heroSlides.map((slide, i) => (
+        <div data-slide class={`slide slide-${i + 1}`}>
+          <Image
+            src={slide.foto}
+            alt={slide.alt}
+            widths={[768, 1200, 1440, 1920]}
+            sizes="100vw"
+            loading={i === 0 ? "eager" : "lazy"}
+            class="h-full w-full object-cover object-center"
+          />
+        </div>
+      ))
+    }
+  </div>
+
+  <!-- Velos: base pareja + oscurecido radial tras el texto + borde inferior.
+       Deja ver la foto pero mantiene el nombre legible al centro. -->
+  <div class="absolute inset-0 bg-fondo/30"></div>
+  <div
+    class="absolute inset-0 bg-[radial-gradient(ellipse_75%_65%_at_50%_45%,rgba(10,10,10,0.6),transparent_75%)]"
+  >
+  </div>
+  <div
+    class="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-fondo to-transparent"
+  >
+  </div>
+
+  <!-- Contenido centrado: el nombre manda, la ubicación va debajo -->
+  <div class="relative mx-auto w-full max-w-3xl px-5 py-24">
+    <h1
+      aria-label="Toros Food"
+      class="titulo-toros text-7xl leading-[0.85] drop-shadow-xl sm:text-8xl xl:text-9xl"
+    >
+      TOROS <span class="neon">FOOD</span>
+    </h1>
+
+    <p class="mt-4 text-sm uppercase tracking-[0.4em] text-texto-suave">
+      {negocio.bajada} · {negocio.comuna}
+    </p>
+
+    <p class="mx-auto mt-6 max-w-lg text-lg text-texto drop-shadow-lg sm:text-xl">
+      {negocio.descripcion}
+    </p>
+
+    <ul class="mt-6 flex flex-wrap justify-center gap-2">
+      {
+        negocio.atributos.map((texto) => (
+          <li class="rounded-full border border-borde bg-fondo/70 px-3.5 py-1.5 text-sm text-texto-suave backdrop-blur-sm">
+            {texto}
+          </li>
+        ))
+      }
+    </ul>
+
+    <div class="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
+      <a
+        href={whatsapp}
+        target="_blank"
+        rel="noopener"
+        class="rounded-suave bg-marca px-8 py-4 text-center text-lg font-semibold text-white shadow-lg shadow-marca/30 transition-colors hover:bg-marca-hover"
+      >
+        Pedir por WhatsApp
+      </a>
+      <a
+        href="/carta"
+        class="rounded-suave border border-borde bg-fondo/50 px-8 py-4 text-center text-lg font-semibold backdrop-blur-sm transition-colors hover:border-texto-suave"
+      >
+        Ver la carta
+      </a>
+    </div>
+  </div>
+</section>
+
+<style>
+  /* Tres slides que se funden en ciclo (18s, uno cada 6s). */
+  .slide {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    animation: crossfade 18s infinite;
+  }
+  .slide-1 {
+    animation-delay: 0s;
+  }
+  .slide-2 {
+    animation-delay: 6s;
+  }
+  .slide-3 {
+    animation-delay: 12s;
+  }
+
+  @keyframes crossfade {
+    0% {
+      opacity: 0;
+    }
+    5% {
+      opacity: 1;
+    }
+    28% {
+      opacity: 1;
+    }
+    33% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .slide {
+      animation: none;
+    }
+    .slide-1 {
+      opacity: 1;
+    }
+  }
+</style>

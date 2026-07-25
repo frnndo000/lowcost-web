@@ -1,0 +1,93 @@
+---
+import { negocio, textoDias } from "../data/negocio.js";
+import Toro from "./Toro.astro";
+
+const delivery = [
+  { nombre: "Uber Eats", href: negocio.canales.ubereats },
+  { nombre: "Rappi", href: negocio.canales.rappi },
+  { nombre: "PedidosYa", href: negocio.canales.pedidosya },
+].filter((d) => d.href);
+---
+
+<footer class="relative overflow-hidden border-t border-borde bg-superficie">
+  <Toro class="pointer-events-none absolute -right-10 -top-12 hidden w-64 select-none text-marca opacity-[0.05] sm:block" />
+
+  <div class="relative mx-auto grid max-w-5xl gap-8 px-5 py-14 sm:grid-cols-3">
+    <div class="space-y-2">
+      <p class="titulo-toros text-xl tracking-tight">
+        TOROS<span class="text-marca-texto"> FOOD</span>
+      </p>
+      <address class="text-sm leading-relaxed text-texto-suave">
+        {negocio.direccion}<br />
+        {negocio.comuna}, {negocio.region}<br />
+        {negocio.telefono}
+      </address>
+      <div class="flex gap-4 pt-1 text-sm">
+        <a
+          href={`https://instagram.com/${negocio.instagram}`}
+          target="_blank"
+          rel="noopener"
+          class="text-precio transition-colors hover:text-texto"
+        >
+          @{negocio.instagram}
+        </a>
+        <a
+          href={negocio.facebook}
+          target="_blank"
+          rel="noopener"
+          class="text-texto-suave transition-colors hover:text-texto"
+        >
+          Facebook
+        </a>
+      </div>
+    </div>
+
+    <div>
+      <h2 class="mb-3 text-xs uppercase tracking-widest text-texto-suave">
+        Horario
+      </h2>
+      <ul class="space-y-1">
+        {
+          negocio.horario.map((bloque) => (
+            <li class="flex justify-between gap-4 text-sm">
+              <span class="text-texto">{textoDias(bloque.dias)}</span>
+              <span class="tabular-nums text-texto-suave">
+                {bloque.abre} – {bloque.cierra}
+              </span>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+
+    <div>
+      <h2 class="mb-3 text-xs uppercase tracking-widest text-texto-suave">
+        También en delivery
+      </h2>
+      <ul class="space-y-1 text-sm">
+        {
+          delivery.map((d) => (
+            <li>
+              <a
+                href={d.href}
+                target="_blank"
+                rel="noopener"
+                class="text-texto-suave transition-colors hover:text-texto"
+              >
+                {d.nombre}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+      <p class="mt-3 text-xs leading-relaxed text-texto-suave">
+        Pidiendo directo por WhatsApp el precio es el de la carta: las apps
+        cobran comisión.
+      </p>
+    </div>
+  </div>
+
+  <div class="relative border-t border-borde px-5 py-6 text-center text-xs text-texto-suave">
+    <p>&copy; {new Date().getFullYear()} {negocio.nombre} · {negocio.comuna}</p>
+  </div>
+</footer>

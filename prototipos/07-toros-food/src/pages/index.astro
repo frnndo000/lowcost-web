@@ -1,0 +1,20 @@
+---
+// Portada: gancho, los más pedidos, combos y cómo pedir. La carta completa
+// vive en /carta. La página solo compone; los datos están en src/data/.
+import Layout from "../layouts/Layout.astro";
+import Hero from "../components/secciones/Hero.astro";
+import BestSellers from "../components/secciones/BestSellers.astro";
+import Combos from "../components/secciones/Combos.astro";
+import Pedidos from "../components/secciones/Pedidos.astro";
+import Faq from "../components/secciones/Faq.astro";
+import Ubicacion from "../components/secciones/Ubicacion.astro";
+---
+
+<Layout conFaq>
+  <Hero />
+  <BestSellers />
+  <Combos />
+  <Pedidos />
+  <Faq />
+  <Ubicacion />
+</Layout>
