@@ -1,0 +1,29 @@
+---
+// Motivo de marca: la amapola (la flor del nombre). Cuatro pétalos en el
+// color de marca (currentColor) con centro navy del logo. Decorativo:
+// aria-hidden. El tamaño y color se controlan con clases (h-*/text-*).
+interface Props {
+  class?: string;
+}
+const { class: clase = "h-6 w-6 text-marca" } = Astro.props;
+---
+
+<svg
+  viewBox="0 0 64 64"
+  class:list={["shrink-0", clase]}
+  fill="none"
+  aria-hidden="true"
+>
+  <g fill="currentColor">
+    <ellipse cx="32" cy="18" rx="12.5" ry="16" />
+    <ellipse cx="32" cy="46" rx="12.5" ry="16" />
+    <ellipse cx="18" cy="32" rx="16" ry="12.5" />
+    <ellipse cx="46" cy="32" rx="16" ry="12.5" />
+  </g>
+  <circle cx="32" cy="32" r="7.5" fill="#373b4c" />
+  <g fill="#fffdfb">
+    <circle cx="30" cy="30" r="1.05" />
+    <circle cx="35" cy="31" r="1.05" />
+    <circle cx="31.5" cy="35" r="1.05" />
+  </g>
+</svg>

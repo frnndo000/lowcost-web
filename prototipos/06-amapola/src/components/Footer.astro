@@ -1,12 +1,16 @@
 ---
 import { negocio, textoDias, linkWhatsapp } from "../data/negocio.js";
 import Logo from "./Logo.astro";
+import Amapola from "./Amapola.astro";
 ---
 
 <footer class="border-t border-borde bg-superficie">
   <div class="mx-auto grid max-w-5xl gap-8 px-5 py-12 sm:grid-cols-3">
     <div class="space-y-2">
-      <Logo class="h-11" />
+      <div class="flex items-center gap-3">
+        <Logo class="h-11" />
+        <Amapola class="h-7 w-7 text-marca/80" />
+      </div>
       <p class="text-sm text-texto-suave">{negocio.bajada}</p>
       <p class="text-sm text-texto-suave">{negocio.comuna}, Región de {negocio.region}</p>
     </div>

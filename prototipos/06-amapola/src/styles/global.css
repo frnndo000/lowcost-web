@@ -1,18 +1,12 @@
 @import "tailwindcss";
 
 /* =========================================================
-   FUENTES — autohospedadas, subset latin (cubre el español).
-   Bricolage Grotesque = display (títulos de sección).
-   Hanken Grotesk      = body.
-   El wordmark "Amapola" usa Pacifico (script), cargada en Layout.astro.
+   FUENTES.
+   Fraunces (serif cálida, artesanal) = display/títulos — acorde a una
+   pastelería casera y contrasta con el script del logo. Se carga desde
+   Google Fonts en Layout.astro.
+   Hanken Grotesk (autohospedada, subset latin) = cuerpo.
    ========================================================= */
-@font-face {
-  font-family: "Bricolage Grotesque";
-  src: url("/fonts/bricolage-grotesque-latin.woff2") format("woff2");
-  font-weight: 200 800;
-  font-display: swap;
-  unicode-range: U+0000-00FF;
-}
 @font-face {
   font-family: "Hanken Grotesk";
   src: url("/fonts/hanken-grotesk-latin.woff2") format("woff2");
@@ -31,22 +25,24 @@
    las clases repartidas por los componentes.
    ========================================================= */
 @theme {
+  /* Paleta alineada al logo real (rosa #f19bde, azul #54a6d8, navy #373b4c).
+     Base crema; el texto en el navy del logo, el acento en su azul. */
   --color-fondo: #fffdfb; /* blanco cálido (base) */
   --color-superficie: #fdf1f6; /* tarjetas y bloques, rosa muy tenue */
-  --color-borde: #f2dde7; /* líneas sutiles */
-  --color-texto: #2c1a23; /* casi negro cálido */
-  --color-texto-suave: #77596a; /* plum apagado (5:1 sobre crema, WCAG AA) */
+  --color-borde: #f1dbe6; /* líneas sutiles */
+  --color-texto: #363a4b; /* navy del logo (10,8:1 sobre crema) */
+  --color-texto-suave: #6b6f7e; /* slate apagado (~4,7:1 sobre crema, AA) */
 
-  /* Magenta de marca. Texto blanco encima da 5,9:1 (ok para botones). */
+  /* Magenta de marca (versión profunda del rosa del logo). Blanco encima
+     da 5,9:1 (ok para botones); igual sobre crema para texto/links. */
   --color-marca: #c2185b;
   --color-marca-hover: #9d1450;
-  /* Para texto/links sobre la base clara (5,9:1 sobre blanco). */
   --color-marca-texto: #b0165a;
-  --color-acento: #7b3fa0; /* morado de acento */
-  --color-precio: #2c1a23; /* precios en el texto oscuro, legibles */
+  --color-acento: #2f83c2; /* azul del logo, más profundo para acentos */
+  --color-precio: #363a4b; /* precios en el navy, legibles */
 
   --font-sans: "Hanken Grotesk", system-ui, sans-serif;
-  --font-display: "Bricolage Grotesque", "Hanken Grotesk", system-ui, sans-serif;
+  --font-display: "Fraunces", "Hanken Grotesk", Georgia, serif;
 
   /* --- Escala tipográfica fluida (clamp: mín / preferido / máx) --- */
   --text-hero: clamp(2.75rem, 1.85rem + 4.2vw, 4.5rem);

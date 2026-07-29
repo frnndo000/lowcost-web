@@ -7,3 +7,4 @@ poner una opcion en la carta que permita ver en formato lista o bloques con cada
 la barra lateral se superpone en la carta cuando se angosta la vista
 hay archivos que no corresponden a la pasteleria, borra toda la basura.
 agregue fotos del hero carta y mas pedidos
+cd

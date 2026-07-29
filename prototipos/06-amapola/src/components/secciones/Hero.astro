@@ -4,6 +4,7 @@
 // respetando la línea del proyecto (menú, FAQ e índice también son sin JS).
 import { Image } from "astro:assets";
 import Logo from "../Logo.astro";
+import Amapola from "../Amapola.astro";
 import { negocio, linkWhatsapp } from "../../data/negocio.js";
 import { fotosHero } from "../../data/imagenes.js";
 ---
@@ -51,9 +52,11 @@ import { fotosHero } from "../../data/imagenes.js";
       en {negocio.comuna}
     </h1>
     <p
-      class="text-sm uppercase tracking-[0.4em] text-marca-texto sm:text-base"
+      class="flex items-center justify-center gap-3 text-sm uppercase tracking-[0.4em] text-marca-texto sm:text-base"
     >
+      <Amapola class="h-4 w-4 text-marca" />
       Tortas · Kuchen · Postres
+      <Amapola class="h-4 w-4 text-marca" />
     </p>
 
     <p class="max-w-md text-balance text-lg text-texto">
