@@ -12,10 +12,12 @@ Thumbs.db
 dist/
 .astro/
 
-.claude 
+.claude
+.impeccable
 
 # wrangler files
 .wrangler
 .dev.vars*
 !.dev.vars.example
 !.env.example
+

@@ -2,10 +2,11 @@
 
 /* =========================================================
    FUENTES.
-   Fraunces (serif cálida, artesanal) = display/títulos — acorde a una
-   pastelería casera y contrasta con el script del logo. Se carga desde
-   Google Fonts en Layout.astro.
-   Hanken Grotesk (autohospedada, subset latin) = cuerpo.
+   Petrona (serif humanista y cálida) = display/títulos — voz de "recetas
+   de familia", distintiva y en contraste con el script del logo. Se carga
+   desde Google Fonts en Layout.astro.
+   Hanken Grotesk (autohospedada, subset latin) = cuerpo. Dos familias: la
+   jerarquía la cargan el contraste serif/sans + los pesos y tamaños.
    ========================================================= */
 @font-face {
   font-family: "Hanken Grotesk";
@@ -42,7 +43,7 @@
   --color-precio: #363a4b; /* precios en el navy, legibles */
 
   --font-sans: "Hanken Grotesk", system-ui, sans-serif;
-  --font-display: "Fraunces", "Hanken Grotesk", Georgia, serif;
+  --font-display: "Petrona", "Hanken Grotesk", Georgia, serif;
 
   /* --- Escala tipográfica fluida (clamp: mín / preferido / máx) --- */
   --text-hero: clamp(2.75rem, 1.85rem + 4.2vw, 4.5rem);
